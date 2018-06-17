@@ -219,9 +219,9 @@ Inserting, updating and deleting records works just like the original QB.
 **Insert**
 
     DB::table('emp')
-        ->insertCollection('set', 'emp_city', [123, 1234, 12345])
+        ->insertCollection('set', 'phn', [123, 1234, 12345])
         ->insertCollection('map', 'friends', [['John', 'Male'], ['Eli', 'Female']])
-        ->insert(['emp_id' => 11, 'emp_city' => '{"kochi", "tvm", "kollam"}', 'emp_name' => 'Christy', 'emp_phone' => 12345676890, 'emp_sal' => 500]);
+        ->insert(['emp_id' => 11, 'emp_name' => 'Christy', 'emp_phone' => 12345676890, 'emp_sal' => 500]);
 
 **Updating**
 
