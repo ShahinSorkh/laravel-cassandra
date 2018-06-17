@@ -210,35 +210,31 @@ class Grammar extends BaseGrammar
      */
     public function buildCollectionString($type, $value)
     {
-        $isAssociative = false;
-        if(count(array_filter(array_keys($value), 'is_string')) > 0) {
-            $isAssociative = true;
-        }
-        if(is_array($value)) {
-            if('set' == $type || 'list' == $type) {
-                $collection = collect($value)->map(
-                    function ($item, $key) {
-                        return 'string' == strtolower(gettype($item)) ? "'" . $item . "'" : $item;
-                    }
-                )->implode(', ');
-            }
-            elseif('map' == $type) {
-                $collection = collect($value)->map(
-                    function ($item, $key) use ($isAssociative){
-                        if($isAssociative === true) {
-                            $key = 'string' == strtolower(gettype($key)) ? "'" . $key . "'" : $key;
-                            $item = 'string' == strtolower(gettype($item)) ? "'" . $item . "'" : $item;
-                            return   $key . ':'. $item;
-                        }else{
-                            return is_numeric($item) ? $item : "'".$item."'";
-                        }
 
-                    }
-                )->implode(', ');
-            }
+        $items = [];
+        if ($type === 'map') {
+            foreach ($value as $item) {
+                list($key, $value, $qoutk, $qoutv) = [$item[0], $item[1], $item['key'] ?? null, $item['value'] ?? null];
 
+                if(!is_bool($qoutk)) {
+                    $qoutk = 'string' == strtolower(gettype($key));
+                }
+                if(!is_bool($qoutv)) {
+                    $qoutv = 'string' == strtolower(gettype($value));
+                }
+
+                $key = $qoutk ? "'{$key}'" : $key;
+                $value = $qoutv ? "'{$value}'" : $value;
+                $items[] = "{$key}:{$value}";
+            }
+        } elseif ($type === 'set' || $type === 'list') {
+            foreach ($value as $item) {
+                $qoutv = 'string' == strtolower(gettype($item));
+                $items[] = $qoutv ? "'{$item}'" : $item;
+            }
         }
-        return $collection;
+
+        return implode(',', $items);
     }
 
     /**
