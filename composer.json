@@ -1,5 +1,5 @@
 {
-    "name": "cubettech/lacassa",
+    "name": "sorkh.shahin/laravel-cassandra",
     "type": "library",
     "description": "Cassandra based query builder for laravel.",
     "license": "MIT",
@@ -9,8 +9,7 @@
         "laravel",
         "database",
         "query builder",
-        "cql",
-        "lacassa"
+        "cql"
     ],
     "require": {
         "datastax/php-driver": "^1.2"
@@ -27,7 +26,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Cubettech\\Lacassa\\":"src/"
+            "ShSo\\Lacassa\\": "src/"
             }
         },
     "minimum-stability": "dev",
