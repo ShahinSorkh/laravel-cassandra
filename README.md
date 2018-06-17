@@ -1,7 +1,7 @@
 ## **Lacassa**
 
-
-A Query builder with support for Cassandra, using the original Laravel API. This library extends the original Laravel classes, so it uses exactly the same methods.
+A Query builder with support for Cassandra, using the original Laravel API.
+This library extends the original Laravel classes, so it uses exactly the same methods.
 
 ## **Table of contents**
 
@@ -19,19 +19,19 @@ A Query builder with support for Cassandra, using the original Laravel API. This
 
 ## **Installation**
 
-Make sure you have the DataStax PHP Driver for Apache Cassandra installed. You can find installation instructions at https://github.com/datastax/php-driver
-or 
+Make sure you have the DataStax PHP Driver for Apache Cassandra installed.
+You can find installation instructions at https://github.com/datastax/php-driver or 
 https://github.com/datastax/php-driver/blob/master/ext/README.md
 
 *datastax php-driver requires php version 5.6+*
 
 Installation using composer:
 
-    composer require cubettech/lacassa
+    composer require shso/laravel-cassandra
 
 And add the service provider in config/app.php:
 
-    Cubettech\Lacassa\CassandraServiceProvider::class,
+    ShSo\Lacassa\CassandraServiceProvider::class,
 
 ## **Configuration**
 
@@ -42,45 +42,51 @@ Change your default database connection name in config/database.php:
 And add a new cassandra connection:
 
     'cassandra' => [
-    	 	'driver' => 'Cassandra',
-    		'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', 7199),
-            'keyspace' => env('DB_DATABASE', 'cassandra_db'),
-        	'username' => env('DB_USERNAME', ''),
-        	'password' => env('DB_PASSWORD', ''),
+        'driver' => 'Cassandra',
+        'host' => env('DB_HOST', 'localhost'),
+        'port' => env('DB_PORT', 7199),
+        'keyspace' => env('DB_DATABASE', 'cassandra_db'),
+        'username' => env('DB_USERNAME', ''),
+        'password' => env('DB_PASSWORD', ''),
      ],
+
+_Note: you can enter all of your nodes like:_
+
+    # .env
+    DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
 
 ### **Auth**
 
 You can use Laravel's native Auth functionality for cassandra, make sure your config/auth.php looks like 
 
         'providers' => [
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\User::class,
-        // ],
-        'users' => [
-            'driver' => 'database',
-            'table' => 'users',
-        ],
+            // 'users' => [
+            //     'driver' => 'eloquent',
+            //     'model' => App\User::class,
+            // ],
+            'users' => [
+                'driver' => 'database',
+                'table' => 'users',
             ],
+        ],
 
 ## **Schema**
 
 The database driver also has (limited) schema builder support. You can easily manipulate tables and set indexes:
 
-        Schema::create(
-            'users', function ($table) {
-                $table->int('id');
-	            $table->text('name');
-	            $table->text('email');
-	            $table->text('password');
-                $table->text('remember_token');
-	            $table->setCollection('phn', 'bigint');
-                $table->listCollection('hobbies', 'text');
-                $table->mapCollection('friends', 'text', 'text');
-                $table->primary(['id']);
-          });
+        use ShSo/Lacassa/Schema/Bluprint;
+        
+        Schema::create('users', function (Bluprint $table) {
+            $table->int('id');
+            $table->text('name');
+            $table->text('email');
+            $table->text('password');
+            $table->text('remember_token');
+            $table->setCollection('phn', 'bigint');
+            $table->listCollection('hobbies', 'text');
+            $table->mapCollection('friends', 'text', 'text');
+            $table->primary(['id']);
+        });
 
 DROP table
 
@@ -88,55 +94,20 @@ DROP table
 
 # **CQL data types supported**
 
-text('a')
-
-bigint('b')
-
-blob('c')
-
-boolean('d')
-
-counter('e')
-
-decimal('f')
-
-double('g')
-
-float('h')
-
-frozen('i')
-
-inet('j')
-
-nt('k')
-
-listCollection('l', 'text')
-
-mapCollection('m', 'timestamp', 'text')
-
-setCollection('n', 'int')
-
-timestamp('o')
-
-timeuuid('p')
-
-tuple('q', 'int', 'text', 'timestamp')
-
-uuid('r')
-
-varchar('s')
-
-varint('t')
-
-ascii('u')
+`text('a')` `bigint('b')` `blob('c')` `boolean('d')` `counter('e')` `decimal('f')`
+`double('g')` `float('h')` `frozen('i')` `inet('j')` `net('k')` `listCollection('l', 'text')`
+`mapCollection('m', 'timestamp', 'text')` `setCollection('n', 'int')` `timestamp('o')`
+`timeuuid('p')` `tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
+`ascii('u')`
 
 **Primary Key**
 
-primary(['a', 'b'])
+`primary(['a', 'b'])`
 
 **Query Builder**
 
-The database driver plugs right into the original query builder. When using cassandra connections, you will be able to build fluent queries to perform database operations.
+The database driver plugs right into the original query builder.
+When using cassandra connections, you will be able to build fluent queries to perform database operations.
 
     $emp = DB::table('emp')->get();
 
@@ -168,7 +139,9 @@ CREATE INDEX creates a new index on the given table for the named column.
 
 **Wheres**
 
-The WHERE clause specifies which rows to query. In the WHERE clause, refer to a column using the actual name, not an alias. Columns in the WHERE clause need to meet one of these requirements:
+The WHERE clause specifies which rows to query.
+In the WHERE clause, refer to a column using the actual name, not an alias.
+Columns in the WHERE clause need to meet one of these requirements:
 
 * The partition key definition includes the column.	
 
@@ -186,7 +159,9 @@ The WHERE clause specifies which rows to query. In the WHERE clause, refer to a 
 
 **Order By**
 
-ORDER BY clauses can select a single column only. Ordering can be done in ascending or descending order, default ascending, and specified with the ASC or DESC keywords. In the ORDER BY clause, refer to a column using the actual name, not the aliases.
+ORDER BY clauses can select a single column only.
+Ordering can be done in ascending or descending order, default ascending, and specified with the ASC or DESC keywords.
+In the ORDER BY clause, refer to a column using the actual name, not the aliases.
 
     $emp = DB::table('emp')->where('emp_name','Christy')->orderBy('emp_no', 'desc')->get();
 
@@ -222,7 +197,8 @@ Count can be combined with **where**:
 
 ### **Filtering a collection set, list, or map**
 
-You can index the collection column, and then use the CONTAINS condition in the WHERE clause to filter the data for a particular value in the collection.
+You can index the collection column, and then use the CONTAINS condition
+in the WHERE clause to filter the data for a particular value in the collection.
 
     $emp = DB::table('emp')->where('emp_name','contains', 'Christy')->get();
 
@@ -256,9 +232,9 @@ Update collections in a row. The method will be like
 
     updateCollection(collection_type, column_name, operator, value);
 
-Collection_type is any of set, list or map.
+Collection\_type is any of set, list or map.
 
-Column_name is the name of column to be updated.
+Column\_name is the name of column to be updated.
 
 Operator is + or -, + for adding the values to collection and - to remove the value from collection.
 
@@ -285,3 +261,4 @@ To delete a model, simply call the delete method on the instance. We can delete 
 We can also perform delete by the column in a table using deleteColumn method:
 
     $emp = DB::table('emp')->where('emp_id', 3)->deleteColumn();
+
