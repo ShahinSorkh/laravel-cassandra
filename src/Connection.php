@@ -1,5 +1,6 @@
 <?php
-namespace Cubettech\Lacassa;
+
+namespace ShSo\Lacassa;
 
 use Illuminate\Database\Connection as BaseConnection;
 use Cassandra;

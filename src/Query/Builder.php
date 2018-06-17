@@ -1,4 +1,6 @@
-<?php namespace Cubettech\Lacassa\Query;
+<?php
+
+namespace ShSo\Lacassa\Query;
 
 use Closure;
 use DateTime;

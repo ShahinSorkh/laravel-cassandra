@@ -1,4 +1,6 @@
-<?php namespace Cubettech\Lacassa;
+<?php
+
+namespace ShSo\Lacassa;
 
 use Exception;
 use MongoDB\BSON\ObjectID;
