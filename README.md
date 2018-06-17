@@ -95,7 +95,7 @@ DROP table
 # **CQL data types supported**
 
 `text('a')` `bigint('b')` `blob('c')` `boolean('d')` `counter('e')` `decimal('f')`
-`double('g')` `float('h')` `frozen('i')` `inet('j')` `net('k')` `listCollection('l', 'text')`
+`double('g')` `float('h')` `frozen('i')` `inet('j')` `int('k')` `listCollection('l', 'text')`
 `mapCollection('m', 'timestamp', 'text')` `setCollection('n', 'int')` `timestamp('o')`
 `timeuuid('p')` `tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
 `ascii('u')`
