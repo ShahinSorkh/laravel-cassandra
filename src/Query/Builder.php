@@ -2,6 +2,7 @@
 
 namespace ShSo\Lacassa\Query;
 
+use Cassandra;
 use Closure;
 use DateTime;
 use InvalidArgumentException;
@@ -9,11 +10,7 @@ use Illuminate\Database\Query\Builder as BaseBuilder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Cubettech\Lacassa\Connection;
-use Cassandra;
-
-
-
+use ShSo\Lacassa\Connection;
 
 class Builder extends BaseBuilder
 {
@@ -32,6 +29,7 @@ class Builder extends BaseBuilder
         'updateCollection' => [],
         'insertCollection' => []
     ];
+
     /**
      * The where constraints for the query.
      *
