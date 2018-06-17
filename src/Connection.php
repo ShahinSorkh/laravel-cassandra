@@ -86,8 +86,8 @@ class Connection extends BaseConnection
     protected function createConnection(array $config)
     {
         return Cassandra::cluster()
-            ->withContactPoints($config['hosts'])
-            ->withPort($config['port'])
+            ->withContactPoints($config['host'])
+            ->withPort(intval($config['port']))
             ->build()->connect($config['keyspace']);
     }
 
