@@ -102,14 +102,6 @@ class Connection extends BaseConnection
     /**
      * @inheritdoc
      */
-    public function getElapsedTime($start)
-    {
-        return parent::getElapsedTime($start);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getDriverName()
     {
         return 'Cassandra';
@@ -148,13 +140,12 @@ class Connection extends BaseConnection
      */
     public function statement($query, $bindings = [])
     {
-        foreach($bindings as $binding)
-          {
+        foreach($bindings as $binding) {
             $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
             $query = preg_replace('/\?/', $value, $query, 1);
-          }
-          $builder = new Query\Builder($this, $this->getPostProcessor());
-          return $builder->executeCql($query);
+        }
+        $builder = new Query\Builder($this, $this->getPostProcessor());
+        return $builder->executeCql($query);
     }
 
     /**
@@ -166,17 +157,16 @@ class Connection extends BaseConnection
      */
     public function affectingStatement($query, $bindings = [])
     {
-            // For update or delete statements, we want to get the number of rows affected
-            // by the statement and return that back to the developer. We'll first need
-            // to execute the statement and then we'll use PDO to fetch the affected.
-        foreach($bindings as $binding)
-            {
+        // For update or delete statements, we want to get the number of rows affected
+        // by the statement and return that back to the developer. We'll first need
+        // to execute the statement and then we'll use PDO to fetch the affected.
+        foreach($bindings as $binding) {
             $value = $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
             $query = preg_replace('/\?/', $value, $query, 1);
         }
-            $builder = new Query\Builder($this, $this->getPostProcessor());
+        $builder = new Query\Builder($this, $this->getPostProcessor());
 
-            return $builder->executeCql($query);
+        return $builder->executeCql($query);
     }
 
     /**
