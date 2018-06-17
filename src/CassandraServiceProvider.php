@@ -2,8 +2,8 @@
 
 namespace ShSo\Lacassa;
 
-use Illuminate\Support\ServiceProvider;
 use Cassandra;
+use Illuminate\Support\ServiceProvider;
 
 class CassandraServiceProvider extends ServiceProvider
 {
@@ -25,11 +25,12 @@ class CassandraServiceProvider extends ServiceProvider
     public function register()
     {
         // Add database driver.
-        $this->app->resolving('db', function ($db) {
-            $db->extend('Cassandra', function ($config, $name) {
+        $this->app->resolving('db', function($db) {
+            $db->extend('Cassandra', function($config, $name) {
                 $config['name'] = $name;
                 return new Connection($config);
             });
         });
     }
 }
+

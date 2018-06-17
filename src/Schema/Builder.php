@@ -3,12 +3,13 @@
 namespace ShSo\Lacassa\Schema;
 
 use Closure;
-use Cubettech\Lacassa\Connection;
+use ShSo\Lacassa\Connection;
+use Illuminate\Database\Schema\Builder as BaseBuilder;
 
-class Builder extends \Illuminate\Database\Schema\Builder
+class Builder extends BaseBuilder
 {
     /**
-     * @inheritdoc
+     * @return void
      */
     public function __construct(Connection $connection)
     {
@@ -16,13 +17,12 @@ class Builder extends \Illuminate\Database\Schema\Builder
         $this->grammar = $connection->getSchemaGrammar();
     }
 
-
-
     /**
-     * @inheritdoc
+     * @return \ShSo\Lacassa\Schema\Builder
      */
     protected function createBlueprint($table, Closure $callback = null)
     {
         return new Blueprint($this->connection, $table);
     }
 }
+

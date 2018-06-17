@@ -2,14 +2,15 @@
 
 namespace ShSo\Lacassa\Schema;
 
+use Illuminate\Database\Schema\Blueprint as BaseBlueprint;
 use Illuminate\Database\Schema\Grammars\Grammar as BaseGrammar;
-use Cubettech\Lacassa\Schema\Blueprint as Blueprint;
-use \Illuminate\Support\Fluent;
-use Cubettech\Lacassa\Connection;
-use \Illuminate\Database\Schema\Blueprint as BaseBlueprint;
+use Illuminate\Support\Fluent;
+use ShSo\Lacassa\Connection;
+use ShSo\Lacassa\Schema\Blueprint as Blueprint;
 
 class Grammar extends BaseGrammar
 {
+
   /**
     * The possible column modifiers.
     *
@@ -50,9 +51,10 @@ class Grammar extends BaseGrammar
    /**
     * Compile a create table command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
-    * @param  \Illuminate\Database\Connection  $connection
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    * @param \Illuminate\Database\Connection $connection
+    *
     * @return string
     */
    public function compileCreate(Blueprint $blueprint, Fluent $command, Connection $connection)
@@ -60,16 +62,6 @@ class Grammar extends BaseGrammar
        $sql = $this->compileCreateTable(
            $blueprint, $command, $connection
        );
-
-       // Once we have the primary SQL, we can add the encoding option to the SQL for
-       // the table.  Then, we can check if a storage engine has been supplied for
-       // the table. If so, we will add the engine declaration to the SQL query.
-      //  $sql = $this->compileCreateEncoding(
-      //      $sql, $connection, $blueprint
-      //  );
-
-       //Once we have the sql query we add the indexes - primary key to the query
-      //  $sql = $this->compilePrimary($blueprint, $command);
 
        // Finally, we will append the engine configuration onto this SQL statement as
        // the final thing we do before returning this finished SQL. Once this gets
@@ -82,9 +74,10 @@ class Grammar extends BaseGrammar
    /**
     * Create the main create table clause.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
-    * @param  \Illuminate\Database\Connection  $connection
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    * @param \Illuminate\Database\Connection $connection
+    *
     * @return string
     */
    protected function compileCreateTable($blueprint, $command, $connection)
@@ -100,9 +93,10 @@ class Grammar extends BaseGrammar
    /**
     * Append the character set specifications to a command.
     *
-    * @param  string  $sql
-    * @param  \Illuminate\Database\Connection  $connection
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+    * @param string $sql
+    * @param \Illuminate\Database\Connection $connection
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    *
     * @return string
     */
    protected function compileCreateEncoding($sql, Connection $connection, Blueprint $blueprint)
@@ -112,7 +106,7 @@ class Grammar extends BaseGrammar
        // table is being created on. We will add these to the create table query.
        if (isset($blueprint->charset)) {
            $sql .= ' default character set '.$blueprint->charset;
-       } elseif (! is_null($charset = $connection->getConfig('charset'))) {
+       } elseif (!is_null($charset = $connection->getConfig('charset'))) {
            $sql .= ' default character set '.$charset;
        }
 
@@ -121,7 +115,7 @@ class Grammar extends BaseGrammar
        // connection that the query is targeting. We'll add it to this SQL query.
        if (isset($blueprint->collation)) {
            $sql .= ' collate '.$blueprint->collation;
-       } elseif (! is_null($collation = $connection->getConfig('collation'))) {
+       } elseif (!is_null($collation = $connection->getConfig('collation'))) {
            $sql .= ' collate '.$collation;
        }
 
@@ -131,16 +125,17 @@ class Grammar extends BaseGrammar
    /**
     * Append the engine specifications to a command.
     *
-    * @param  string  $sql
-    * @param  \Illuminate\Database\Connection  $connection
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+    * @param string $sql
+    * @param \Illuminate\Database\Connection $connection
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    *
     * @return string
     */
    protected function compileCreateEngine($sql, Connection $connection, Blueprint $blueprint)
    {
        if (isset($blueprint->engine)) {
            return $sql.' engine = '.$blueprint->engine;
-       } elseif (! is_null($engine = $connection->getConfig('engine'))) {
+       } elseif (!is_null($engine = $connection->getConfig('engine'))) {
            return $sql.' engine = '.$engine;
        }
 
@@ -150,8 +145,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile an add column command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileAdd(Blueprint $blueprint, Fluent $command)
@@ -164,8 +160,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a primary key command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compilePrimary(Blueprint $blueprint, Fluent $command)
@@ -177,8 +174,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a unique key command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileUnique(Blueprint $blueprint, Fluent $command)
@@ -189,8 +187,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a plain index key command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileIndex(Blueprint $blueprint, Fluent $command)
@@ -201,9 +200,10 @@ class Grammar extends BaseGrammar
    /**
     * Compile an index creation command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
-    * @param  string  $type
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    * @param string $type
+    *
     * @return string
     */
    protected function compileKey(Blueprint $blueprint, Fluent $command, $type)
@@ -220,8 +220,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop table command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDrop(Blueprint $blueprint, Fluent $command)
@@ -232,8 +233,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop table (if exists) command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDropIfExists(Blueprint $blueprint, Fluent $command)
@@ -244,8 +246,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop column command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDropColumn(Blueprint $blueprint, Fluent $command)
@@ -258,8 +261,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop primary key command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDropPrimary(Blueprint $blueprint, Fluent $command)
@@ -270,8 +274,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop unique key command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDropUnique(Blueprint $blueprint, Fluent $command)
@@ -284,8 +289,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop index command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDropIndex(Blueprint $blueprint, Fluent $command)
@@ -298,8 +304,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a drop foreign key command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileDropForeign(Blueprint $blueprint, Fluent $command)
@@ -312,8 +319,9 @@ class Grammar extends BaseGrammar
    /**
     * Compile a rename table command.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $command
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $command
+    *
     * @return string
     */
    public function compileRename(Blueprint $blueprint, Fluent $command)
@@ -346,7 +354,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a char type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeChar(Fluent $column)
@@ -357,7 +366,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a string type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeString(Fluent $column)
@@ -368,7 +378,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a text type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeText(Fluent $column)
@@ -379,7 +390,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a text type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeBigint(Fluent $column)
@@ -390,7 +402,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a blob type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeBlob(Fluent $column)
@@ -401,7 +414,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a counter type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeCounter(Fluent $column)
@@ -412,7 +426,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a frozen type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeFrozen(Fluent $column)
@@ -423,7 +438,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a inet type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeInet(Fluent $column)
@@ -434,7 +450,8 @@ class Grammar extends BaseGrammar
   /**
     * Create the column definition for a int type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeInt(Fluent $column)
@@ -445,7 +462,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a list type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeList(Fluent $column)
@@ -456,7 +474,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a map type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeMap(Fluent $column)
@@ -467,7 +486,8 @@ class Grammar extends BaseGrammar
   /**
     * Create the column definition for a set type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeSet(Fluent $column)
@@ -478,7 +498,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a timeuuid type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTimeuuid(Fluent $column)
@@ -489,7 +510,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a tuple type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTuple(Fluent $column)
@@ -500,7 +522,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a varchar type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeVarchar(Fluent $column)
@@ -511,7 +534,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a varint type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeVarint(Fluent $column)
@@ -522,7 +546,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a medium text type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeMediumText(Fluent $column)
@@ -533,7 +558,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a long text type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeLongText(Fluent $column)
@@ -544,7 +570,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a big integer type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeBigInteger(Fluent $column)
@@ -555,7 +582,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for an integer type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeInteger(Fluent $column)
@@ -566,7 +594,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a medium integer type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeMediumInteger(Fluent $column)
@@ -577,7 +606,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a tiny integer type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTinyInteger(Fluent $column)
@@ -588,7 +618,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a small integer type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeSmallInteger(Fluent $column)
@@ -599,7 +630,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a float type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeFloat(Fluent $column)
@@ -610,7 +642,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a double type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeDouble(Fluent $column)
@@ -621,7 +654,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a decimal type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeDecimal(Fluent $column)
@@ -632,7 +666,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a boolean type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeBoolean(Fluent $column)
@@ -643,7 +678,8 @@ class Grammar extends BaseGrammar
   /**
     * Create the column definition for a boolean type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeAscii(Fluent $column)
@@ -653,7 +689,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for an enum type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeEnum(Fluent $column)
@@ -664,7 +701,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a json type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeJson(Fluent $column)
@@ -675,7 +713,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a jsonb type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeJsonb(Fluent $column)
@@ -686,7 +725,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a date type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeDate(Fluent $column)
@@ -697,7 +737,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a date-time type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeDateTime(Fluent $column)
@@ -708,7 +749,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a date-time type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeDateTimeTz(Fluent $column)
@@ -719,7 +761,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a time type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTime(Fluent $column)
@@ -730,7 +773,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a time type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTimeTz(Fluent $column)
@@ -741,7 +785,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a timestamp type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTimestamp(Fluent $column)
@@ -756,7 +801,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a timestamp type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeTimestampTz(Fluent $column)
@@ -771,7 +817,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a binary type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeBinary(Fluent $column)
@@ -782,7 +829,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a uuid type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeUuid(Fluent $column)
@@ -793,7 +841,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for an IP address type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeIpAddress(Fluent $column)
@@ -804,7 +853,8 @@ class Grammar extends BaseGrammar
    /**
     * Create the column definition for a MAC address type.
     *
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string
     */
    protected function typeMacAddress(Fluent $column)
@@ -815,13 +865,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a generated virtual column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyVirtualAs(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->virtualAs)) {
+       if (!is_null($column->virtualAs)) {
            return " as ({$column->virtualAs})";
        }
    }
@@ -829,13 +880,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a generated stored column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyStoredAs(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->storedAs)) {
+       if (!is_null($column->storedAs)) {
            return " as ({$column->storedAs}) stored";
        }
    }
@@ -843,8 +895,9 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for an unsigned column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyUnsigned(Blueprint $blueprint, Fluent $column)
@@ -857,13 +910,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a character set column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyCharset(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->charset)) {
+       if (!is_null($column->charset)) {
            return ' character set '.$column->charset;
        }
    }
@@ -871,13 +925,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a collation column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyCollate(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->collation)) {
+       if (!is_null($column->collation)) {
            return ' collate '.$column->collation;
        }
    }
@@ -885,8 +940,9 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a nullable column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyNullable(Blueprint $blueprint, Fluent $column)
@@ -899,13 +955,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a default column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyDefault(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->default)) {
+       if (!is_null($column->default)) {
            return ' default '.$this->getDefaultValue($column->default);
        }
    }
@@ -913,8 +970,9 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for an auto-increment column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyIncrement(Blueprint $blueprint, Fluent $column)
@@ -927,13 +985,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a "first" column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyFirst(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->first)) {
+       if (!is_null($column->first)) {
            return ' first';
        }
    }
@@ -941,13 +1000,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for an "after" column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyAfter(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->after)) {
+       if (!is_null($column->after)) {
            return ' after '.$this->wrap($column->after);
        }
    }
@@ -955,13 +1015,14 @@ class Grammar extends BaseGrammar
    /**
     * Get the SQL for a "comment" column modifier.
     *
-    * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-    * @param  \Illuminate\Support\Fluent  $column
+    * @param \Illuminate\Database\Schema\Blueprint $blueprint
+    * @param \Illuminate\Support\Fluent $column
+    *
     * @return string|null
     */
    protected function modifyComment(Blueprint $blueprint, Fluent $column)
    {
-       if (! is_null($column->comment)) {
+       if (!is_null($column->comment)) {
            return " comment '".$column->comment."'";
        }
    }
@@ -969,7 +1030,8 @@ class Grammar extends BaseGrammar
    /**
     * Wrap a single string in keyword identifiers.
     *
-    * @param  string  $value
+    * @param string $value
+    *
     * @return string
     */
    protected function wrapValue($value)
@@ -984,7 +1046,8 @@ class Grammar extends BaseGrammar
    /**
    * Compile the blueprint's column definitions.
    *
-   * @param  \Illuminate\Database\Schema\Blueprint $blueprint
+   * @param \Illuminate\Database\Schema\Blueprint $blueprint
+   *
    * @return array
    */
   protected function getColumns(BaseBlueprint $blueprint)
@@ -1004,3 +1067,4 @@ class Grammar extends BaseGrammar
   }
 
 }
+

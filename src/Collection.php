@@ -23,7 +23,7 @@ class Collection
     protected $collection;
 
     /**
-     * @param Connection      $connection
+     * @param Connection $connection
      * @param MongoCollection $collection
      */
     public function __construct(Connection $connection, MongoCollection $collection)
@@ -35,8 +35,9 @@ class Collection
     /**
      * Handle dynamic method calls.
      *
-     * @param  string $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -76,3 +77,4 @@ class Collection
         return $result;
     }
 }
+

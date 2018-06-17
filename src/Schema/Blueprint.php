@@ -3,8 +3,8 @@
 namespace ShSo\Lacassa\Schema;
 
 use Illuminate\Database\Connection;
-use \Illuminate\Database\Schema\Grammars\Grammar as BaseGrammar;
-use \Illuminate\Database\Schema\Blueprint as BaseBluprint;
+use Illuminate\Database\Schema\Blueprint as BaseBluprint;
+use Illuminate\Database\Schema\Grammars\Grammar as BaseGrammar;
 
 class Blueprint extends BaseBluprint
 {
@@ -18,7 +18,7 @@ class Blueprint extends BaseBluprint
     protected $primary;
 
     /**
-     * @inheritdoc
+     * @return void
      */
     public function __construct(Connection $connection, $table)
     {
@@ -42,8 +42,9 @@ class Blueprint extends BaseBluprint
     /**
      * Get the raw SQL statements for the blueprint.
      *
-     * @param  \Illuminate\Database\Connection              $connection
-     * @param  \Illuminate\Database\Schema\Grammars\Grammar $grammar
+     * @param \Illuminate\Database\Connection $connection
+     * @param \Illuminate\Database\Schema\Grammars\Grammar $grammar
+     *
      * @return array
      */
     public function toSql(Connection $connection, BaseGrammar $grammar)
@@ -69,9 +70,10 @@ class Blueprint extends BaseBluprint
     /**
      * Specify the primary key(s) for the table.
      *
-     * @param  string|array $columns
-     * @param  string       $name
-     * @param  string|null  $algorithm
+     * @param string|array $columns
+     * @param string $name
+     * @param string|null $algorithm
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function primary($columns, $name = null, $algorithm = null)
@@ -81,11 +83,15 @@ class Blueprint extends BaseBluprint
         $this->primary = $command = $this->createCommand('primary', compact('columns', 'algorithm'));
         return $command;
     }
+
+    /**
+     * @return void
+     */
     public function compilePrimary()
     {
         $primaryKey = $this->primary;
-        if($primaryKey) {
-            if('primary' == $primaryKey->name) {
+        if ($primaryKey) {
+            if ('primary' == $primaryKey->name) {
                 return sprintf('primary key (%s) ', implode(', ', $primaryKey->columns));
             }
         }
@@ -94,7 +100,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new ascii column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function ascii($column)
@@ -105,7 +112,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new bigint column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function bigint($column)
@@ -116,7 +124,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new blob column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function blob($column)
@@ -127,7 +136,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new boolean column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function boolean($column)
@@ -138,7 +148,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new counter column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function counter($column)
@@ -149,7 +160,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new frozen column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function frozen($column)
@@ -160,7 +172,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new inet column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function inet($column)
@@ -171,7 +184,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new int column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function int($column)
@@ -182,8 +196,9 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new list column on the table.
      *
-     * @param  string $column
-     * @param  string $collectionType
+     * @param string $column
+     * @param string $collectionType
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function listCollection($column, $collectionType)
@@ -194,9 +209,10 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new map column on the table.
      *
-     * @param  string $column
-     * @param  string $collectionType1
-     * @param  string $collectionType2
+     * @param string $column
+     * @param string $collectionType1
+     * @param string $collectionType2
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function mapCollection($column, $collectionType1, $collectionType2)
@@ -207,8 +223,9 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new set column on the table.
      *
-     * @param  string $column
-     * @param  string $collectionType
+     * @param string $column
+     * @param string $collectionType
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function setCollection($column, $collectionType)
@@ -219,7 +236,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new timestamp column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function timestamp($column)
@@ -230,7 +248,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new timeuuid column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function timeuuid($column)
@@ -241,10 +260,11 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new tuple column on the table.
      *
-     * @param  string $column
-     * @param  string $tuple1type
-     * @param  string $tuple2type
-     * @param  string $tuple3type
+     * @param string $column
+     * @param string $tuple1type
+     * @param string $tuple2type
+     * @param string $tuple3type
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function tuple($column, $tuple1type, $tuple2type, $tuple3type)
@@ -255,7 +275,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new uuid column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function uuid($column)
@@ -266,7 +287,8 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new varchar column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function varchar($column)
@@ -277,12 +299,13 @@ class Blueprint extends BaseBluprint
     /**
      * Create a new varint column on the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return \Illuminate\Support\Fluent
      */
     public function varint($column)
     {
         return $this->addColumn('varint', $column);
     }
-
 }
+

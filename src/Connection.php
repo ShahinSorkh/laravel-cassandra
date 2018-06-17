@@ -2,8 +2,8 @@
 
 namespace ShSo\Lacassa;
 
-use Illuminate\Database\Connection as BaseConnection;
 use Cassandra;
+use Illuminate\Database\Connection as BaseConnection;
 
 class Connection extends BaseConnection
 {
@@ -31,8 +31,9 @@ class Connection extends BaseConnection
     /**
      * Begin a fluent query against a database collection.
      *
-     * @param  string $collection
-     * @return Query\Builder
+     * @param string $collection
+     *
+     * @return \ShSo\Lacassa\Query\Builder
      */
     public function collection($collection)
     {
@@ -43,8 +44,9 @@ class Connection extends BaseConnection
     /**
      * Begin a fluent query against a database collection.
      *
-     * @param  string $table
-     * @return Query\Builder
+     * @param string $table
+     *
+     * @return \ShSo\Lacassa\Query\Builder
      */
     public function table($table)
     {
@@ -52,15 +54,17 @@ class Connection extends BaseConnection
     }
 
     /**
-     * @inheritdoc
+     * @return \ShSo\Lacassa\Schema\Builder
      */
     public function getSchemaBuilder()
     {
         return new Schema\Builder($this);
     }
+
     /**
-     * [getSchemaGrammar returns the connection grammer]
-     * @return [Schema\Grammar] [description]
+     * Returns the connection grammer
+     *
+     * @return \ShSo\Lacassa\Schema\Grammar
      */
     public function getSchemaGrammar()
     {
@@ -80,7 +84,8 @@ class Connection extends BaseConnection
     /**
      * Create a new Cassandra connection.
      *
-     * @param  array $config
+     * @param array $config
+     *
      * @return \Cassandra\DefaultSession
      */
     protected function createConnection(array $config)
@@ -92,7 +97,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * @inheritdoc
+     * @return void
      */
     public function disconnect()
     {
@@ -100,7 +105,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * @inheritdoc
+     * @return string
      */
     public function getDriverName()
     {
@@ -108,7 +113,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * @inheritdoc
+     * @return \ShSo\Lacassa\Query\Processor
      */
     protected function getDefaultPostProcessor()
     {
@@ -116,7 +121,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * @inheritdoc
+     * @return \ShSo\Lacassa\Query\Grammar
      */
     protected function getDefaultQueryGrammar()
     {
@@ -124,7 +129,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * @inheritdoc
+     * @return \ShSo\Lacassa\Schema\Grammar
      */
     protected function getDefaultSchemaGrammar()
     {
@@ -134,13 +139,14 @@ class Connection extends BaseConnection
     /**
      * Execute an CQL statement and return the boolean result.
      *
-     * @param  string $query
-     * @param  array  $bindings
+     * @param string $query
+     * @param array $bindings
+     *
      * @return bool
      */
     public function statement($query, $bindings = [])
     {
-        foreach($bindings as $binding) {
+        foreach ($bindings as $binding) {
             $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
             $query = preg_replace('/\?/', $value, $query, 1);
         }
@@ -151,8 +157,9 @@ class Connection extends BaseConnection
     /**
      * Run an CQL statement and get the number of rows affected.
      *
-     * @param  string $query
-     * @param  array  $bindings
+     * @param string $query
+     * @param array $bindings
+     *
      * @return int
      */
     public function affectingStatement($query, $bindings = [])
@@ -160,7 +167,7 @@ class Connection extends BaseConnection
         // For update or delete statements, we want to get the number of rows affected
         // by the statement and return that back to the developer. We'll first need
         // to execute the statement and then we'll use PDO to fetch the affected.
-        foreach($bindings as $binding) {
+        foreach ($bindings as $binding) {
             $value = $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
             $query = preg_replace('/\?/', $value, $query, 1);
         }
@@ -172,22 +179,23 @@ class Connection extends BaseConnection
     /**
      * Execute an CQL statement and return the boolean result.
      *
-     * @param  string $query
-     * @param  array  $bindings
+     * @param string $query
+     * @param array $bindings
+     *
      * @return bool
      */
     public function raw($query)
     {
         $builder = new Query\Builder($this, $this->getPostProcessor());
-        $result = $builder->executeCql($query);
-        return $result;
+        return $builder->executeCql($query);
     }
 
     /**
      * Dynamically pass methods to the connection.
      *
-     * @param  string $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -195,3 +203,4 @@ class Connection extends BaseConnection
         return call_user_func_array([$this->connection, $method], $parameters);
     }
 }
+
