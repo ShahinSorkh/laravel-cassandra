@@ -218,7 +218,10 @@ Inserting, updating and deleting records works just like the original QB.
 
 **Insert**
 
-    DB::table('emp')->insert(['emp_id' => 11, 'emp_city' => '{"kochi", "tvm", "kollam"}', 'emp_name' => 'Christy', 'emp_phone' => 12345676890, 'emp_sal' => 500]);
+    DB::table('emp')
+        ->insertCollection('set', 'emp_city', [123, 1234, 12345])
+        ->insertCollection('map', 'friends', [['John', 'Male'], ['Eli', 'Female']])
+        ->insert(['emp_id' => 11, 'emp_city' => '{"kochi", "tvm", "kollam"}', 'emp_name' => 'Christy', 'emp_phone' => 12345676890, 'emp_sal' => 500]);
 
 **Updating**
 
@@ -241,15 +244,10 @@ Operator is + or -, + for adding the values to collection and - to remove the va
 Value can be associative array for map type and array of string/number for list and set types.
 
     DB::table('users')->where('id', 1)->updateCollection('set', 'phn', '+', [123, 1234,12345])->update();
-
     DB::table('users')->where('id', 1)->updateCollection('set', 'phn', '-', [123])->update();
-
     DB::table('users')->where('id', 1)->updateCollection('list', 'hobbies', '+', ['reading', 'cooking', 'cycling'])->update();
-
     DB::table('users')->where('id', 1)->updateCollection('list', 'hobbies', '-', ['cooking'])->update();
-
-    DB::table('users')->where('id', 1)->updateCollection('map', 'friends', '+', ['John' => 'Male', 'Rex' => 'Male'])->update();
-
+    DB::table('users')->where('id', 1)->updateCollection('map', 'friends', '+', [['John', 'Male'], ['Rex', 'Male']])->update();
     DB::table('users')->where('id', 1)->updateCollection('map', 'friends', '-', ['John'])->update();
 
 **Deleting**
