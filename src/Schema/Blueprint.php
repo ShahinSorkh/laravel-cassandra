@@ -1,10 +1,12 @@
-<?php namespace Cubettech\Lacassa\Schema;
+<?php
+
+namespace ShSo\Lacassa\Schema;
 
 use Illuminate\Database\Connection;
 use \Illuminate\Database\Schema\Grammars\Grammar as BaseGrammar;
+use \Illuminate\Database\Schema\Blueprint as BaseBluprint;
 
-
-class Blueprint extends \Illuminate\Database\Schema\Blueprint
+class Blueprint extends BaseBluprint
 {
     /**
      * The Cassandra object for this blueprint.
@@ -56,7 +58,7 @@ class Blueprint extends \Illuminate\Database\Schema\Blueprint
             $method = 'compile'.ucfirst($command->name);
 
             if (method_exists($grammar, $method)) {
-                if (! is_null($sql = $grammar->$method($this, $command, $connection))) {
+                if (!is_null($sql = $grammar->$method($this, $command, $connection))) {
                     $statements = array_merge($statements, (array) $sql);
                 }
             }

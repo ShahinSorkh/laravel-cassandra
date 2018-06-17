@@ -1,4 +1,6 @@
-<?php namespace Cubettech\Lacassa\Schema;
+<?php
+
+namespace ShSo\Lacassa\Schema;
 
 use Closure;
 use Cubettech\Lacassa\Connection;
@@ -15,7 +17,7 @@ class Builder extends \Illuminate\Database\Schema\Builder
     }
 
 
-  
+
     /**
      * @inheritdoc
      */
