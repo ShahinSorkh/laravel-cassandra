@@ -1,5 +1,5 @@
 {
-    "name": "sorkh.shahin/laravel-cassandra",
+    "name": "shso/laravel-cassandra",
     "type": "library",
     "description": "Cassandra based query builder for laravel.",
     "license": "MIT",
