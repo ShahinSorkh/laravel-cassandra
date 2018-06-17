@@ -147,8 +147,7 @@ class Grammar extends BaseGrammar
         // intended records are updated by the SQL statements we generate to run.
         $wheres = $this->compileWheres($query);
         $upateCollections = $this->compileUpdateCollections($query);
-        if($upateCollections)
-        {
+        if($upateCollections) {
           $upateCollections = $columns ? ', '.$upateCollections : $upateCollections;
         }
 
@@ -164,15 +163,13 @@ class Grammar extends BaseGrammar
     {
         $updateCollections = collect($query->bindings['updateCollection']);
 
-        $updateCollectionCql = $updateCollections->map(
-            function ($collection, $key) {
-                if($collection['operation']) {
-                    return $collection['column'] . '=' . $collection['column'] . $collection['operation'] . $this->compileCollectionValues($collection['type'], $collection['value']);
-                }else{
-                    return $collection['column'] . '=' . $this->compileCollectionValues($collection['type'], $collection['value']);
-                }
+        $updateCollectionCql = $updateCollections->map(function ($collection, $key) {
+            if($collection['operation']) {
+                return $collection['column'] . '=' . $collection['column'] . $collection['operation'] . $this->compileCollectionValues($collection['type'], $collection['value']);
+            } else {
+                return $collection['column'] . '=' . $this->compileCollectionValues($collection['type'], $collection['value']);
             }
-        )->implode(', ');
+        })->implode(', ');
         return $updateCollectionCql;
 
     }
