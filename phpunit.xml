@@ -6,6 +6,6 @@
         <env name="DB_CONNECTION" value="cassandra" />
         <env name="DB_HOST" value="127.0.0.1" />
         <env name="DB_PORT" value="9042" />
-        <env name="DB_DATABASE" value="irib" />
+        <env name="DB_DATABASE" value="testing" />
     </php>
 </phpunit>
