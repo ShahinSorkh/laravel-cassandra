@@ -1,4 +1,4 @@
-## **Lacassa**
+# **Lacassa**
 
 A Query builder with support for Cassandra, using the original Laravel API.
 This library extends the original Laravel classes, so it uses exactly the same methods.
@@ -9,7 +9,7 @@ This library extends the original Laravel classes, so it uses exactly the same m
 
 * Configuration
 
-* Query 	Builder
+* Query Builder
 
 * Schema
 
@@ -20,12 +20,11 @@ This library extends the original Laravel classes, so it uses exactly the same m
 ## **Installation**
 
 Make sure you have the DataStax PHP Driver for Apache Cassandra installed.
-You can find installation instructions at https://github.com/datastax/php-driver or 
-https://github.com/datastax/php-driver/blob/master/ext/README.md
+You can find installation instructions at [datastax repo](https://github.com/datastax/php-driver).
 
-*datastax php-driver requires php version 5.6+*
+Note: *datastax php-driver works with php version 5.6.\*, 7.0.\* and 7.1.\* only*
 
-Installation using composer:
+### Installation using composer
 
     composer require shso/laravel-cassandra
 
@@ -50,14 +49,15 @@ And add a new cassandra connection:
         'password' => env('DB_PASSWORD', ''),
      ],
 
-_Note: you can enter all of your nodes like:_
+Note: _you can enter all of your nodes like:_
 
     # .env
     DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
 
 ### **Auth**
 
-You can use Laravel's native Auth functionality for cassandra, make sure your config/auth.php looks like 
+You can use Laravel's native Auth functionality for cassandra,
+make sure your config/auth.php looks like
 
         'providers' => [
             // 'users' => [
@@ -72,10 +72,10 @@ You can use Laravel's native Auth functionality for cassandra, make sure your co
 
 ## **Schema**
 
-The database driver also has (limited) schema builder support. You can easily manipulate tables and set indexes:
+The database driver also has (limited) schema builder support.
+You can easily manipulate tables and set indexes:
 
         use ShSo/Lacassa/Schema/Bluprint;
-        
         Schema::create('users', function (Bluprint $table) {
             $table->int('id');
             $table->text('name');
@@ -92,80 +92,80 @@ DROP table
 
         Schema::drop('users');
 
-# **CQL data types supported**
+## **CQL data types supported**
 
 `text('a')` `bigint('b')` `blob('c')` `boolean('d')` `counter('e')` `decimal('f')`
-`double('g')` `float('h')` `frozen('i')` `inet('j')` `int('k')` `listCollection('l', 'text')`
-`mapCollection('m', 'timestamp', 'text')` `setCollection('n', 'int')` `timestamp('o')`
-`timeuuid('p')` `tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
-`ascii('u')`
+`double('g')` `float('h')` `frozen('i')` `inet('j')` `int('k')`
+`listCollection('l', 'text')` `mapCollection('m', 'timestamp', 'text')`
+`setCollection('n', 'int')` `timestamp('o')` `timeuuid('p')` `ascii('u')`
+`tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
 
-**Primary Key**
+### **Primary Key**
 
 `primary(['a', 'b'])`
 
-**Query Builder**
+### **Query Builder**
 
 The database driver plugs right into the original query builder.
-When using cassandra connections, you will be able to build fluent queries to perform database operations.
+When using cassandra connections, you will be able to build
+fluent queries to perform database operations.
 
     $emp = DB::table('emp')->get();
-
     $emp = DB::table('emp')->where('emp_name', 'Christy')->first();
 
-If you did not change your default database connection, you will need to specify it when querying.
+If you did not change your default database connection,
+you will need to specify it when querying.
 
     $emp = DB::connection('cassandra')->table('emp')->get();
 
-**Examples**
+## **Examples**
 
-### **Basic Usage**
-
-**Retrieving All Records**
+### **Retrieving All Records**
 
     $emp = DB::table('emp')->all();
 
-**Indexing columns**
+### **Indexing columns**
 
 CREATE INDEX creates a new index on the given table for the named column.
 
     DB::table('users')->index(['name']);
 
-**Selecting columns**
+### **Selecting columns**
 
     $emp = DB::table('emp')->where('emp_no', '>', 50)->select('emp_name', 'emp_no')->get();
 
     $emp = DB::table('emp')->where('emp_no', '>', 50)->get(['emp_name', 'emp_no']);
 
-**Wheres**
+### **Wheres**
 
 The WHERE clause specifies which rows to query.
 In the WHERE clause, refer to a column using the actual name, not an alias.
 Columns in the WHERE clause need to meet one of these requirements:
 
-* The partition key definition includes the column.	
+* The partition key definition includes the column.
 
 * A column that is indexed using CREATE INDEX.
 
         $emp = DB::table('emp')->where('emp_no', '>', 50)->take(10)->get();
 
-**And Statements**
+### **And Statements**
 
     $emp = DB::table('emp')->where('emp_no', '>', 50)->where('emp_name', '=', 'Christy')->get();
 
-**Using Where In With An Array**
+### **Using Where In With An Array**
 
     $emp = DB::table('emp')->whereIn('emp_no', [12, 17, 21])->get();
 
-**Order By**
+### **Order By**
 
 ORDER BY clauses can select a single column only.
-Ordering can be done in ascending or descending order, default ascending, and specified with the ASC or DESC keywords.
+Ordering can be done in ascending or descending order,
+default ascending, and specified with the ASC or DESC keywords.
 In the ORDER BY clause, refer to a column using the actual name, not the aliases.
 
     $emp = DB::table('emp')->where('emp_name','Christy')->orderBy('emp_no', 'desc')->get();
 
-**Limit**
+### **Limit**
 
 We can use limit() and take() for limiting the query.
 
@@ -173,7 +173,7 @@ We can use limit() and take() for limiting the query.
 
     $emp = DB::table('emp')->where('emp_no', '>', 50)->limit(10)->get();
 
-**Distinct**
+### **Distinct**
 
 Distinct requires a field for which to return the distinct values.
 
@@ -183,7 +183,7 @@ Distinct can be combined with **where**:
 
     $emp = DB::table('emp')->where('emp_sal', 45000)->distinct()->get(['emp_name']);
 
-**Count**
+### **Count**
 
     $number = DB::table('emp')->count();
 
@@ -191,7 +191,7 @@ Count can be combined with **where**:
 
     $sal = DB::table('emp')->where('emp_sal', 45000)->count();
 
-**Truncate**
+### **Truncate**
 
     $sal = DB::table('emp')->truncate();
 
@@ -202,32 +202,44 @@ in the WHERE clause to filter the data for a particular value in the collection.
 
     $emp = DB::table('emp')->where('emp_name','contains', 'Christy')->get();
 
-After [indexing the collection keys](https://docs.datastax.com/en/cql/3.1/cql/cql_reference/create_index_r.html#reference_ds_eqm_nmd_xj__CreatIdxCollKey) in the venues map, you can filter on map keys.
+After [indexing the collection keys](https://docs.datastax.com/en/cql/3.1/cql/cql_reference/create_index_r.html#reference_ds_eqm_nmd_xj__CreatIdxCollKey)
+in the venues map, you can filter on map keys.
 
     $emp = DB::table(emp')->where('todo','contains key', '2014-10-02 06:30:00+0000')->get();
 
-**Raw Query**
+### **Raw Query**
 
 The CQL expressions can be injected directly into the query.
 
     $emp = DB::raw('select * from emp');
 
-**Inserts, updates and deletes**
+## **Inserts, updates and deletes**
 
 Inserting, updating and deleting records works just like the original QB.
 
-**Insert**
+### **Insert**
 
     DB::table('emp')
         ->insertCollection('set', 'phn', [123, 1234, 12345])
         ->insertCollection('map', 'friends', [['John', 'Male'], ['Eli', 'Female']])
-        ->insert(['emp_id' => 11, 'emp_name' => 'Christy', 'emp_phone' => 12345676890, 'emp_sal' => 500]);
+        ->insert([
+            'emp_id' => 11,
+            'emp_name' => 'Christy',
+            'emp_phone' => 12345676890,
+            'emp_sal' => 500
+         ]);
 
-**Updating**
+### **Updating**
 
 To update a model, you may retrieve it, change an attribute, and use the update method.
 
-    DB::table('emp')->where('emp_id', 11)->update(['emp_city' => 'kochi', 'emp_name' => 'Christy jos', 'emp_phone' =>  1234567890]);
+    DB::table('emp')
+        ->where('emp_id', 11)
+        ->update([
+            'emp_city' => 'kochi',
+            'emp_name' => 'Christy jos',
+            'emp_phone' =>  123456789
+        ]);
 
 ### **Updating a collection set, list, and map**
 
@@ -239,24 +251,46 @@ Collection\_type is any of set, list or map.
 
 Column\_name is the name of column to be updated.
 
-Operator is + or -, + for adding the values to collection and - to remove the value from collection.
+Operator is + or -, + for adding the values to collection
+and - to remove the value from collection.
 
-Value can be associative array for map type and array of string/number for list and set types.
+Value can be associative array for map type
+and array of string/number for list and set types.
 
-    DB::table('users')->where('id', 1)->updateCollection('set', 'phn', '+', [123, 1234,12345])->update();
-    DB::table('users')->where('id', 1)->updateCollection('set', 'phn', '-', [123])->update();
-    DB::table('users')->where('id', 1)->updateCollection('list', 'hobbies', '+', ['reading', 'cooking', 'cycling'])->update();
-    DB::table('users')->where('id', 1)->updateCollection('list', 'hobbies', '-', ['cooking'])->update();
-    DB::table('users')->where('id', 1)->updateCollection('map', 'friends', '+', [['John', 'Male'], ['Rex', 'Male']])->update();
-    DB::table('users')->where('id', 1)->updateCollection('map', 'friends', '-', ['John'])->update();
+    DB::table('users')->where('id', 1)
+        ->updateCollection('set', 'phn', '+', [123, 1234,12345])->update();
+    DB::table('users')->where('id', 1)
+        ->updateCollection('set', 'phn', '-', [123])->update();
+    DB::table('users')->where('id', 1)
+        ->updateCollection('list', 'hobbies', '+', ['reading', 'cooking', 'cycling'])->update();
+    DB::table('users')->where('id', 1)
+        ->updateCollection('list', 'hobbies', '-', ['cooking'])->update();
+    DB::table('users')->where('id', 1)
+        ->updateCollection('map', 'friends', '+', [['John', 'Male'], ['Rex', 'Male']])->update();
+    DB::table('users')->where('id', 1)
+        ->updateCollection('map', 'friends', '-', ['John'])->update();
 
-**Deleting**
+### **Deleting**
 
-To delete a model, simply call the delete method on the instance. We can delete the rows in a table by using deleteRow method:
+To delete a model, simply call the delete method on the instance.
+We can delete the rows in a table by using deleteRow method:
 
     $emp = DB::table('emp')->where('emp_city', 'Kochi')->deleteRow();
 
 We can also perform delete by the column in a table using deleteColumn method:
 
     $emp = DB::table('emp')->where('emp_id', 3)->deleteColumn();
+
+## **Testing**
+
+For testing you need an up and running cassandra
+service with an empty keyspace named testing.
+
+    cqlsh> CREATE KEYSPACE testing WITH REPLICATION =
+           {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+And then run phpunit:
+
+    # `pwd` = <project root>
+    $ ./vendor/bin/phpunit tests
 
