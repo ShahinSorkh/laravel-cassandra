@@ -45,13 +45,6 @@ class Builder extends BaseBuilder
     public $insertCollections;
 
     /**
-     * The database collection.
-     *
-     * @var CassandraCollection
-     */
-    protected $collection;
-
-    /**
      * The column projections.
      *
      * @var array
@@ -170,18 +163,6 @@ class Builder extends BaseBuilder
     {
         $this->grammar = new Grammar;
         $this->connection = $connection;
-    }
-
-    /**
-     * Set the table which the query is targeting.
-     *
-     * @param string $table
-     *
-     * @return $this
-     */
-    public function from($collection)
-    {
-        return parent::from($collection);
     }
 
     /**
