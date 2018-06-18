@@ -2,6 +2,7 @@
 
 namespace ShSo\Lacassa;
 
+use Cassandra;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -30,7 +31,12 @@ class TestCase extends Orchestra
     {
         $app['config']->set('database.default', 'cassandra');
         $app['config']->set('database.connections.cassandra', [
-            'driver' => 'cassandra',
+            'driver' => 'Cassandra',
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT'),
+            'keyspace' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
         ]);
     }
 
