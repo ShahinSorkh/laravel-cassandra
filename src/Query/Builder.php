@@ -198,7 +198,10 @@ class Builder extends BaseBuilder
         }
         $cql = $this->toCql();
         $cql = $this->bindQuery($cql);
-        $result = $this->executeCql($cql);
+        $result = collect();
+        foreach ($this->executeCql($cql) as $row) {
+            $result->push($row);
+        }
         return $result;
     }
 
