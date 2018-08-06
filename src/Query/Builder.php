@@ -231,8 +231,7 @@ class Builder extends BaseBuilder
     public function executeCql($cql)
     {
         $statement = new Cassandra\SimpleStatement($cql);
-        $future = $this->connection->getCassandraConnection()->executeAsync($statement);
-        return $future->get();
+        return $this->connection->getCassandraConnection()->execute($statement);
     }
 
     /**
