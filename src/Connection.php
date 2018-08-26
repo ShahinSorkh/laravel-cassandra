@@ -146,12 +146,22 @@ class Connection extends BaseConnection
      */
     public function statement($query, $bindings = [])
     {
-        foreach ($bindings as $binding) {
-            $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
-            $query = preg_replace('/\?/', $value, $query, 1);
-        }
-        $builder = new Query\Builder($this, $this->getPostProcessor());
-        return $builder->executeCql($query);
+        $statement = new Cassandra\SimpleStatement($query);
+        return $this->getCassandraConnection()->execute($statement, ['arguments' => $bindings]);
+    }
+
+    /**
+     * Execute an async CQL statement and return the boolean result.
+     *
+     * @param string $query
+     * @param array $bindings
+     *
+     * @return bool
+     */
+    public function statementAsync($query, $bindings = [])
+    {
+        $statement = new Cassandra\SimpleStatement($query);
+        return $this->getCassandraConnection()->executeAsync($statement, ['arguments' => $bindings])->get();
     }
 
     /**
@@ -173,7 +183,7 @@ class Connection extends BaseConnection
         }
         $builder = new Query\Builder($this, $this->getPostProcessor());
 
-        return $builder->executeCql($query);
+        return $builder->execute($query);
     }
 
     /**
@@ -187,7 +197,7 @@ class Connection extends BaseConnection
     public function raw($query)
     {
         $builder = new Query\Builder($this, $this->getPostProcessor());
-        return $builder->executeCql($query);
+        return $builder->execute($query);
     }
 
     /**

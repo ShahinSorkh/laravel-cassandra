@@ -196,26 +196,8 @@ class Builder extends BaseBuilder
         if (is_null($this->columns)) {
             $this->columns = $columns;
         }
-        $cql = $this->toCql();
-        $cql = $this->bindQuery($cql);
-        $result = $this->executeCql($cql);
-        return $result;
-    }
-
-    /**
-     * Bind the query with its parameters.
-     *
-     * @param string $cql
-     *
-     * @return string
-     */
-    public function bindQuery($cql)
-    {
-        foreach ($this->getBindings() as $binding) {
-            $value = is_numeric($binding) ? $binding : "'".$binding."'";
-            $cql = preg_replace('/\?/', $value, $cql, 1);
-        }
-        return $cql;
+        $cql = $this->grammar->compileSelect($this);
+        return $this->execute($cql);
     }
 
     /**
@@ -225,10 +207,9 @@ class Builder extends BaseBuilder
      *
      * @return Cassandra\Rows
      */
-    public function executeCql($cql)
+    public function execute($cql)
     {
-        $statement = new Cassandra\SimpleStatement($cql);
-        return $this->connection->getCassandraConnection()->execute($statement);
+        return $this->connection->statement($cql, $this->getBindings());
     }
 
     /**
@@ -239,8 +220,7 @@ class Builder extends BaseBuilder
     public function deleteRow()
     {
         $query = $this->grammar->compileDelete($this);
-        $cql = $this->bindQuery($query);
-        return $this->executeCql($cql);
+        return $this->executeAsync($query);
     }
 
     /**
@@ -254,18 +234,7 @@ class Builder extends BaseBuilder
     {
         $this->delParams = $columns;
         $query = $this->grammar->compileDelete($this);
-        $cql = $this->bindQuery($query);
-        return $this->executeCql($cql);
-    }
-
-    /**
-     * Get the CQL representation of the query.
-     *
-     * @return string
-     */
-    public function toCql()
-    {
-        return $this->grammar->compileSelect($this);
+        return $this->executeAsync($cql);
     }
 
     /**
@@ -409,7 +378,7 @@ class Builder extends BaseBuilder
     public function index($columns = [])
     {
         $cql = $this->grammar->compileIndex($this, $columns);
-        return $this->executeCql($cql);
+        return $this->execute($cql);
     }
 }
 
