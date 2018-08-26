@@ -37,6 +37,14 @@ class Grammar extends BaseGrammar
         return $cql;
     }
 
+    protected $selectComponents = [
+        'columns',
+        'from',
+        'wheres',
+        'limit',
+        'allowFiltering',
+    ];
+
     /**
       * Compile an insert statement into CQL.
       *
@@ -258,5 +266,9 @@ class Grammar extends BaseGrammar
       return "CREATE INDEX IF NOT EXISTS ON ". $table ."(".  $value .")";
     }
 
+    public function compileAllowFiltering($query, $allow_filtering)
+    {
+        return $allow_filtering ? 'allow filtering':'';
+    }
 }
 

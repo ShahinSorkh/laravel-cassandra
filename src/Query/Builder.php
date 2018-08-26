@@ -30,6 +30,10 @@ class Builder extends BaseBuilder
         'insertCollection' => []
     ];
 
+    public $allowFiltering = false;
+
+    public $distinct = false;
+
     /**
      * The where constraints for the query.
      *
@@ -170,6 +174,18 @@ class Builder extends BaseBuilder
     {
         $this->grammar = new Grammar;
         $this->connection = $connection;
+    }
+
+    public function distinct()
+    {
+        $this->distinct = true;
+        return $this;
+    }
+
+    public function allowFiltering()
+    {
+        $this->allowFiltering = true;
+        return $this;
     }
 
     /**
