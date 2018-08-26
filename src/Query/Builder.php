@@ -21,11 +21,7 @@ class Builder extends BaseBuilder
      */
     public $bindings = [
         'select' => [],
-        'join'   => [],
         'where'  => [],
-        'having' => [],
-        'order'  => [],
-        'union'  => [],
         'updateCollection' => [],
         'insertCollection' => []
     ];
@@ -54,41 +50,6 @@ class Builder extends BaseBuilder
      * @var CassandraCollection
      */
     protected $collection;
-
-    /**
-     * The column projections.
-     *
-     * @var array
-     */
-    public $projections;
-
-    /**
-     * The cursor timeout value.
-     *
-     * @var int
-     */
-    public $timeout;
-
-    /**
-     * The cursor hint value.
-     *
-     * @var int
-     */
-    public $hint;
-
-    /**
-     * Custom options to add to the query.
-     *
-     * @var array
-     */
-    public $options = [];
-
-    /**
-     * Indicate if we are executing a pagination query.
-     *
-     * @var bool
-     */
-    public $paginating = false;
 
     /**
      * All of the available clause operators.
@@ -154,13 +115,6 @@ class Builder extends BaseBuilder
         '>' => '$gt',
         '>=' => '$gte'
     ];
-
-    /**
-     * Check if we need to return Collections instead of plain arrays (laravel >= 5.3 )
-     *
-     * @var boolean
-     */
-    protected $useCollections;
 
     /**
      * @var array
