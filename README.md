@@ -1,4 +1,6 @@
-## **Lacassa**
+# **Lacassa**
+
+## WORKING ON A NEW VERSION WAIT FOR DOCUMENTATION UPDATES
 
 A Query builder with support for Cassandra, using the original Laravel API.
 This library extends the original Laravel classes, so it uses exactly the same methods.
