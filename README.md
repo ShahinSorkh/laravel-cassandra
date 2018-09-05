@@ -11,7 +11,7 @@ This library extends the original Laravel classes, so it uses exactly the same m
 
 * Configuration
 
-* Query 	Builder
+* Query Builder
 
 * Schema
 
@@ -22,7 +22,7 @@ This library extends the original Laravel classes, so it uses exactly the same m
 ## **Installation**
 
 Make sure you have the DataStax PHP Driver for Apache Cassandra installed.
-You can find installation instructions at https://github.com/datastax/php-driver or 
+You can find installation instructions at https://github.com/datastax/php-driver or
 https://github.com/datastax/php-driver/blob/master/ext/README.md
 
 *datastax php-driver requires php version 5.6+*
@@ -45,66 +45,22 @@ And add a new cassandra connection:
 
     'cassandra' => [
         'driver' => 'Cassandra',
-        'host' => env('DB_HOST', 'localhost'),
-        'port' => env('DB_PORT', 7199),
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'port' => env('DB_PORT', 7000),
         'keyspace' => env('DB_DATABASE', 'cassandra_db'),
         'username' => env('DB_USERNAME', ''),
         'password' => env('DB_PASSWORD', ''),
+        # 'page_size' => '20000', # defaults to 5000
+        # 'consistency' => 'two',
+        # 'timeout' => 10.0,
+        # 'connect_timeout' => 3.0,
+        # 'request_timeout' => 3.0,
      ],
 
 _Note: you can enter all of your nodes like:_
 
     # .env
     DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
-
-### **Auth**
-
-You can use Laravel's native Auth functionality for cassandra, make sure your config/auth.php looks like 
-
-        'providers' => [
-            // 'users' => [
-            //     'driver' => 'eloquent',
-            //     'model' => App\User::class,
-            // ],
-            'users' => [
-                'driver' => 'database',
-                'table' => 'users',
-            ],
-        ],
-
-## **Schema**
-
-The database driver also has (limited) schema builder support. You can easily manipulate tables and set indexes:
-
-        use ShSo/Lacassa/Schema/Bluprint;
-        
-        Schema::create('users', function (Bluprint $table) {
-            $table->int('id');
-            $table->text('name');
-            $table->text('email');
-            $table->text('password');
-            $table->text('remember_token');
-            $table->setCollection('phn', 'bigint');
-            $table->listCollection('hobbies', 'text');
-            $table->mapCollection('friends', 'text', 'text');
-            $table->primary(['id']);
-        });
-
-DROP table
-
-        Schema::drop('users');
-
-# **CQL data types supported**
-
-`text('a')` `bigint('b')` `blob('c')` `boolean('d')` `counter('e')` `decimal('f')`
-`double('g')` `float('h')` `frozen('i')` `inet('j')` `int('k')` `listCollection('l', 'text')`
-`mapCollection('m', 'timestamp', 'text')` `setCollection('n', 'int')` `timestamp('o')`
-`timeuuid('p')` `tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
-`ascii('u')`
-
-**Primary Key**
-
-`primary(['a', 'b'])`
 
 **Query Builder**
 
@@ -115,7 +71,7 @@ When using cassandra connections, you will be able to build fluent queries to pe
 
     $emp = DB::table('emp')->where('emp_name', 'Christy')->first();
 
-If you did not change your default database connection, you will need to specify it when querying.
+If you did not change your default database connection, you will need to specify it on each query.
 
     $emp = DB::connection('cassandra')->table('emp')->get();
 
@@ -145,7 +101,7 @@ The WHERE clause specifies which rows to query.
 In the WHERE clause, refer to a column using the actual name, not an alias.
 Columns in the WHERE clause need to meet one of these requirements:
 
-* The partition key definition includes the column.	
+* The partition key definition includes the column.
 
 * A column that is indexed using CREATE INDEX.
 
