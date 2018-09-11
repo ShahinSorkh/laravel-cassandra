@@ -76,10 +76,25 @@ class Connection extends BaseConnection
      */
     protected function createConnection(array $config)
     {
-        return Cassandra::cluster()
-            ->withContactPoints($config['host'])
-            ->withPort(intval($config['port']))
-            ->build()->connect($config['keyspace']);
+        $builder = Cassandra::cluster()
+            ->withContactPoints($config['host'] ?? '127.0.0.1')
+            ->withPort(intval($config['port'] ?? '7000'));
+        if (array_key_exists('page_size', $config) && !empty($config['page_size']))
+            $builder->withDefaultPageSize(intval($config['page_size'] ?? '5000'));
+        if (array_key_exists('consistency', $config) && in_array(strtoupper($config['consistency']), [
+                'ANY', 'ONE', 'TWO', 'THREE', 'QOURUM', 'ALL', 'SERIAL',
+                'LOCAL_QUORUM', 'EACH_QOURUM', 'LOCAL_SERIAL', 'LOCAL_ONE',
+            ]))
+            $builder->withDefaultConsistency(Cassandra::{strtoupper("CONSISTENCY_{$config['consistency']}")});
+        if (array_key_exists('timeout', $config) && !empty($config['timeout']))
+            $builder->withDefaultTimeout(intval($config['timeout']));
+        if (array_key_exists('connect_timeout', $config) && !empty($config['connect_timeout']))
+            $builder->withConnectTimeout(floatval($config['connect_timeout']));
+        if (array_key_exists('request_timeout', $config) && !empty($config['request_timeout']))
+            $builder->withRequestTimeout(floatval($config['request_timeout']));
+        if (array_key_exists('username', $config) && array_key_exists('password', $config)
+            $builder->withCredentials($config['username'], $config['password']);
+        return $builder->build()->connect($config['keyspace']);
     }
 
     /**
@@ -140,11 +155,44 @@ class Connection extends BaseConnection
      */
     public function statement($query, $bindings = [])
     {
+        $statement = new Cassandra\SimpleStatement($query);
+        return $this->getCassandraConnection()->execute($statement, ['arguments' => $bindings]);
+    }
+
+    /**
+     * Execute an async CQL statement and return the boolean result.
+     *
+     * @param string $query
+     * @param array $bindings
+     *
+     * @return bool
+     */
+    public function statementAsync($query, $bindings = [])
+    {
+        $statement = new Cassandra\SimpleStatement($query);
+        return $this->getCassandraConnection()->executeAsync($statement, ['arguments' => $bindings])->get();
+    }
+
+    /**
+     * Run an CQL statement and get the number of rows affected.
+     *
+     * @param string $query
+     * @param array $bindings
+     *
+     * @return int
+     */
+    public function affectingStatement($query, $bindings = [])
+    {
+        // For update or delete statements, we want to get the number of rows affected
+        // by the statement and return that back to the developer. We'll first need
+        // to execute the statement and then we'll use PDO to fetch the affected.
         foreach ($bindings as $binding) {
-            $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
+            $value = $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
             $query = preg_replace('/\?/', $value, $query, 1);
         }
-        return $this->getDefaultQueryBuilder()->executeCql($query);
+        $builder = new Query\Builder($this, $this->getPostProcessor());
+
+        return $builder->execute($query);
     }
 
     /**
@@ -157,7 +205,8 @@ class Connection extends BaseConnection
      */
     public function raw($query)
     {
-        return $this->getDefaultQueryBuilder()->executeCql($query);
+        $builder = new Query\Builder($this, $this->getPostProcessor());
+        return $builder->execute($query);
     }
 
     /**

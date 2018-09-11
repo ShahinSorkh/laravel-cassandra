@@ -21,14 +21,14 @@ class Builder extends BaseBuilder
      */
     public $bindings = [
         'select' => [],
-        'join'   => [],
         'where'  => [],
-        'having' => [],
-        'order'  => [],
-        'union'  => [],
         'updateCollection' => [],
         'insertCollection' => []
     ];
+
+    public $allowFiltering = false;
+
+    public $distinct = false;
 
     /**
      * The where constraints for the query.
@@ -45,39 +45,11 @@ class Builder extends BaseBuilder
     public $insertCollections;
 
     /**
-     * The column projections.
+     * The database collection.
      *
-     * @var array
+     * @var CassandraCollection
      */
-    public $projections;
-
-    /**
-     * The cursor timeout value.
-     *
-     * @var int
-     */
-    public $timeout;
-
-    /**
-     * The cursor hint value.
-     *
-     * @var int
-     */
-    public $hint;
-
-    /**
-     * Custom options to add to the query.
-     *
-     * @var array
-     */
-    public $options = [];
-
-    /**
-     * Indicate if we are executing a pagination query.
-     *
-     * @var bool
-     */
-    public $paginating = false;
+    protected $collection;
 
     /**
      * All of the available clause operators.
@@ -145,13 +117,6 @@ class Builder extends BaseBuilder
     ];
 
     /**
-     * Check if we need to return Collections instead of plain arrays (laravel >= 5.3 )
-     *
-     * @var boolean
-     */
-    protected $useCollections;
-
-    /**
      * @var array
      */
     public $collectionTypes = ['set', 'list', 'map'];
@@ -163,6 +128,18 @@ class Builder extends BaseBuilder
     {
         $this->grammar = new Grammar;
         $this->connection = $connection;
+    }
+
+    public function distinct()
+    {
+        $this->distinct = true;
+        return $this;
+    }
+
+    public function allowFiltering()
+    {
+        $this->allowFiltering = true;
+        return $this;
     }
 
     /**
@@ -177,26 +154,8 @@ class Builder extends BaseBuilder
         if (is_null($this->columns)) {
             $this->columns = $columns;
         }
-        $cql = $this->toCql();
-        $cql = $this->bindQuery($cql);
-        $result = $this->executeCql($cql);
-        return $result;
-    }
-
-    /**
-     * Bind the query with its parameters.
-     *
-     * @param string $cql
-     *
-     * @return string
-     */
-    public function bindQuery($cql)
-    {
-        foreach ($this->getBindings() as $binding) {
-            $value = is_numeric($binding) ? $binding : "'".$binding."'";
-            $cql = preg_replace('/\?/', $value, $cql, 1);
-        }
-        return $cql;
+        $cql = $this->grammar->compileSelect($this);
+        return $this->execute($cql);
     }
 
     /**
@@ -206,11 +165,9 @@ class Builder extends BaseBuilder
      *
      * @return Cassandra\Rows
      */
-    public function executeCql($cql)
+    public function execute($cql)
     {
-        $statement = new Cassandra\SimpleStatement($cql);
-        $future = $this->connection->getCassandraConnection()->executeAsync($statement);
-        return $future->get();
+        return $this->connection->statement($cql, $this->getBindings());
     }
 
     /**
@@ -221,8 +178,7 @@ class Builder extends BaseBuilder
     public function deleteRow()
     {
         $query = $this->grammar->compileDelete($this);
-        $cql = $this->bindQuery($query);
-        return $this->executeCql($cql);
+        return $this->executeAsync($query);
     }
 
     /**
@@ -236,18 +192,7 @@ class Builder extends BaseBuilder
     {
         $this->delParams = $columns;
         $query = $this->grammar->compileDelete($this);
-        $cql = $this->bindQuery($query);
-        return $this->executeCql($cql);
-    }
-
-    /**
-     * Get the CQL representation of the query.
-     *
-     * @return string
-     */
-    public function toCql()
-    {
-        return $this->grammar->compileSelect($this);
+        return $this->executeAsync($cql);
     }
 
     /**
@@ -391,7 +336,7 @@ class Builder extends BaseBuilder
     public function index($columns = [])
     {
         $cql = $this->grammar->compileIndex($this, $columns);
-        return $this->executeCql($cql);
+        return $this->execute($cql);
     }
 }
 

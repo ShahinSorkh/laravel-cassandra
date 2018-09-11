@@ -1,5 +1,7 @@
 # **Lacassa**
 
+## WORKING ON A NEW VERSION WAIT FOR DOCUMENTATION UPDATES
+
 A Query builder with support for Cassandra, using the original Laravel API.
 This library extends the original Laravel classes, so it uses exactly the same methods.
 
@@ -20,7 +22,8 @@ This library extends the original Laravel classes, so it uses exactly the same m
 ## **Installation**
 
 Make sure you have the DataStax PHP Driver for Apache Cassandra installed.
-You can find installation instructions at [datastax repo](https://github.com/datastax/php-driver).
+You can find installation instructions at https://github.com/datastax/php-driver or
+https://github.com/datastax/php-driver/blob/master/ext/README.md
 
 Note: *datastax php-driver works with php version 5.6.\*, 7.0.\* and 7.1.\* only*
 
@@ -42,11 +45,16 @@ And add a new cassandra connection:
 
     'cassandra' => [
         'driver' => 'Cassandra',
-        'host' => env('DB_HOST', 'localhost'),
-        'port' => env('DB_PORT', 7199),
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'port' => env('DB_PORT', 7000),
         'keyspace' => env('DB_DATABASE', 'cassandra_db'),
         'username' => env('DB_USERNAME', ''),
         'password' => env('DB_PASSWORD', ''),
+        # 'page_size' => '20000', # defaults to 5000
+        # 'consistency' => 'two',
+        # 'timeout' => 10.0,
+        # 'connect_timeout' => 3.0,
+        # 'request_timeout' => 3.0,
      ],
 
 Note: _you can enter all of your nodes like:_
@@ -54,57 +62,7 @@ Note: _you can enter all of your nodes like:_
     # .env
     DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
 
-### **Auth**
-
-You can use Laravel's native Auth functionality for cassandra,
-make sure your config/auth.php looks like
-
-        'providers' => [
-            // 'users' => [
-            //     'driver' => 'eloquent',
-            //     'model' => App\User::class,
-            // ],
-            'users' => [
-                'driver' => 'database',
-                'table' => 'users',
-            ],
-        ],
-
-## **Schema**
-
-The database driver also has (limited) schema builder support.
-You can easily manipulate tables and set indexes:
-
-        use ShSo/Lacassa/Schema/Bluprint;
-        Schema::create('users', function (Bluprint $table) {
-            $table->int('id');
-            $table->text('name');
-            $table->text('email');
-            $table->text('password');
-            $table->text('remember_token');
-            $table->setCollection('phn', 'bigint');
-            $table->listCollection('hobbies', 'text');
-            $table->mapCollection('friends', 'text', 'text');
-            $table->primary(['id']);
-        });
-
-DROP table
-
-        Schema::drop('users');
-
-## **CQL data types supported**
-
-`text('a')` `bigint('b')` `blob('c')` `boolean('d')` `counter('e')` `decimal('f')`
-`double('g')` `float('h')` `frozen('i')` `inet('j')` `int('k')`
-`listCollection('l', 'text')` `mapCollection('m', 'timestamp', 'text')`
-`setCollection('n', 'int')` `timestamp('o')` `timeuuid('p')` `ascii('u')`
-`tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
-
-### **Primary Key**
-
-`primary(['a', 'b'])`
-
-### **Query Builder**
+**Query Builder**
 
 The database driver plugs right into the original query builder.
 When using cassandra connections, you will be able to build
@@ -113,8 +71,7 @@ fluent queries to perform database operations.
     $emp = DB::table('emp')->get();
     $emp = DB::table('emp')->where('emp_name', 'Christy')->first();
 
-If you did not change your default database connection,
-you will need to specify it when querying.
+If you did not change your default database connection, you will need to specify it on each query.
 
     $emp = DB::connection('cassandra')->table('emp')->get();
 

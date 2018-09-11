@@ -37,6 +37,13 @@
             "ShSo\\Lacassa\\": "tests/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShSo\\Lacassa\\CassandraServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {

@@ -7,35 +7,14 @@ use Illuminate\Database\Query\Grammars\Grammar as BaseGrammar;
 
 class Grammar extends BaseGrammar
 {
-    /**
-     * Compiles the cql select
-     *
-     * @param BaseBuilder $query
-     *
-     * @return string
-     */
-    public function compileSelect(BaseBuilder $query)
-    {
 
-        // If the query does not have any columns set, we'll set the columns to the
-        // * character to just get all of the columns from the database. Then we
-        // can build the query and concatenate all the pieces together as one.
-        $original = $query->columns;
-
-        if (is_null($query->columns)) {
-            $query->columns = ['*'];
-        }
-
-        // To compile the query, we'll spin through each component of the query and
-        // see if that component exists. If it does we'll just call the compiler
-        // function for the component which is responsible for making the CQL.
-        $cql = trim($this->concatenate(
-            $this->compileComponents($query)
-        ));
-        $query->columns = $original;
-
-        return $cql;
-    }
+    protected $selectComponents = [
+        'columns',
+        'from',
+        'wheres',
+        'limit',
+        'allowFiltering',
+    ];
 
     /**
       * Compile an insert statement into CQL.
@@ -51,9 +30,11 @@ class Grammar extends BaseGrammar
         // simply makes creating the CQL easier for us since we can utilize the same
         // basic routine regardless of an amount of records given to us to insert.
         $table = $this->wrapTable($query->from);
+
         if (!is_array(reset($values))) {
             $values = [$values];
         }
+
         $insertCollections = collect($query->bindings['insertCollection']);
 
         $insertCollectionArray = $insertCollections->mapWithKeys(function($collectionItem) {
@@ -70,11 +51,9 @@ class Grammar extends BaseGrammar
         // We need to build a list of parameter place-holders of values that are bound
         // to the query. Each insert should have the exact same amount of parameter
         // bindings so we will loop through the record and parameterize them all.
-        $parameters = collect($values)->map(
-            function ($record) {
-                return $this->parameterize($record);
-            }
-        )->implode(', ');
+        $parameters = collect($values)->map(function ($record) {
+            return $this->parameterize($record);
+        })->implode(', ');
 
         if ($collectionParam) {
           $parameters = $parameters ? $parameters .', '. $collectionParam : $collectionParam;
@@ -258,5 +237,9 @@ class Grammar extends BaseGrammar
       return "CREATE INDEX IF NOT EXISTS ON ". $table ."(".  $value .")";
     }
 
+    public function compileAllowFiltering($query, $allow_filtering)
+    {
+        return $allow_filtering ? 'allow filtering':'';
+    }
 }
 
