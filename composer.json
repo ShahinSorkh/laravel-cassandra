@@ -27,8 +27,15 @@
     "autoload": {
         "psr-4": {
             "ShSo\\Lacassa\\": "src/"
-            }
-        },
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShSo\\Lacassa\\CassandraServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
