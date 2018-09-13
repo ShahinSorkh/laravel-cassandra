@@ -45,10 +45,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "laravel": {
-            "providers": [ "ShSo\\Lacassa\\CassandraServiceProvider" ]
-        }
-    }
+    "prefer-stable": true
 }
