@@ -8,6 +8,15 @@ use Orchestra\Testbench\TestCase as Orchestra;
 class TestCase extends Orchestra
 {
 
+    protected function setUp()
+    {
+        parent::setUp();
+        if (
+            !file_exists(__DIR__.'/data/data.json') ||
+            !file_exists(__DIR__.'/data/users.json')
+        ) die('first run [php prepare_db.php]');
+    }
+
     protected function getPackageProviders($app)
     {
         return ['ShSo\\Lacassa\\CassandraServiceProvider'];
