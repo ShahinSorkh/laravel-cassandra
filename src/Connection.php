@@ -105,6 +105,7 @@ class Connection extends BaseConnection
      */
     public function disconnect()
     {
+        $this->connection->close();
         unset($this->connection);
     }
 
