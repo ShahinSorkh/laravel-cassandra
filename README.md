@@ -61,7 +61,7 @@ And add a new cassandra connection:
 ```php
 # config/database.php
     'cassandra' => [
-        'driver' => 'Cassandra',
+        'driver' => 'cassandra',
         'host' => env('DB_HOST', '127.0.0.1'),
         'port' => env('DB_PORT', 9042),
         'keyspace' => env('DB_DATABASE', 'cassandra_db'),

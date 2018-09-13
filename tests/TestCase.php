@@ -17,17 +17,17 @@ class TestCase extends Orchestra
     {
         $app['config']->set('database.default', 'cassandra');
         $app['config']->set('database.connections.cassandra', [
-            'driver' => 'Cassandra',
+            'driver' => 'cassandra',
             'host' => env('DB_HOST'),
             'port' => env('DB_PORT'),
             'keyspace' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME', ''),
             'password' => env('DB_PASSWORD', ''),
-            'page_size' => '20000', # defaults to 5000
-            'consistency' => 'two',
-            'timeout' => 10.0,
-            'connect_timeout' => 3.0,
-            'request_timeout' => 3.0,
+            'page_size' => '5000', # defaults to 5000
+            'consistency' => 'local_one',
+            'timeout' => null,
+            'connect_timeout' => 5.0,
+            'request_timeout' => 12.0,
         ]);
     }
 
