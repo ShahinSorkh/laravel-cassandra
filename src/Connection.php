@@ -98,15 +98,17 @@ class Connection extends BaseConnection
         if (array_key_exists('consistency', $config) && in_array(strtoupper($config['consistency']), [
                 'ANY', 'ONE', 'TWO', 'THREE', 'QOURUM', 'ALL', 'SERIAL',
                 'LOCAL_QUORUM', 'EACH_QOURUM', 'LOCAL_SERIAL', 'LOCAL_ONE',
-            ]))
-            $builder->withDefaultConsistency(Cassandra::{strtoupper("CONSISTENCY_{$config['consistency']}")});
+            ])) {
+            $consistency = constant('\Cassandra::CONSISTENCY_'.strtoupper($config['consistency']));
+            $builder->withDefaultConsistency($consistency);
+        }
         if (array_key_exists('timeout', $config) && !empty($config['timeout']))
             $builder->withDefaultTimeout(intval($config['timeout']));
         if (array_key_exists('connect_timeout', $config) && !empty($config['connect_timeout']))
             $builder->withConnectTimeout(floatval($config['connect_timeout']));
         if (array_key_exists('request_timeout', $config) && !empty($config['request_timeout']))
             $builder->withRequestTimeout(floatval($config['request_timeout']));
-        if (array_key_exists('username', $config) && array_key_exists('password', $config)
+        if (array_key_exists('username', $config) && array_key_exists('password', $config))
             $builder->withCredentials($config['username'], $config['password']);
         return $builder->build()->connect($config['keyspace']);
     }
