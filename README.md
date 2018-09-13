@@ -63,7 +63,7 @@ And add a new cassandra connection:
     'cassandra' => [
         'driver' => 'Cassandra',
         'host' => env('DB_HOST', '127.0.0.1'),
-        'port' => env('DB_PORT', 7000),
+        'port' => env('DB_PORT', 9042),
         'keyspace' => env('DB_DATABASE', 'cassandra_db'),
         'username' => env('DB_USERNAME', ''),
         'password' => env('DB_PASSWORD', ''),
