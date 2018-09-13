@@ -4,3 +4,5 @@ phpunit.phar
 composer.phar
 composer.lock
 .idea/
+*.swp
+*.swo
