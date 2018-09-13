@@ -76,10 +76,8 @@ And add a new cassandra connection:
 
 Note: _you can enter all of your nodes like:_
 
-```php
-# .env
-DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
-```
+    # .env
+    DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
 
 Note: _you can choose one of the consistency levels below:_
 
@@ -371,11 +369,16 @@ $emp = DB::table('emp')->where('emp_id', 3)->deleteColumn();
 
 ## **Testing**
 
-For testing you need an up and running cassandra
-service with an empty keyspace named testing.
+For testing run the command below once:
 
-    cqlsh> CREATE KEYSPACE testing WITH REPLICATION =
-           {'class': 'SimpleStrategy', 'replication_factor': 1};
+```sh
+$ php ./prepare_db.php
+```
+
+This will create a keyspace named `testing`, a table named `users` and two
+materialized views named `users_by_username` and `users_by_email` and another
+table named `posts` and a materialized view named `posts_by_month`. You can see
+the full schemas in the file `prepare_db.php`.
 
 And then run phpunit:
 
