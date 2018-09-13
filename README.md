@@ -25,7 +25,7 @@ This library extends the original Laravel classes, so it uses exactly the same m
 Make sure you have the DataStax PHP Driver for Apache Cassandra installed.
 You can find installation instructions at [datastax repo](https://github.com/datastax/php-driver).
 
-Note: *datastax php-driver works with php version 5.6.\*, 7.0.\* and 7.1.\* only*
+Note: _datastax php-driver works with php version 5.6.\*, 7.0.\* and 7.1.\* only_
 
 ### Installation using composer
 
@@ -76,8 +76,18 @@ And add a new cassandra connection:
 
 Note: _you can enter all of your nodes like:_
 
-    # .env
-    DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
+```php
+# .env
+DB_HOST=192.168.100.140,192.168.100.141,192.168.100.142
+```
+
+Note: _you can choose one of the consistency levels below:_
+
+|                 |                 |                 |                 |
+|-----------------|-----------------|-----------------|-----------------|
+| `any`           | `three`         | `local_qourum`  | `local_one`     |
+| `one`           | `qourum`        | `each_qourum`   | `serial`        |
+| `two`           | `all`           | `local_serial`  |                 |
 
 ### **Auth**
 
@@ -369,6 +379,8 @@ service with an empty keyspace named testing.
 
 And then run phpunit:
 
-    # `pwd` = <project root>
-    $ ./vendor/bin/phpunit tests
+```sh
+# `pwd` = <project root>
+$ ./vendor/bin/phpunit tests
+```
 
