@@ -13,20 +13,6 @@ class TestCase extends Orchestra
         return ['ShSo\\Lacassa\\CassandraServiceProvider'];
     }
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        // set up a fake database
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
-
-        // drop the fake database
-    }
-
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'cassandra');
@@ -37,6 +23,11 @@ class TestCase extends Orchestra
             'keyspace' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME', ''),
             'password' => env('DB_PASSWORD', ''),
+            'page_size' => '20000', # defaults to 5000
+            'consistency' => 'two',
+            'timeout' => 10.0,
+            'connect_timeout' => 3.0,
+            'request_timeout' => 3.0,
         ]);
     }
 
