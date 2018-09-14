@@ -6,7 +6,7 @@ use DB;
 use Cassandra\DefaultSession as CassandraSession;
 use Cassandra\{FutureRows, Rows};
 use ShSo\Lacassa\Connection;
-use ShSo\Lacassa\Query\{Builder, Grammar, Processor};
+use ShSo\Lacassa\Query\Builder;
 use ShSo\Lacassa\TestCase;
 
 class ConnectionTest extends TestCase
