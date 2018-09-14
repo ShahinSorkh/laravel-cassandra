@@ -45,13 +45,6 @@ class Builder extends BaseBuilder
     public $insertCollections;
 
     /**
-     * The database collection.
-     *
-     * @var CassandraCollection
-     */
-    protected $collection;
-
-    /**
      * All of the available clause operators.
      *
      * @var array
@@ -62,41 +55,7 @@ class Builder extends BaseBuilder
         '>',
         '<=',
         '>=',
-        '<>',
-        '!=',
         'like',
-        'not like',
-        'between',
-        'ilike',
-        '&',
-        '|',
-        '^',
-        '<<',
-        '>>',
-        'rlike',
-        'regexp',
-        'not regexp',
-        'exists',
-        'type',
-        'mod',
-        'where',
-        'all',
-        'size',
-        'regex',
-        'text',
-        'slice',
-        'elemmatch',
-        'geowithin',
-        'geointersects',
-        'near',
-        'nearsphere',
-        'geometry',
-        'maxdistance',
-        'center',
-        'centersphere',
-        'box',
-        'polygon',
-        'uniquedocs',
         'contains',
         'contains key',
     ];
@@ -107,7 +66,7 @@ class Builder extends BaseBuilder
      * @var array
      */
     protected $conversion = [
-        '=' => '=',
+        '=' => '$eq',
         '!=' => '$ne',
         '<>' => '$ne',
         '<' => '$lt',
@@ -126,7 +85,7 @@ class Builder extends BaseBuilder
      */
     public function __construct(Connection $connection)
     {
-        $this->grammar = new Grammar;
+        $this->grammar = $connection->getQueryGrammar();
         $this->connection = $connection;
     }
 
@@ -140,18 +99,6 @@ class Builder extends BaseBuilder
     {
         $this->allowFiltering = true;
         return $this;
-    }
-
-    /**
-     * Set the table which the query is targeting.
-     *
-     * @param string $table
-     *
-     * @return $this
-     */
-    public function from($collection)
-    {
-        return parent::from($collection);
     }
 
     /**
@@ -171,15 +118,43 @@ class Builder extends BaseBuilder
     }
 
     /**
+     * Execute the query as a "select" statement.
+     *
+     * @param array $columns
+     *
+     * @return Cassandra\FutureRows
+     */
+    public function getAsync($columns = ['*'])
+    {
+        if (is_null($this->columns)) {
+            $this->columns = $columns;
+        }
+        $cql = $this->grammar->compileSelect($this);
+        return $this->executeAsync($cql);
+    }
+
+    /**
      * Execute the CQL query.
      *
      * @param string $cql
      *
      * @return Cassandra\Rows
      */
-    public function execute($cql)
+    private function execute($cql)
     {
-        return $this->connection->statement($cql, $this->getBindings());
+        return $this->connection->execute($cql, ['arguments' => $this->getBindings()]);
+    }
+
+    /**
+     * Execute the CQL query asyncronously.
+     *
+     * @param string $cql
+     *
+     * @return Cassandra\FutureRows
+     */
+    private function executeAsync($cql)
+    {
+        return $this->connection->executeAsync($cql, ['arguments' => $this->getBindings()]);
     }
 
     /**
@@ -204,7 +179,7 @@ class Builder extends BaseBuilder
     {
         $this->delParams = $columns;
         $query = $this->grammar->compileDelete($this);
-        return $this->executeAsync($cql);
+        return $this->executeAsync($query);
     }
 
     /**
@@ -216,8 +191,14 @@ class Builder extends BaseBuilder
      */
     public function count($columns = '*')
     {
-        $result = $this->get($columns);
-        return (int) $result->count();
+        $count = 0;
+        $result = $this->get(array_wrap($columns));
+        while(true) {
+            $count += $result->count();
+            if ($result->isLastPage()) break;
+            $result = $result->nextPage();
+        }
+        return $count;
     }
 
     /**
