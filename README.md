@@ -52,26 +52,26 @@ Change your default database connection name in config/database.php:
 
 ```php
 # config/database.php
-    'default' => env('DB_CONNECTION', 'cassandra'),
+'default' => env('DB_CONNECTION', 'cassandra'),
 ```
 
 And add a new cassandra connection:
 
 ```php
 # config/database.php
-    'cassandra' => [
-        'driver' => 'Cassandra',
-        'host' => env('DB_HOST', '127.0.0.1'),
-        'port' => env('DB_PORT', 9042),
-        'keyspace' => env('DB_DATABASE', 'cassandra_db'),
-        'username' => env('DB_USERNAME', ''),
-        'password' => env('DB_PASSWORD', ''),
-        'page_size' => '5000',
-        'consistency' => 'local_one',
-        'timeout' => null,
-        'connect_timeout' => 5.0,
-        'request_timeout' => 12.0,
-    ],
+'cassandra' => [
+    'driver' => 'cassandra',
+    'host' => env('DB_HOST', '127.0.0.1'),
+    'port' => env('DB_PORT', 9042),
+    'keyspace' => env('DB_DATABASE', 'cassandra_db'),
+    'username' => env('DB_USERNAME', ''),
+    'password' => env('DB_PASSWORD', ''),
+    'page_size' => '5000',
+    'consistency' => 'local_one',
+    'timeout' => null,
+    'connect_timeout' => 5.0,
+    'request_timeout' => 12.0,
+],
 ```
 
 Note: _you can enter all of your nodes like:_
@@ -87,59 +87,7 @@ Note: _you can choose one of the consistency levels below:_
 | `one`           | `qourum`        | `each_qourum`   | `serial`        |
 | `two`           | `all`           | `local_serial`  |                 |
 
-### **Auth**
-
-You can use Laravel's native Auth functionality for cassandra,
-make sure your config/auth.php looks like
-
-        'providers' => [
-            // 'users' => [
-            //     'driver' => 'eloquent',
-            //     'model' => App\User::class,
-            // ],
-            'users' => [
-                'driver' => 'database',
-                'table' => 'users',
-            ],
-        ],
-
-## **Schema**
-
-The database driver also has (limited) schema builder support.
-You can easily manipulate tables and set indexes:
-
-        use ShSo/Lacassa/Schema/Bluprint;
-        Schema::create('users', function (Bluprint $table) {
-            $table->int('id');
-            $table->text('name');
-            $table->text('email');
-            $table->text('password');
-            $table->text('remember_token');
-            $table->setCollection('phn', 'bigint');
-            $table->listCollection('hobbies', 'text');
-            $table->mapCollection('friends', 'text', 'text');
-            $table->primary(['id']);
-        });
-
-DROP table
-
-        Schema::drop('users');
-
-## **CQL data types supported**
-
-`text('a')` `bigint('b')` `blob('c')` `boolean('d')` `counter('e')` `decimal('f')`
-`double('g')` `float('h')` `frozen('i')` `inet('j')` `int('k')`
-`listCollection('l', 'text')` `mapCollection('m', 'timestamp', 'text')`
-`setCollection('n', 'int')` `timestamp('o')` `timeuuid('p')` `ascii('u')`
-`tuple('q', 'int', 'text', 'timestamp')` `uuid('r')` `varchar('s')` `varint('t')`
-
-|                 |                 |                 |                 |
-|-----------------|-----------------|-----------------|-----------------|
-| `any`           | `three`         | `local_qourum`  | `local_one`     |
-| `one`           | `qourum`        | `each_qourum`   | `serial`        |
-| `two`           | `all`           | `local_serial`  |                 |
-
-### **Query Builder**
+***Query Builder***
 
 The database driver plugs right into the original query builder.
 When using cassandra connections, you will be able to build
@@ -150,8 +98,7 @@ $emp = DB::table('emp')->get();
 $emp = DB::table('emp')->where('emp_name', 'Christy')->first();
 ```
 
-If you did not change your default database connection,
-you will need to specify it when querying.
+If you did not change your default database connection, you will need to specify it on each query.
 
 ```php
 $emp = DB::connection('cassandra')->table('emp')->get();
@@ -208,10 +155,10 @@ $emp = DB::table('emp')->whereIn('emp_no', [12, 17, 21])->get();
 
 ### **Order By**
 
-ORDER BY clauses can select a single column only.
+`ORDER BY` clauses can select a single column only.
 Ordering can be done in ascending or descending order,
 default ascending, and specified with the ASC or DESC keywords.
-In the ORDER BY clause, refer to a column using the actual name, not the aliases.
+In the `ORDER BY` clause, refer to a column using the actual name, not the aliases.
 
 ```php
 $emp = DB::table('emp')->where('emp_name', 'Christy')->orderBy('emp_no', 'desc')->get();
@@ -228,7 +175,7 @@ $emp = DB::table('emp')->where('emp_no', '>', 50)->limit(10)->get();
 
 ### **Distinct**
 
-Distinct requires a field for which to return the distinct values.
+Distinct requires a _primary key_ field for which to return the distinct values.
 
 ```php
 $emp = DB::table('emp')->distinct()->get(['emp_id']);
@@ -305,13 +252,13 @@ DB::table('emp')
 To update a model, you may retrieve it, change an attribute, and use the update method.
 
 ```php
-    DB::table('emp')
-        ->where('emp_id', 11)
-        ->update([
-            'emp_city' => 'kochi',
-            'emp_name' => 'Christy jos',
-            'emp_phone' =>  123456789
-        ]);
+DB::table('emp')
+    ->where('emp_id', 11)
+    ->update([
+        'emp_city' => 'kochi',
+        'emp_name' => 'Christy jos',
+        'emp_phone' =>  123456789
+    ]);
 ```
 
 ### **Updating a collection set, list, and map**
@@ -343,7 +290,22 @@ DB::table('users')->where('id', 1)
     ->updateCollection('list', 'hobbies', '+', ['reading', 'cooking', 'cycling'])->update();
 
 DB::table('users')->where('id', 1)
+    ->updateCollection('set', 'phn', '+', [123, 1234,12345])->update();
+
+DB::table('users')->where('id', 1)
+    ->updateCollection('set', 'phn', '-', [123])->update();
+
+DB::table('users')->where('id', 1)
+    ->updateCollection('list', 'hobbies', '+', ['reading', 'cooking', 'cycling'])->update();
+
+DB::table('users')->where('id', 1)
     ->updateCollection('list', 'hobbies', '-', ['cooking'])->update();
+
+DB::table('users')->where('id', 1)
+    ->updateCollection('map', 'friends', '+', [['John', 'Male'], ['Rex', 'Male']])->update();
+
+DB::table('users')->where('id', 1)
+    ->updateCollection('map', 'friends', '-', ['John'])->update();
 
 DB::table('users')->where('id', 1)
     ->updateCollection('map', 'friends', '+', [['John', 'Male'], ['Rex', 'Male']])->update();
