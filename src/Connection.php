@@ -3,6 +3,15 @@
 namespace ShSo\Lacassa;
 
 use Cassandra;
+use ShSo\Lacassa\Schema\{
+    Builder as SchemaBuilder,
+    Grammar as SchemaGrammar
+};
+use ShSo\Lacassa\Query\{
+    Builder as QueryBuilder,
+    Grammar as QueryGrammar,
+    Processor as QueryProcessor
+};
 use Illuminate\Database\Connection as BaseConnection;
 
 class Connection extends BaseConnection
@@ -24,7 +33,10 @@ class Connection extends BaseConnection
         $this->config = $config;
         $this->db = $config['keyspace'];
         $this->connection = $this->createConnection($config);
+
         $this->useDefaultPostProcessor();
+        $this->useDefaultSchemaGrammar();
+        $this->useDefaultQueryGrammar();
     }
 
     /**
@@ -44,7 +56,7 @@ class Connection extends BaseConnection
      */
     public function getSchemaBuilder()
     {
-        return new Schema\Builder($this);
+        return new SchemaBuilder($this);
     }
 
     /**
@@ -54,7 +66,7 @@ class Connection extends BaseConnection
      */
     public function getSchemaGrammar()
     {
-        return new Schema\Grammar();
+        return new SchemaGrammar();
     }
 
     /**
@@ -62,9 +74,9 @@ class Connection extends BaseConnection
      *
      * @return \Cassandra\Session
      */
-    public function getCassandraConnection()
+    public function getConnection()
     {
-        return $this->connection;
+        return $this->connection ?? null;
     }
 
     /**
@@ -113,7 +125,7 @@ class Connection extends BaseConnection
      */
     public function getDriverName()
     {
-        return 'Cassandra';
+        return 'cassandra';
     }
 
     /**
@@ -121,7 +133,7 @@ class Connection extends BaseConnection
      */
     protected function getDefaultPostProcessor()
     {
-        return new Query\Processor();
+        return new QueryProcessor();
     }
 
     /**
@@ -129,7 +141,7 @@ class Connection extends BaseConnection
      */
     protected function getDefaultQueryBuilder()
     {
-        return new Query\Builder($this, $this->getPostProcessor());
+        return new QueryBuilder($this, $this->getPostProcessor());
     }
 
     /**
@@ -137,7 +149,7 @@ class Connection extends BaseConnection
      */
     protected function getDefaultQueryGrammar()
     {
-        return new Query\Grammar();
+        return new QueryGrammar();
     }
 
     /**
@@ -145,71 +157,7 @@ class Connection extends BaseConnection
      */
     protected function getDefaultSchemaGrammar()
     {
-        return new Schema\Grammar();
-    }
-
-    /**
-     * Execute an CQL statement with bindings and return the result.
-     *
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return Cassandra\Rows
-     */
-    public function statement($query, $bindings = [])
-    {
-        $statement = new Cassandra\SimpleStatement($query);
-        return $this->getCassandraConnection()->execute($statement, ['arguments' => $bindings]);
-    }
-
-    /**
-     * Execute an async CQL statement and return the boolean result.
-     *
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return bool
-     */
-    public function statementAsync($query, $bindings = [])
-    {
-        $statement = new Cassandra\SimpleStatement($query);
-        return $this->getCassandraConnection()->executeAsync($statement, ['arguments' => $bindings])->get();
-    }
-
-    /**
-     * Run an CQL statement and get the number of rows affected.
-     *
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return int
-     */
-    public function affectingStatement($query, $bindings = [])
-    {
-        // For update or delete statements, we want to get the number of rows affected
-        // by the statement and return that back to the developer. We'll first need
-        // to execute the statement and then we'll use PDO to fetch the affected.
-        foreach ($bindings as $binding) {
-            $value = $value = 'string' == strtolower(gettype($binding)) ? "'" . $binding . "'" : $binding;
-            $query = preg_replace('/\?/', $value, $query, 1);
-        }
-        $builder = new Query\Builder($this, $this->getPostProcessor());
-
-        return $builder->execute($query);
-    }
-
-    /**
-     * Execute an CQL statement and return the result.
-     *
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return Cassandra\Rows
-     */
-    public function raw($query)
-    {
-        $builder = new Query\Builder($this, $this->getPostProcessor());
-        return $builder->execute($query);
+        return new SchemaGrammar();
     }
 
     /**
