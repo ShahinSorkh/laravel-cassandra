@@ -2,16 +2,17 @@
 
 namespace ShSo\Lacassa\Tests;
 
-use DB;
 use Cassandra\DefaultSession as CassandraSession;
-use Cassandra\{FutureRows, Rows};
+use Cassandra\FutureRows;
+use Cassandra\Rows;
+use DB;
 use ShSo\Lacassa\Connection;
 use ShSo\Lacassa\Query\Builder;
 use ShSo\Lacassa\TestCase;
 
 class ConnectionTest extends TestCase
 {
-    function testNewConnection()
+    public function testNewConnection()
     {
         $connection = DB::connection('cassandra');
         $this->assertInstanceOf(CassandraSession::class, $connection->getConnection());
@@ -19,7 +20,7 @@ class ConnectionTest extends TestCase
         $this->assertEquals('cassandra', $connection->getDriverName());
     }
 
-    function testDynamicMethods()
+    public function testDynamicMethods()
     {
         $connection = DB::connection('cassandra');
         $this->assertInstanceOf(Rows::class, $connection->execute('select * from users'));
@@ -27,13 +28,13 @@ class ConnectionTest extends TestCase
         $this->assertInternalType('array', $connection->metrics());
     }
 
-    function testInstanciatingFromConnection()
+    public function testInstanciatingFromConnection()
     {
         $connection = DB::connection('cassandra');
         $this->assertInstanceOf(Builder::class, $connection->table('foo'));
     }
 
-    function testDisconnect()
+    public function testDisconnect()
     {
         $connection = DB::connection('cassandra');
         $this->assertNotNull($connection->getConnection());
@@ -41,4 +42,3 @@ class ConnectionTest extends TestCase
         $this->assertNull($connection->getConnection());
     }
 }
-

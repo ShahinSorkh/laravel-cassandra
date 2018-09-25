@@ -35,14 +35,15 @@ class Blueprint extends BaseBluprint
     {
         return array_filter(
             $this->columns, function ($column) {
-                return ! $column->change;
+                return !$column->change;
             }
         );
     }
+
     /**
      * Get the raw SQL statements for the blueprint.
      *
-     * @param \Illuminate\Database\Connection $connection
+     * @param \Illuminate\Database\Connection              $connection
      * @param \Illuminate\Database\Schema\Grammars\Grammar $grammar
      *
      * @return array
@@ -64,6 +65,7 @@ class Blueprint extends BaseBluprint
                 }
             }
         }
+
         return $statements;
     }
 
@@ -71,8 +73,8 @@ class Blueprint extends BaseBluprint
      * Specify the primary key(s) for the table.
      *
      * @param string|array $columns
-     * @param string $name
-     * @param string|null $algorithm
+     * @param string       $name
+     * @param string|null  $algorithm
      *
      * @return \Illuminate\Support\Fluent
      */
@@ -81,6 +83,7 @@ class Blueprint extends BaseBluprint
         $columns = (array) $columns;
         //$index = $index ?: $this->createIndexName($type, $columns);
         $this->primary = $command = $this->createCommand('primary', compact('columns', 'algorithm'));
+
         return $command;
     }
 
@@ -95,8 +98,8 @@ class Blueprint extends BaseBluprint
                 return sprintf('primary key (%s) ', implode(', ', $primaryKey->columns));
             }
         }
-        return;
     }
+
     /**
      * Create a new ascii column on the table.
      *
@@ -308,4 +311,3 @@ class Blueprint extends BaseBluprint
         return $this->addColumn('varint', $column);
     }
 }
-

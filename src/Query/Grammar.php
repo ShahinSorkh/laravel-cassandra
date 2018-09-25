@@ -7,7 +7,6 @@ use Illuminate\Database\Query\Grammars\Grammar as BaseGrammar;
 
 class Grammar extends BaseGrammar
 {
-
     protected $selectComponents = [
         'columns',
         'from',
@@ -17,13 +16,13 @@ class Grammar extends BaseGrammar
     ];
 
     /**
-      * Compile an insert statement into CQL.
-      *
-      * @param \ShSo\Lacassa\Query $query
-      * @param array $values
-      *
-      * @return string
-      */
+     * Compile an insert statement into CQL.
+     *
+     * @param \ShSo\Lacassa\Query $query
+     * @param array               $values
+     *
+     * @return string
+     */
     public function compileInsert(BaseBuilder $query, array $values)
     {
         // Essentially we will force every insert to be treated as a batch insert which
@@ -37,14 +36,14 @@ class Grammar extends BaseGrammar
 
         $insertCollections = collect($query->bindings['insertCollection']);
 
-        $insertCollectionArray = $insertCollections->mapWithKeys(function($collectionItem) {
+        $insertCollectionArray = $insertCollections->mapWithKeys(function ($collectionItem) {
             return [$collectionItem['column'] => $this->compileCollectionValues($collectionItem['type'], $collectionItem['value'])];
         })->all();
 
         $columns = $this->columnize(array_keys(reset($values)));
         $collectionColumns = $this->columnize(array_keys($insertCollectionArray));
         if ($collectionColumns) {
-          $columns = $columns ? $columns .', '. $collectionColumns:$collectionColumns;
+            $columns = $columns ? $columns.', '.$collectionColumns : $collectionColumns;
         }
         $collectionParam = $this->buildInsertCollectionParam($insertCollections);
 
@@ -56,7 +55,7 @@ class Grammar extends BaseGrammar
         })->implode(', ');
 
         if ($collectionParam) {
-          $parameters = $parameters ? $parameters .', '. $collectionParam : $collectionParam;
+            $parameters = $parameters ? $parameters.', '.$collectionParam : $collectionParam;
         }
 
         return "insert into {$table} ({$columns}) values ({$parameters})";
@@ -67,10 +66,11 @@ class Grammar extends BaseGrammar
      *
      * @return \Illuminate\Support\Collection
      */
-    public function buildInsertCollectionParam($collection){
-      return $collection->map(function($collectionItem) {
-        return $this->compileCollectionValues($collectionItem['type'], $collectionItem['value']);
-      })->implode(', ');
+    public function buildInsertCollectionParam($collection)
+    {
+        return $collection->map(function ($collectionItem) {
+            return $this->compileCollectionValues($collectionItem['type'], $collectionItem['value']);
+        })->implode(', ');
     }
 
     /**
@@ -98,20 +98,21 @@ class Grammar extends BaseGrammar
      */
     public function compileDelete(BaseBuilder $query)
     {
-        $delColumns = "";
+        $delColumns = '';
         if (isset($query->delParams)) {
-            $delColumns = implode(", ", $query->delParams);
+            $delColumns = implode(', ', $query->delParams);
         }
 
         $wheres = is_array($query->wheres) ? $this->compileWheres($query) : '';
-        return trim("delete ".$delColumns." from {$this->wrapTable($query->from)} $wheres");
+
+        return trim('delete '.$delColumns." from {$this->wrapTable($query->from)} $wheres");
     }
 
     /**
      * Compile an update statement into SQL.
      *
      * @param \Illuminate\Database\Query\Builder $query
-     * @param array $values
+     * @param array                              $values
      *
      * @return string
      */
@@ -133,14 +134,14 @@ class Grammar extends BaseGrammar
         $wheres = $this->compileWheres($query);
         $upateCollections = $this->compileUpdateCollections($query);
         if ($upateCollections) {
-          $upateCollections = $columns ? ', '.$upateCollections : $upateCollections;
+            $upateCollections = $columns ? ', '.$upateCollections : $upateCollections;
         }
 
         return trim("update {$table} set $columns $upateCollections $wheres");
     }
 
     /**
-     * Compiles the udpate collection methods
+     * Compiles the udpate collection methods.
      *
      * @param BaseBuilder $query
      *
@@ -152,17 +153,17 @@ class Grammar extends BaseGrammar
 
         $updateCollectionCql = $updateCollections->map(function ($collection, $key) {
             if ($collection['operation']) {
-                return $collection['column'] . '=' . $collection['column'] . $collection['operation'] . $this->compileCollectionValues($collection['type'], $collection['value']);
+                return $collection['column'].'='.$collection['column'].$collection['operation'].$this->compileCollectionValues($collection['type'], $collection['value']);
             } else {
-                return $collection['column'] . '=' . $this->compileCollectionValues($collection['type'], $collection['value']);
+                return $collection['column'].'='.$this->compileCollectionValues($collection['type'], $collection['value']);
             }
         })->implode(', ');
-        return $updateCollectionCql;
 
+        return $updateCollectionCql;
     }
 
     /**
-     * Compiles the values assigned to collections
+     * Compiles the values assigned to collections.
      *
      * @param string $type
      * @param string $value
@@ -172,22 +173,20 @@ class Grammar extends BaseGrammar
     public function compileCollectionValues($type, $value)
     {
         if (is_array($value)) {
-
             if ('set' == $type) {
-                $collection = "{".$this->buildCollectionString($type, $value)."}";
+                $collection = '{'.$this->buildCollectionString($type, $value).'}';
             } elseif ('list' == $type) {
-                $collection = "[".$this->buildCollectionString($type, $value)."]";
+                $collection = '['.$this->buildCollectionString($type, $value).']';
             } elseif ('map' == $type) {
-                $collection = "{".$this->buildCollectionString($type, $value)."}";
+                $collection = '{'.$this->buildCollectionString($type, $value).'}';
             }
 
             return $collection;
         }
-
     }
 
     /**
-     * Builds the insert string
+     * Builds the insert string.
      *
      * @param string $type
      * @param string $value
@@ -196,7 +195,6 @@ class Grammar extends BaseGrammar
      */
     public function buildCollectionString($type, $value)
     {
-
         $items = [];
         if ($type === 'map') {
             foreach ($value as $item) {
@@ -226,20 +224,20 @@ class Grammar extends BaseGrammar
 
     /**
      * @param Builder $query
-     * @param string $columns
+     * @param string  $columns
      *
      * @return string
      */
     public function compileIndex($query, $columns)
     {
-      $table = $this->wrapTable($query->from);
-      $value = implode(", ",$columns);
-      return "CREATE INDEX IF NOT EXISTS ON ". $table ."(".  $value .")";
+        $table = $this->wrapTable($query->from);
+        $value = implode(', ', $columns);
+
+        return 'CREATE INDEX IF NOT EXISTS ON '.$table.'('.$value.')';
     }
 
     public function compileAllowFiltering($query, $allow_filtering)
     {
-        return $allow_filtering ? 'allow filtering':'';
+        return $allow_filtering ? 'allow filtering' : '';
     }
 }
-

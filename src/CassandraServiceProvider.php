@@ -25,12 +25,12 @@ class CassandraServiceProvider extends ServiceProvider
     public function register()
     {
         // Add database driver.
-        $this->app->resolving('db', function($db) {
-            $db->extend('cassandra', function($config, $name) {
+        $this->app->resolving('db', function ($db) {
+            $db->extend('cassandra', function ($config, $name) {
                 $config['name'] = $name;
+
                 return new Connection($config);
             });
         });
     }
 }
-

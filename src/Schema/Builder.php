@@ -3,8 +3,8 @@
 namespace ShSo\Lacassa\Schema;
 
 use Closure;
-use ShSo\Lacassa\Connection;
 use Illuminate\Database\Schema\Builder as BaseBuilder;
+use ShSo\Lacassa\Connection;
 
 class Builder extends BaseBuilder
 {
@@ -25,4 +25,3 @@ class Builder extends BaseBuilder
         return new Blueprint($this->connection, $table);
     }
 }
-
