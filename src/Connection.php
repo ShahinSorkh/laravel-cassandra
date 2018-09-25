@@ -3,15 +3,11 @@
 namespace ShSo\Lacassa;
 
 use Cassandra;
-use ShSo\Lacassa\Schema\{
-    Builder as SchemaBuilder,
-    Grammar as SchemaGrammar
-};
-use ShSo\Lacassa\Query\{
-    Builder as QueryBuilder,
-    Grammar as QueryGrammar,
-    Processor as QueryProcessor
-};
+use ShSo\Lacassa\Query\Builder as QueryBuilder;
+use ShSo\Lacassa\Query\Grammar as QueryGrammar;
+use ShSo\Lacassa\Schema\Builder as SchemaBuilder;
+use ShSo\Lacassa\Schema\Grammar as SchemaGrammar;
+use ShSo\Lacassa\Query\Processor as QueryProcessor;
 use Illuminate\Database\Connection as BaseConnection;
 
 class Connection extends BaseConnection
@@ -60,7 +56,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * Returns the connection grammer
+     * Returns the connection grammer.
      *
      * @return \ShSo\Lacassa\Schema\Grammar
      */
@@ -91,8 +87,9 @@ class Connection extends BaseConnection
         $builder = Cassandra::cluster()
             ->withContactPoints($config['host'] ?? '127.0.0.1')
             ->withPort(intval($config['port'] ?? '7000'));
-        if (array_key_exists('page_size', $config) && !empty($config['page_size']))
+        if (array_key_exists('page_size', $config) && ! empty($config['page_size'])) {
             $builder->withDefaultPageSize(intval($config['page_size'] ?? '5000'));
+        }
         if (array_key_exists('consistency', $config) && in_array(strtoupper($config['consistency']), [
                 'ANY', 'ONE', 'TWO', 'THREE', 'QOURUM', 'ALL', 'SERIAL',
                 'LOCAL_QUORUM', 'EACH_QOURUM', 'LOCAL_SERIAL', 'LOCAL_ONE',
@@ -100,14 +97,19 @@ class Connection extends BaseConnection
             $consistency = constant('\Cassandra::CONSISTENCY_'.strtoupper($config['consistency']));
             $builder->withDefaultConsistency($consistency);
         }
-        if (array_key_exists('timeout', $config) && !empty($config['timeout']))
+        if (array_key_exists('timeout', $config) && ! empty($config['timeout'])) {
             $builder->withDefaultTimeout(intval($config['timeout']));
-        if (array_key_exists('connect_timeout', $config) && !empty($config['connect_timeout']))
+        }
+        if (array_key_exists('connect_timeout', $config) && ! empty($config['connect_timeout'])) {
             $builder->withConnectTimeout(floatval($config['connect_timeout']));
-        if (array_key_exists('request_timeout', $config) && !empty($config['request_timeout']))
+        }
+        if (array_key_exists('request_timeout', $config) && ! empty($config['request_timeout'])) {
             $builder->withRequestTimeout(floatval($config['request_timeout']));
-        if (array_key_exists('username', $config) && array_key_exists('password', $config))
+        }
+        if (array_key_exists('username', $config) && array_key_exists('password', $config)) {
             $builder->withCredentials($config['username'], $config['password']);
+        }
+
         return $builder->build()->connect($config['keyspace']);
     }
 
@@ -173,4 +175,3 @@ class Connection extends BaseConnection
         return call_user_func_array([$this->connection, $method], $parameters);
     }
 }
-
