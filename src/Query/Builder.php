@@ -3,14 +3,10 @@
 namespace ShSo\Lacassa\Query;
 
 use Cassandra;
-use Closure;
-use DateTime;
+use Illuminate\Support\Arr;
+use ShSo\Lacassa\Connection;
 use InvalidArgumentException;
 use Illuminate\Database\Query\Builder as BaseBuilder;
-use Illuminate\Database\Query\Expression;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-use ShSo\Lacassa\Connection;
 
 class Builder extends BaseBuilder
 {
@@ -23,7 +19,7 @@ class Builder extends BaseBuilder
         'select' => [],
         'where'  => [],
         'updateCollection' => [],
-        'insertCollection' => []
+        'insertCollection' => [],
     ];
 
     public $allowFiltering = false;
@@ -72,7 +68,7 @@ class Builder extends BaseBuilder
         '<' => '$lt',
         '<=' => '$lte',
         '>' => '$gt',
-        '>=' => '$gte'
+        '>=' => '$gte',
     ];
 
     /**
@@ -92,12 +88,14 @@ class Builder extends BaseBuilder
     public function distinct()
     {
         $this->distinct = true;
+
         return $this;
     }
 
     public function allowFiltering()
     {
         $this->allowFiltering = true;
+
         return $this;
     }
 
@@ -126,6 +124,7 @@ class Builder extends BaseBuilder
             $this->columns = $columns;
         }
         $cql = $this->grammar->compileSelect($this);
+
         return $this->execute($cql);
     }
 
@@ -142,6 +141,7 @@ class Builder extends BaseBuilder
             $this->columns = $columns;
         }
         $cql = $this->grammar->compileSelect($this);
+
         return $this->executeAsync($cql);
     }
 
@@ -177,6 +177,7 @@ class Builder extends BaseBuilder
     public function deleteRow()
     {
         $query = $this->grammar->compileDelete($this);
+
         return $this->executeAsync($query);
     }
 
@@ -191,6 +192,7 @@ class Builder extends BaseBuilder
     {
         $this->delParams = $columns;
         $query = $this->grammar->compileDelete($this);
+
         return $this->executeAsync($query);
     }
 
@@ -205,16 +207,19 @@ class Builder extends BaseBuilder
     {
         $count = 0;
         $result = $this->get(array_wrap($columns));
-        while(true) {
+        while (true) {
             $count += $result->count();
-            if ($result->isLastPage()) break;
+            if ($result->isLastPage()) {
+                break;
+            }
             $result = $result->nextPage();
         }
+
         return $count;
     }
 
     /**
-     * Used to update the colletions like set, list and map
+     * Used to update the colletions like set, list and map.
      *
      * @param string $type
      * @param string $column
@@ -241,6 +246,7 @@ class Builder extends BaseBuilder
         $updateCollection = compact('type', 'column', 'value', 'operation');
         $this->updateCollections[] = $updateCollection;
         $this->addCollectionBinding($updateCollection, 'updateCollection');
+
         return $this;
     }
 
@@ -256,10 +262,11 @@ class Builder extends BaseBuilder
      */
     public function addCollectionBinding($value, $type = 'updateCollection')
     {
-        if (! array_key_exists($type, $this->bindings)) {
+        if (!array_key_exists($type, $this->bindings)) {
             throw new InvalidArgumentException("Invalid binding type: {$type}.");
         }
         $this->bindings[$type][] = $value;
+
         return $this;
     }
 
@@ -273,6 +280,7 @@ class Builder extends BaseBuilder
     public function update(array $values = [])
     {
         $cql = $this->grammar->compileUpdate($this, $values);
+
         return $this->connection->update($cql, $this->cleanBindings(
             $this->grammar->prepareBindingsForUpdate($this->bindings, $values)
         ));
@@ -295,7 +303,7 @@ class Builder extends BaseBuilder
             return true;
         }
 
-        if (! is_array(reset($values))) {
+        if (!is_array(reset($values))) {
             $values = [$values];
         } else {
             // Here, we will sort the insert keys for every record so that each insert is
@@ -317,7 +325,7 @@ class Builder extends BaseBuilder
     }
 
     /**
-     * Insert a colletion type in cassandra
+     * Insert a colletion type in cassandra.
      *
      * @param string $type
      * @param string $column
@@ -330,6 +338,7 @@ class Builder extends BaseBuilder
         $insertCollection = compact('type', 'column', 'value');
         $this->insertCollections[] = $insertCollection;
         $this->addCollectionBinding($insertCollection, 'insertCollection');
+
         return $this;
     }
 
@@ -341,7 +350,7 @@ class Builder extends BaseBuilder
     public function index($columns = [])
     {
         $cql = $this->grammar->compileIndex($this, $columns);
+
         return $this->execute($cql);
     }
 }
-
