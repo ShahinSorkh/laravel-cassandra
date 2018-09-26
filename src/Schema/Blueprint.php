@@ -35,10 +35,11 @@ class Blueprint extends BaseBluprint
     {
         return array_filter(
             $this->columns, function ($column) {
-                return ! $column->change;
+                return !$column->change;
             }
         );
     }
+
     /**
      * Get the raw SQL statements for the blueprint.
      *
@@ -64,6 +65,7 @@ class Blueprint extends BaseBluprint
                 }
             }
         }
+
         return $statements;
     }
 
@@ -81,6 +83,7 @@ class Blueprint extends BaseBluprint
         $columns = (array) $columns;
         //$index = $index ?: $this->createIndexName($type, $columns);
         $this->primary = $command = $this->createCommand('primary', compact('columns', 'algorithm'));
+
         return $command;
     }
 
@@ -95,8 +98,8 @@ class Blueprint extends BaseBluprint
                 return sprintf('primary key (%s) ', implode(', ', $primaryKey->columns));
             }
         }
-        return;
     }
+
     /**
      * Create a new ascii column on the table.
      *
@@ -308,4 +311,3 @@ class Blueprint extends BaseBluprint
         return $this->addColumn('varint', $column);
     }
 }
-

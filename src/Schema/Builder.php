@@ -25,4 +25,3 @@ class Builder extends BaseBuilder
         return new Blueprint($this->connection, $table);
     }
 }
-

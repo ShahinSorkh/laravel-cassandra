@@ -3,27 +3,24 @@
 namespace ShSo\Lacassa\Tests;
 
 use DB;
-use Cassandra\{
-    Rows as CassandraRows,
-    FutureRows as CassandraFutureRows,
-    Timestamp as CassandraTimestamp,
-    Uuid as CassandraUuid
-};
-use Faker\Factory as FakerFactory;
-use ShSo\Lacassa\Query\Builder as QueryBuilder;
 use ShSo\Lacassa\TestCase;
+use Faker\Factory as FakerFactory;
+use Cassandra\Rows as CassandraRows;
+use Cassandra\Uuid as CassandraUuid;
+use Cassandra\Timestamp as CassandraTimestamp;
+use ShSo\Lacassa\Query\Builder as QueryBuilder;
+use Cassandra\FutureRows as CassandraFutureRows;
 
 class QueryBuilderTest extends TestCase
 {
-
-    function testNewBuilder()
+    public function testNewBuilder()
     {
         $connection = DB::connection('cassandra');
         $this->assertInstanceOf(QueryBuilder::class, new QueryBuilder($connection));
         $this->assertInstanceOf(QueryBuilder::class, $connection->table('foo'));
     }
 
-    function testFrom()
+    public function testFrom()
     {
         $connection = DB::connection('cassandra');
         $this->assertEquals(
@@ -32,7 +29,7 @@ class QueryBuilderTest extends TestCase
         );
     }
 
-    function testDistinct()
+    public function testDistinct()
     {
         $builder = DB::table('foo');
         $this->assertFalse($builder->distinct);
@@ -40,7 +37,7 @@ class QueryBuilderTest extends TestCase
         $this->assertTrue($builder->distinct);
     }
 
-    function testAllowFiltering()
+    public function testAllowFiltering()
     {
         $builder = DB::table('foo');
         $this->assertFalse($builder->allowFiltering);
@@ -48,14 +45,14 @@ class QueryBuilderTest extends TestCase
         $this->assertTrue($builder->allowFiltering);
     }
 
-    function testGet()
+    public function testGet()
     {
         $builder = DB::table('users');
         $this->assertInstanceOf(CassandraRows::class, $builder->get());
         $this->assertInstanceOf(CassandraFutureRows::class, $builder->getAsync());
     }
 
-    function testCount()
+    public function testCount()
     {
         \Config::set('database.connections.cassandra.page_size', 2);
         $next_century = date('Y-m', strtotime('+100 years'));
@@ -71,10 +68,13 @@ class QueryBuilderTest extends TestCase
 
         $results = DB::execute('select published_month,user,id from posts_by_month where published_month=?', ['arguments' => [$next_century]]);
         if ($results->count()) {
-            while(true) {
-                foreach($results as $row)
+            while (true) {
+                foreach ($results as $row) {
                     DB::execute('delete from posts where user=? and id=?', ['arguments' => [$row['user'], $row['id']]]);
-                if($results->isLastPage()) break;
+                }
+                if ($results->isLastPage()) {
+                    break;
+                }
                 $results = $results->nextPage();
             }
         }
@@ -82,15 +82,15 @@ class QueryBuilderTest extends TestCase
         $this->assertEquals(0, $builder->count());
     }
 
-    function testDeletes()
+    public function testDeletes()
     {
-        $next_century = strtotime('+101 years +'.rand(10,40000).'minutes');
+        $next_century = strtotime('+101 years +'.rand(10, 40000).'minutes');
         $faker = FakerFactory::create();
 
         $this->assertEquals(0, DB::table('posts_by_month')->where('published_month', date('Y-m', $next_century))->count());
 
         $titles = $users = $post_ids = [];
-        foreach(range(1,10) as $i) {
+        foreach (range(1, 10) as $i) {
             $users[$i] = new CassandraUuid();
             $post_ids[$i] = new CassandraUuid();
             $titles[$i] = $faker->sentence(3);
@@ -107,11 +107,9 @@ class QueryBuilderTest extends TestCase
         $builder->deleteColumn(['title'])->get();
         $this->assertNull($builder->first()['title']);
 
-        foreach($users as $i => $user) {
+        foreach ($users as $i => $user) {
             DB::table('posts')->where('user', $user)->where('id', $post_ids[$i])->deleteRow()->get();
         }
         $this->assertEquals(0, DB::table('posts_by_month')->where('published_month', date('Y-m', $next_century))->count());
     }
-
 }
-
