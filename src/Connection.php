@@ -162,6 +162,35 @@ class Connection extends BaseConnection
         return new SchemaGrammar();
     }
 
+    public function affectingStatement($query, $bindings = [])
+    {
+        return $this->statement($query, $bindings);
+    }
+
+    public function statement($query, $bindings = [])
+    {
+        return $this->run($query, $bindings, function ($query, $bindings) {
+            if ($this->pretending()) return true;
+
+            $statement = $this->connection->prepare($query);
+            $this->recordsHaveBeenModified();
+
+            return $this->connection->execute($statement, ['arguments' => $bindings]);
+        });
+    }
+
+    /**
+     * Reconnect to the database if a PDO connection is missing.
+     *
+     * @return void
+     */
+    protected function reconnectIfMissingConnection()
+    {
+        if (is_null($this->connection)) {
+            $this->connection = $this->createConnection($this->config);
+        }
+    }
+
     /**
      * Dynamically pass methods to the connection.
      *
