@@ -17,9 +17,9 @@
     },
     "require-dev": {
         "datastax/php-driver": "^1.3",
-        "phpunit/phpunit": "^7.2",
-        "johnkary/phpunit-speedtrap": "^3.0",
-        "orchestra/testbench": "~3.0"
+        "johnkary/phpunit-speedtrap": "^2.0 || ^3.0",
+        "orchestra/testbench": ">=3.3",
+        "phpunit/phpunit": "^6 || ^7"
     },
     "authors": [
         {
@@ -43,6 +43,11 @@
                 "ShSo\\Lacassa\\CassandraServiceProvider"
             ]
         }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true
