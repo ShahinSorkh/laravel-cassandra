@@ -30,22 +30,7 @@ class Grammar extends BaseGrammar
         // basic routine regardless of an amount of records given to us to insert.
         $table = $this->wrapTable($query->from);
 
-        if (!is_array(reset($values))) {
-            $values = [$values];
-        }
-
-        $insertCollections = collect($query->bindings['insertCollection']);
-
-        $insertCollectionArray = $insertCollections->mapWithKeys(function ($collectionItem) {
-            return [$collectionItem['column'] => $this->compileCollectionValues($collectionItem['type'], $collectionItem['value'])];
-        })->all();
-
         $columns = $this->columnize(array_keys(reset($values)));
-        $collectionColumns = $this->columnize(array_keys($insertCollectionArray));
-        if ($collectionColumns) {
-            $columns = $columns ? $columns.', '.$collectionColumns : $collectionColumns;
-        }
-        $collectionParam = $this->buildInsertCollectionParam($insertCollections);
 
         // We need to build a list of parameter place-holders of values that are bound
         // to the query. Each insert should have the exact same amount of parameter
@@ -53,10 +38,6 @@ class Grammar extends BaseGrammar
         $parameters = collect($values)->map(function ($record) {
             return $this->parameterize($record);
         })->implode(', ');
-
-        if ($collectionParam) {
-            $parameters = $parameters ? $parameters.', '.$collectionParam : $collectionParam;
-        }
 
         return "insert into {$table} ({$columns}) values ({$parameters})";
     }
