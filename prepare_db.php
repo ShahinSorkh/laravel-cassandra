@@ -21,7 +21,7 @@ echo 'inserting users...'.PHP_EOL;
 $p = $session->prepare('insert into users(id, username, email, password, birthdate) values (?,?,?,?,?)');
 $users_passwords = [];
 $count_users = 0;
-foreach (range(0, 2000) as $i) {
+foreach (range(0, 200) as $i) {
     $new_id = new Cassandra\Uuid();
     $password = $faker->password;
     $users_passwords[$new_id->uuid()] = $password;
@@ -43,7 +43,7 @@ file_put_contents($users_file, json_encode(array_merge($old_users, $users_passwo
 echo 'inserting posts...'.PHP_EOL;
 $p = $session->prepare('insert into posts(user, id, title, body, published_at, published_month) values (?,?,?,?,?,?)');
 $count_posts = 0;
-foreach (range(0, 200000) as $i) {
+foreach (range(0, 20000) as $i) {
     $published_at = $faker->unixTime;
     $session->executeAsync($p, ['arguments' => [
         new Cassandra\Uuid(array_rand($users_passwords)),
