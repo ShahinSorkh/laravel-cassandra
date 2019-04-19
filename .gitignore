@@ -4,3 +4,4 @@
 *.swp
 *.swo
 cassandra.log
+phpdoc-cache-*
