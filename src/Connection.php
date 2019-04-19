@@ -170,7 +170,9 @@ class Connection extends BaseConnection
     public function statement($query, $bindings = [])
     {
         return $this->run($query, $bindings, function ($query, $bindings) {
-            if ($this->pretending()) return true;
+            if ($this->pretending()) {
+                return true;
+            }
 
             $statement = $this->connection->prepare($query);
             $this->recordsHaveBeenModified();
