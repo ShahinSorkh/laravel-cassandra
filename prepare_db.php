@@ -1,9 +1,5 @@
-<?php
+<?php require './vendor/autoload.php';
 
-require './vendor/autoload.php';
-
-echo 'creating keyspace...'.PHP_EOL;
-`cqlsh -e "CREATE KEYSPACE IF NOT EXISTS testing WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;"`;
 $session = Cassandra::cluster()->build()->connect('testing');
 
 echo 'creating table users...'.PHP_EOL;
