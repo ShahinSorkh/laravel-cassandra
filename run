@@ -1,0 +1,57 @@
+#!/bin/bash
+
+DOCKER_CASSANDRA="cassandra"
+DOCKER_NETWORK="--network=container:$DOCKER_CASSANDRA"
+
+if [ -z "$NO_CHECK" ]; then
+    if ! ( docker ps >/dev/null 2>/dev/null ); then
+        echo '[ERR] Could not connect to docker daemon socket' >&2
+        echo '      Retry with root access' >&2
+        exit 1
+    fi
+
+    if [ ! -d vendor ]; then
+        docker run \
+            --user $(id -u):$(id -g) \
+            --workdir /lacassa \
+            --volume "$(pwd):/lacassa:z" \
+            shahinsorkh/lacassa:v0.1.0 php composer.phar install --prefer-dist -o
+    fi
+
+    if ! ( docker container ps | awk '{print $NF}' | grep cassandra -c >/dev/null 2>/dev/null ); then
+        echo '-=-=-=-! No cassandra server found!' >&2
+        echo '-=-=-=- Running one..'
+        docker run --detach \
+            --volume $DOCKER_CASSANDRA:/var/lib/cassandra \
+            --name=$DOCKER_CASSANDRA \
+            cassandra:3 && \
+            echo '-=-=-=- Retry after a few minutes'
+        exit $?
+    fi
+
+    if ! ( docker run $DOCKER_NETWORK cassandra:3 cqlsh -k testing -e 'exit' ); then
+        echo '-=-=-=-! Keyspace testing not found!' >&2
+        echo '-=-=-=- Creating one..'
+        docker run $DOCKER_NETWORK \
+            cassandra:3 cqlsh -e "CREATE KEYSPACE IF NOT EXISTS testing WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;"
+
+        if [ "$?" = "0" ]; then
+            echo '-=-=-=- Keyspace created'
+            echo '-=-=-=- Filling database with fake data..'
+            docker run $DOCKER_NETWORK \
+                --user $(id -u):$(id -g) \
+                --workdir /lacassa \
+                --volume "$(pwd):/lacassa:z" \
+                shahinsorkh/lacassa:v0.1.0 php prepare_db.php && \
+                echo '-=-=-=- Done.'
+        fi
+        exit $?
+    fi
+fi
+
+docker run $DOCKER_NETWORK \
+    --user $(id -u):$(id -g) \
+    --workdir /lacassa \
+    --volume "$(pwd):/lacassa:z" \
+    shahinsorkh/lacassa:v0.1.0 $@
+
