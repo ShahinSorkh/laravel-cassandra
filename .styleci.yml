@@ -1,4 +1,7 @@
 preset: laravel
 
+finder:
+  exclude:
+    - docs/
 disabled:
   - not_operator_with_successor_space
