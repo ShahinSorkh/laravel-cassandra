@@ -1,0 +1,389 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+
+namespace ShSo\Lacassa\Query;
+
+use Cassandra;
+use Illuminate\Support\Arr;
+use ShSo\Lacassa\Connection;
+use InvalidArgumentException;
+use Illuminate\Database\Query\Builder as BaseBuilder;
+
+class Builder extends BaseBuilder
+{
+    /**
+     * The current query value bindings.
+     *
+     * @var array
+     */
+    public $bindings = [
+        'select' =&gt; [],
+        'where'  =&gt; [],
+        'updateCollection' =&gt; [],
+        'insertCollection' =&gt; [],
+    ];
+
+    public $allowFiltering = false;
+
+    public $distinct = false;
+
+    /**
+     * The where constraints for the query.
+     *
+     * @var array
+     */
+    public $updateCollections;
+
+    /**
+     * The where constraints for the query.
+     *
+     * @var array
+     */
+    public $insertCollections;
+
+    /**
+     * All of the available clause operators.
+     *
+     * @var array
+     */
+    public $operators = [
+        '=',
+        '&lt;',
+        '&gt;',
+        '&lt;=',
+        '&gt;=',
+        'like',
+        'contains',
+        'contains key',
+    ];
+
+    /**
+     * Operator conversion.
+     *
+     * @var array
+     */
+    protected $conversion = [
+        '=' =&gt; '$eq',
+        '!=' =&gt; '$ne',
+        '&lt;&gt;' =&gt; '$ne',
+        '&lt;' =&gt; '$lt',
+        '&lt;=' =&gt; '$lte',
+        '&gt;' =&gt; '$gt',
+        '&gt;=' =&gt; '$gte',
+    ];
+
+    /**
+     * @var array
+     */
+    public $collectionTypes = ['set', 'list', 'map'];
+
+    /**
+     * @param Connection $connection
+     */
+    public function __construct(Connection $connection)
+    {
+        $this-&gt;grammar = $connection-&gt;getQueryGrammar();
+        $this-&gt;connection = $connection;
+    }
+
+    public function distinct()
+    {
+        $this-&gt;distinct = true;
+
+        return $this;
+    }
+
+    public function allowFiltering()
+    {
+        $this-&gt;allowFiltering = true;
+
+        return $this;
+    }
+
+    /**
+     * Execute the query as a &quot;select&quot; statement.
+     *
+     * @param array $columns
+     *
+     * @return Cassandra\Rows
+     */
+    public function get($columns = ['*'])
+    {
+        if (is_null($this-&gt;columns)) {
+            $this-&gt;columns = $columns;
+        }
+        $cql = $this-&gt;grammar-&gt;compileSelect($this);
+
+        return $this-&gt;execute($cql);
+    }
+
+    /**
+     * Execute the query as a &quot;select&quot; statement.
+     *
+     * @param array $columns
+     *
+     * @return Cassandra\FutureRows
+     */
+    public function getAsync($columns = ['*'])
+    {
+        if (is_null($this-&gt;columns)) {
+            $this-&gt;columns = $columns;
+        }
+        $cql = $this-&gt;grammar-&gt;compileSelect($this);
+
+        return $this-&gt;executeAsync($cql);
+    }
+
+    /**
+     * Execute the CQL query.
+     *
+     * @param string $cql
+     *
+     * @return Cassandra\Rows
+     */
+    private function execute($cql)
+    {
+        return $this-&gt;connection-&gt;execute($cql, ['arguments' =&gt; $this-&gt;getBindings()]);
+    }
+
+    /**
+     * Execute the CQL query asyncronously.
+     *
+     * @param string $cql
+     *
+     * @return Cassandra\FutureRows
+     */
+    private function executeAsync($cql)
+    {
+        return $this-&gt;connection-&gt;executeAsync($cql, ['arguments' =&gt; $this-&gt;getBindings()]);
+    }
+
+    /**
+     * Delete a record from the database.
+     *
+     * @return Cassandra\Rows
+     */
+    public function deleteRow()
+    {
+        $query = $this-&gt;grammar-&gt;compileDelete($this);
+
+        return $this-&gt;executeAsync($query);
+    }
+
+    /**
+     * Delete a column from the database.
+     *
+     * @param array $columns
+     *
+     * @return Cassandra\Rows
+     */
+    public function deleteColumn($columns)
+    {
+        $this-&gt;delParams = $columns;
+        $query = $this-&gt;grammar-&gt;compileDelete($this);
+
+        return $this-&gt;executeAsync($query);
+    }
+
+    /**
+     * Retrieve the &quot;count&quot; result of the query.
+     *
+     * @param string $columns
+     *
+     * @return Cassandra\Rows
+     */
+    public function count($columns = '*')
+    {
+        $count = 0;
+        $result = $this-&gt;get(array_wrap($columns));
+        while (true) {
+            $count += $result-&gt;count();
+            if ($result-&gt;isLastPage()) {
+                break;
+            }
+            $result = $result-&gt;nextPage();
+        }
+
+        return $count;
+    }
+
+    /**
+     * Used to update the colletions like set, list and map.
+     *
+     * @param string $type
+     * @param string $column
+     * @param string $operation
+     * @param string $value
+     *
+     * @return string
+     */
+    public function updateCollection($type, $column, $operation = null, $value = null)
+    {
+        //Check if the type is anyone in SET, LIST or MAP. else throw ERROR.
+        if (!in_array(strtolower($type), $this-&gt;collectionTypes)) {
+            throw new InvalidArgumentException(&quot;Invalid binding type: {$type}, Should be any one of &quot;.implode(', ', $this-&gt;collectionTypes));
+        }
+
+        // Here we will make some assumptions about the operator. If only 2 values are
+        // passed to the method, we will assume that the operator is an equals sign
+        // and keep going. Otherwise, we'll require the operator to be passed in.
+        if (func_num_args() == 3) {
+            $value = $operation;
+            $operation = null;
+        }
+
+        $updateCollection = compact('type', 'column', 'value', 'operation');
+        $this-&gt;updateCollections[] = $updateCollection;
+        $this-&gt;addCollectionBinding($updateCollection, 'updateCollection');
+
+        return $this;
+    }
+
+    /**
+     * Add a binding to the query.
+     *
+     * @param array $value
+     * @param string $type
+     *
+     * @return $this
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function addCollectionBinding($value, $type = 'updateCollection')
+    {
+        if (!array_key_exists($type, $this-&gt;bindings)) {
+            throw new InvalidArgumentException(&quot;Invalid binding type: {$type}.&quot;);
+        }
+        $this-&gt;bindings[$type][] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Update a record in the database.
+     *
+     * @param array $values
+     *
+     * @return int
+     */
+    public function update(array $values = [])
+    {
+        $cql = $this-&gt;grammar-&gt;compileUpdate($this, $values);
+
+        return $this-&gt;connection-&gt;update($cql, $this-&gt;cleanBindings(
+            $this-&gt;grammar-&gt;prepareBindingsForUpdate($this-&gt;bindings, $values)
+        ));
+    }
+
+    /**
+     * Insert a new record into the database.
+     *
+     * @param array $values
+     *
+     * @return bool
+     */
+    public function insert(array $values = [])
+    {
+        $insertCollectionArray = [];
+        // Since every insert gets treated like a batch insert, we will make sure the
+        // bindings are structured in a way that is convenient when building these
+        // inserts statements by verifying these elements are actually an array.
+        if (empty($values)) {
+            return true;
+        }
+
+        if (!is_array(reset($values))) {
+            $values = [$values];
+        } else {
+            // Here, we will sort the insert keys for every record so that each insert is
+            // in the same order for the record. We need to make sure this is the case
+            // so there are not any errors or problems when inserting these records.
+            foreach ($values as $key =&gt; $value) {
+                ksort($value);
+                $values[$key] = $value;
+            }
+        }
+
+        // Finally, we will run this query against the database connection and return
+        // the results. We will need to also flatten these bindings before running
+        // the query so they are all in one huge, flattened array for execution.
+        return $this-&gt;connection-&gt;insert(
+            $this-&gt;grammar-&gt;compileInsert($this, $values),
+            $this-&gt;cleanBindings(Arr::flatten($values, 1))
+        );
+    }
+
+    /**
+     * Insert a colletion type in cassandra.
+     *
+     * @param string $type
+     * @param string $column
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function insertCollection($type, $column, $value)
+    {
+        $insertCollection = compact('type', 'column', 'value');
+        $this-&gt;insertCollections[] = $insertCollection;
+        $this-&gt;addCollectionBinding($insertCollection, 'insertCollection');
+
+        return $this;
+    }
+
+    /**
+     * @param array $columns
+     *
+     * @return Cassandra\Rows
+     */
+    public function index($columns = [])
+    {
+        $cql = $this-&gt;grammar-&gt;compileIndex($this, $columns);
+
+        return $this-&gt;execute($cql);
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
