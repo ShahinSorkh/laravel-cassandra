@@ -2,8 +2,10 @@
 
 require './vendor/autoload.php';
 
-$session = Cassandra::cluster()->build()->connect('testing');
+$session = Cassandra::cluster()->build()->connect();
 
+echo 'creating testing keyspace...'.PHP_EOL;
+$session->execute("CREATE KEYSPACE IF NOT EXISTS testing WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;");
 echo 'creating table users...'.PHP_EOL;
 $session->execute('CREATE TABLE IF NOT EXISTS testing.users ( id uuid primary key, username text, email text, password text, birthdate date )');
 $session->executeAsync('CREATE MATERIALIZED VIEW IF NOT EXISTS testing.users_by_username AS SELECT * FROM testing.users WHERE username IS NOT NULL AND id IS NOT NULL PRIMARY KEY (username, id)');
@@ -16,7 +18,7 @@ $session->executeAsync('CREATE MATERIALIZED VIEW IF NOT EXISTS testing.posts_by_
 $faker = Faker\Factory::create();
 
 echo 'inserting users...'.PHP_EOL;
-$p = $session->prepare('insert into users(id, username, email, password, birthdate) values (?,?,?,?,?)');
+$p = $session->prepare('insert into testing.users (id, username, email, password, birthdate) values (?,?,?,?,?)');
 $users_passwords = [];
 $count_users = 0;
 foreach (range(0, 200) as $i) {
@@ -39,7 +41,7 @@ $old_users = file_exists($users_file) ? json_decode(file_get_contents($users_fil
 file_put_contents($users_file, json_encode(array_merge($old_users, $users_passwords)));
 
 echo 'inserting posts...'.PHP_EOL;
-$p = $session->prepare('insert into posts(user, id, title, body, published_at, published_month) values (?,?,?,?,?,?)');
+$p = $session->prepare('insert into testing.posts (user, id, title, body, published_at, published_month) values (?,?,?,?,?,?)');
 $count_posts = 0;
 foreach (range(0, 20000) as $i) {
     $published_at = $faker->unixTime;
