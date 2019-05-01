@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+
+namespace ShSo\Lacassa\Schema;
+
+use Closure;
+use ShSo\Lacassa\Connection;
+use Illuminate\Database\Schema\Builder as BaseBuilder;
+
+class Builder extends BaseBuilder
+{
+    /**
+     * @return void
+     */
+    public function __construct(Connection $connection)
+    {
+        $this-&gt;connection = $connection;
+        $this-&gt;grammar = $connection-&gt;getSchemaGrammar();
+    }
+
+    /**
+     * @return \ShSo\Lacassa\Schema\Builder
+     */
+    protected function createBlueprint($table, Closure $callback = null)
+    {
+        return new Blueprint($this-&gt;connection, $table);
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
