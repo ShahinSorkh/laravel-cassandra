@@ -1,7 +1,9 @@
 #!/bin/bash
 
 DOCKER_CASSANDRA="cassandra"
+DOCKER_LACASSA_IMAGE="shahinsorkh/lacassa:v0.1.1"
 DOCKER_NETWORK="--network=container:$DOCKER_CASSANDRA"
+DOCKER_USER=$(grep $SUDO_USER /etc/passwd | cut -d':' -f3,4)
 
 if [ -z "$NO_CHECK" ]; then
     if ! ( docker ps >/dev/null 2>/dev/null ); then
@@ -12,10 +14,11 @@ if [ -z "$NO_CHECK" ]; then
 
     if [ ! -d vendor ]; then
         docker run \
-            --user $(id -u):$(id -g) \
+            --interactive --tty \
+            --user $DOCKER_USER \
             --workdir /lacassa \
             --volume "$(pwd):/lacassa:z" \
-            shahinsorkh/lacassa:v0.1.0 php composer.phar install --prefer-dist -o
+            $DOCKER_LACASSA_IMAGE composer install --prefer-dist -o
     fi
 
     if ! ( docker container ps | awk '{print $NF}' | grep cassandra -c >/dev/null 2>/dev/null ); then
@@ -39,10 +42,11 @@ if [ -z "$NO_CHECK" ]; then
             echo '-=-=-=- Keyspace created'
             echo '-=-=-=- Filling database with fake data..'
             docker run $DOCKER_NETWORK \
-                --user $(id -u):$(id -g) \
+                --interactive --tty \
+                --user $DOCKER_USER \
                 --workdir /lacassa \
                 --volume "$(pwd):/lacassa:z" \
-                shahinsorkh/lacassa:v0.1.0 php prepare_db.php && \
+                $DOCKER_LACASSA_IMAGE php prepare_db.php && \
                 echo '-=-=-=- Done.'
         fi
         exit $?
@@ -51,8 +55,8 @@ fi
 
 docker run $DOCKER_NETWORK \
     --interactive --tty \
-    --user $(id -u):$(id -g) \
+    --user $DOCKER_USER \
     --workdir /lacassa \
     --volume "$(pwd):/lacassa:z" \
-    shahinsorkh/lacassa:v0.1.0 $@
+    $DOCKER_LACASSA_IMAGE $@
 
