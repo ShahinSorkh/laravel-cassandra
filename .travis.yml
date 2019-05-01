@@ -1,0 +1,24 @@
+language: php
+php:
+  - '5.6'
+  - '7.0'
+  - '7.1'
+
+branches:
+  except:
+    - /^analysis/
+
+services:
+  - cassandra
+
+before_install:
+  - pecl channel-update pecl.php.net
+  - pecl install cassandra
+  - composer install --prefer-dist -o
+
+before_script:
+  - cqlsh -e "CREATE KEYSPACE IF NOT EXISTS testing WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;"
+  - php prepare_db.php
+
+script:
+    - phpunit tests
