@@ -50,6 +50,7 @@ if [ -z "$NO_CHECK" ]; then
 fi
 
 docker run $DOCKER_NETWORK \
+    --interactive --tty \
     --user $(id -u):$(id -g) \
     --workdir /lacassa \
     --volume "$(pwd):/lacassa:z" \
