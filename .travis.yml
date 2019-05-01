@@ -1,0 +1,28 @@
+language: php
+dist: xenial
+php:
+  - '7.0'
+  - '7.1'
+
+branches:
+  except:
+    - /^analysis/
+
+services:
+  - cassandra
+
+before_install:
+  - wget http://downloads.datastax.com/cpp-driver/ubuntu/16.04/dependencies/libuv/v1.20.0/libuv_1.20.0-1_amd64.deb
+  - wget http://downloads.datastax.com/cpp-driver/ubuntu/16.04/dependencies/libuv/v1.20.0/libuv-dev_1.20.0-1_amd64.deb
+  - wget http://downloads.datastax.com/cpp-driver/ubuntu/16.04/cassandra/v2.9.0/cassandra-cpp-driver_2.9.0-1_amd64.deb
+  - wget http://downloads.datastax.com/cpp-driver/ubuntu/16.04/cassandra/v2.9.0/cassandra-cpp-driver-dev_2.9.0-1_amd64.deb
+  - sudo dpkg -i *.deb
+  - pecl channel-update pecl.php.net
+  - pecl install cassandra
+
+install:
+  - composer install --prefer-dist -o
+  - php prepare_db.php
+
+script:
+  - phpunit tests
