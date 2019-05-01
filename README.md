@@ -332,20 +332,15 @@ $emp = DB::table('emp')->where('emp_id', 3)->deleteColumn();
 
 ## **Testing**
 
-For testing run the command below once:
+<!-- This will create a keyspace named `testing`, a table named `users` and two -->
+<!-- materialized views named `users_by_username` and `users_by_email` and another -->
+<!-- table named `posts` and a materialized view named `posts_by_month`. You can -->
+<!-- see the full schemas in the file `prepare_db.php`. -->
 
-```sh
-$ php ./prepare_db.php
-```
+I have created a docker container which has php7.0 and cassandra php driver
+installed. It is prefered to use docker for testing purposes.
 
-This will create a keyspace named `testing`, a table named `users` and two
-materialized views named `users_by_username` and `users_by_email` and another
-table named `posts` and a materialized view named `posts_by_month`. You can see
-the full schemas in the file `prepare_db.php`.
-
-And then run phpunit:
-
-```sh
-# `pwd` = <project root>
-$ ./vendor/bin/phpunit tests
-```
+Also there is a `run` executable which is there to ease use of docker
+container. It checks everything and makes sure all dependancies and the
+cassandra server are up and running and then passes your command to the
+container.
