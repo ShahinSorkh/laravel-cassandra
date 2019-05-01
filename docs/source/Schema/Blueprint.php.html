@@ -1,0 +1,358 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+
+namespace ShSo\Lacassa\Schema;
+
+use Illuminate\Database\Connection;
+use Illuminate\Database\Schema\Blueprint as BaseBluprint;
+use Illuminate\Database\Schema\Grammars\Grammar as BaseGrammar;
+
+class Blueprint extends BaseBluprint
+{
+    /**
+     * The Cassandra object for this blueprint.
+     *
+     * @var MongoConnection
+     */
+    protected $connection;
+
+    protected $primary;
+
+    /**
+     * @return void
+     */
+    public function __construct(Connection $connection, $table)
+    {
+        $this-&gt;connection = $connection;
+        $this-&gt;table = $table;
+    }
+
+    /**
+     * Get the columns on the blueprint that should be added.
+     *
+     * @return array
+     */
+    public function getAddedColumns()
+    {
+        return array_filter(
+            $this-&gt;columns, function ($column) {
+                return !$column-&gt;change;
+            }
+        );
+    }
+
+    /**
+     * Get the raw SQL statements for the blueprint.
+     *
+     * @param \Illuminate\Database\Connection $connection
+     * @param \Illuminate\Database\Schema\Grammars\Grammar $grammar
+     *
+     * @return array
+     */
+    public function toSql(Connection $connection, BaseGrammar $grammar)
+    {
+        $this-&gt;addImpliedCommands();
+
+        $statements = [];
+        // Each type of command has a corresponding compiler function on the schema
+        // grammar which is used to build the necessary SQL statements to build
+        // the blueprint element, so we'll just call that compilers function.
+        foreach ($this-&gt;commands as $command) {
+            $method = 'compile'.ucfirst($command-&gt;name);
+
+            if (method_exists($grammar, $method)) {
+                if (!is_null($sql = $grammar-&gt;$method($this, $command, $connection))) {
+                    $statements = array_merge($statements, (array) $sql);
+                }
+            }
+        }
+
+        return $statements;
+    }
+
+    /**
+     * Specify the primary key(s) for the table.
+     *
+     * @param string|array $columns
+     * @param string $name
+     * @param string|null $algorithm
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function primary($columns, $name = null, $algorithm = null)
+    {
+        $columns = (array) $columns;
+        //$index = $index ?: $this-&gt;createIndexName($type, $columns);
+        $this-&gt;primary = $command = $this-&gt;createCommand('primary', compact('columns', 'algorithm'));
+
+        return $command;
+    }
+
+    /**
+     * @return void
+     */
+    public function compilePrimary()
+    {
+        $primaryKey = $this-&gt;primary;
+        if ($primaryKey) {
+            if ('primary' == $primaryKey-&gt;name) {
+                return sprintf('primary key (%s) ', implode(', ', $primaryKey-&gt;columns));
+            }
+        }
+    }
+
+    /**
+     * Create a new ascii column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function ascii($column)
+    {
+        return $this-&gt;addColumn('ascii', $column);
+    }
+
+    /**
+     * Create a new bigint column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function bigint($column)
+    {
+        return $this-&gt;addColumn('bigint', $column);
+    }
+
+    /**
+     * Create a new blob column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function blob($column)
+    {
+        return $this-&gt;addColumn('blob', $column);
+    }
+
+    /**
+     * Create a new boolean column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function boolean($column)
+    {
+        return $this-&gt;addColumn('boolean', $column);
+    }
+
+    /**
+     * Create a new counter column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function counter($column)
+    {
+        return $this-&gt;addColumn('counter', $column);
+    }
+
+    /**
+     * Create a new frozen column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function frozen($column)
+    {
+        return $this-&gt;addColumn('frozen', $column);
+    }
+
+    /**
+     * Create a new inet column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function inet($column)
+    {
+        return $this-&gt;addColumn('inet', $column);
+    }
+
+    /**
+     * Create a new int column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function int($column)
+    {
+        return $this-&gt;addColumn('int', $column);
+    }
+
+    /**
+     * Create a new list column on the table.
+     *
+     * @param string $column
+     * @param string $collectionType
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function listCollection($column, $collectionType)
+    {
+        return $this-&gt;addColumn('list', $column, compact('collectionType'));
+    }
+
+    /**
+     * Create a new map column on the table.
+     *
+     * @param string $column
+     * @param string $collectionType1
+     * @param string $collectionType2
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function mapCollection($column, $collectionType1, $collectionType2)
+    {
+        return $this-&gt;addColumn('map', $column, compact('collectionType1', 'collectionType2'));
+    }
+
+    /**
+     * Create a new set column on the table.
+     *
+     * @param string $column
+     * @param string $collectionType
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function setCollection($column, $collectionType)
+    {
+        return $this-&gt;addColumn('set', $column, compact('collectionType'));
+    }
+
+    /**
+     * Create a new timestamp column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function timestamp($column)
+    {
+        return $this-&gt;addColumn('timestamp', $column);
+    }
+
+    /**
+     * Create a new timeuuid column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function timeuuid($column)
+    {
+        return $this-&gt;addColumn('timeuuid', $column);
+    }
+
+    /**
+     * Create a new tuple column on the table.
+     *
+     * @param string $column
+     * @param string $tuple1type
+     * @param string $tuple2type
+     * @param string $tuple3type
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function tuple($column, $tuple1type, $tuple2type, $tuple3type)
+    {
+        return $this-&gt;addColumn('tuple', $column, compact('tuple1type', 'tuple2type', 'tuple3type'));
+    }
+
+    /**
+     * Create a new uuid column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function uuid($column)
+    {
+        return $this-&gt;addColumn('uuid', $column);
+    }
+
+    /**
+     * Create a new varchar column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function varchar($column)
+    {
+        return $this-&gt;addColumn('varchar', $column);
+    }
+
+    /**
+     * Create a new varint column on the table.
+     *
+     * @param string $column
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function varint($column)
+    {
+        return $this-&gt;addColumn('varint', $column);
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

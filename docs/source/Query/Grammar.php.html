@@ -1,0 +1,269 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+
+namespace ShSo\Lacassa\Query;
+
+use Illuminate\Database\Query\Builder as BaseBuilder;
+use Illuminate\Database\Query\Grammars\Grammar as BaseGrammar;
+
+class Grammar extends BaseGrammar
+{
+    protected $selectComponents = [
+        'columns',
+        'from',
+        'wheres',
+        'limit',
+        'allowFiltering',
+    ];
+
+    /**
+     * Compile an insert statement into CQL.
+     *
+     * @param \ShSo\Lacassa\Query $query
+     * @param array $values
+     *
+     * @return string
+     */
+    public function compileInsert(BaseBuilder $query, array $values)
+    {
+        // Essentially we will force every insert to be treated as a batch insert which
+        // simply makes creating the CQL easier for us since we can utilize the same
+        // basic routine regardless of an amount of records given to us to insert.
+        $table = $this-&gt;wrapTable($query-&gt;from);
+
+        $columns = $this-&gt;columnize(array_keys(reset($values)));
+
+        // We need to build a list of parameter place-holders of values that are bound
+        // to the query. Each insert should have the exact same amount of parameter
+        // bindings so we will loop through the record and parameterize them all.
+        $parameters = collect($values)-&gt;map(function ($record) {
+            return $this-&gt;parameterize($record);
+        })-&gt;implode(', ');
+
+        return &quot;insert into {$table} ({$columns}) values ({$parameters})&quot;;
+    }
+
+    /**
+     * @param \Illuminate\Support\Collection $collection
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function buildInsertCollectionParam($collection)
+    {
+        return $collection-&gt;map(function ($collectionItem) {
+            return $this-&gt;compileCollectionValues($collectionItem['type'], $collectionItem['value']);
+        })-&gt;implode(', ');
+    }
+
+    /**
+     * Wrap a single string in keyword identifiers.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function wrapValue($value)
+    {
+        if ($value !== '*') {
+            return str_replace('&quot;', '&quot;&quot;', $value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Compile a delete statement into CQL.
+     *
+     * @param \ShSo\Lacassa\Query $query
+     *
+     * @return string
+     */
+    public function compileDelete(BaseBuilder $query)
+    {
+        $delColumns = '';
+        if (isset($query-&gt;delParams)) {
+            $delColumns = implode(', ', $query-&gt;delParams);
+        }
+
+        $wheres = is_array($query-&gt;wheres) ? $this-&gt;compileWheres($query) : '';
+
+        return trim('delete '.$delColumns.&quot; from {$this-&gt;wrapTable($query-&gt;from)} $wheres&quot;);
+    }
+
+    /**
+     * Compile an update statement into SQL.
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @param array $values
+     *
+     * @return string
+     */
+    public function compileUpdate(BaseBuilder $query, $values)
+    {
+        $table = $this-&gt;wrapTable($query-&gt;from);
+        // Each one of the columns in the update statements needs to be wrapped in the
+        // keyword identifiers, also a place-holder needs to be created for each of
+        // the values in the list of bindings so we can make the sets statements.
+        $columns = collect($values)-&gt;map(
+            function ($value, $key) {
+                return $this-&gt;wrap($key).' = '.$this-&gt;parameter($value);
+            }
+        )-&gt;implode(', ');
+
+        // Of course, update queries may also be constrained by where clauses so we'll
+        // need to compile the where clauses and attach it to the query so only the
+        // intended records are updated by the SQL statements we generate to run.
+        $wheres = $this-&gt;compileWheres($query);
+        $upateCollections = $this-&gt;compileUpdateCollections($query);
+        if ($upateCollections) {
+            $upateCollections = $columns ? ', '.$upateCollections : $upateCollections;
+        }
+
+        return trim(&quot;update {$table} set $columns $upateCollections $wheres&quot;);
+    }
+
+    /**
+     * Compiles the udpate collection methods.
+     *
+     * @param BaseBuilder $query
+     *
+     * @return string
+     */
+    public function compileUpdateCollections(BaseBuilder $query)
+    {
+        $updateCollections = collect($query-&gt;bindings['updateCollection']);
+
+        $updateCollectionCql = $updateCollections-&gt;map(function ($collection, $key) {
+            if ($collection['operation']) {
+                return $collection['column'].'='.$collection['column'].$collection['operation'].$this-&gt;compileCollectionValues($collection['type'], $collection['value']);
+            } else {
+                return $collection['column'].'='.$this-&gt;compileCollectionValues($collection['type'], $collection['value']);
+            }
+        })-&gt;implode(', ');
+
+        return $updateCollectionCql;
+    }
+
+    /**
+     * Compiles the values assigned to collections.
+     *
+     * @param string $type
+     * @param string $value
+     *
+     * @return string
+     */
+    public function compileCollectionValues($type, $value)
+    {
+        if (is_array($value)) {
+            if ('set' == $type) {
+                $collection = '{'.$this-&gt;buildCollectionString($type, $value).'}';
+            } elseif ('list' == $type) {
+                $collection = '['.$this-&gt;buildCollectionString($type, $value).']';
+            } elseif ('map' == $type) {
+                $collection = '{'.$this-&gt;buildCollectionString($type, $value).'}';
+            }
+
+            return $collection;
+        }
+    }
+
+    /**
+     * Builds the insert string.
+     *
+     * @param string $type
+     * @param string $value
+     *
+     * @return string
+     */
+    public function buildCollectionString($type, $value)
+    {
+        $items = [];
+        if ($type === 'map') {
+            foreach ($value as $item) {
+                list($key, $value, $qoutk, $qoutv) = [$item[0], $item[1], $item['key'] ?? null, $item['value'] ?? null];
+
+                if (!is_bool($qoutk)) {
+                    $qoutk = 'string' == strtolower(gettype($key));
+                }
+
+                if (!is_bool($qoutv)) {
+                    $qoutv = 'string' == strtolower(gettype($value));
+                }
+
+                $key = $qoutk ? &quot;'{$key}'&quot; : $key;
+                $value = $qoutv ? &quot;'{$value}'&quot; : $value;
+                $items[] = &quot;{$key}:{$value}&quot;;
+            }
+        } elseif ($type === 'set' || $type === 'list') {
+            foreach ($value as $item) {
+                $qoutv = 'string' == strtolower(gettype($item));
+                $items[] = $qoutv ? &quot;'{$item}'&quot; : $item;
+            }
+        }
+
+        return implode(',', $items);
+    }
+
+    /**
+     * @param Builder $query
+     * @param string $columns
+     *
+     * @return string
+     */
+    public function compileIndex($query, $columns)
+    {
+        $table = $this-&gt;wrapTable($query-&gt;from);
+        $value = implode(', ', $columns);
+
+        return 'CREATE INDEX IF NOT EXISTS ON '.$table.'('.$value.')';
+    }
+
+    public function compileAllowFiltering($query, $allow_filtering)
+    {
+        return $allow_filtering ? 'allow filtering' : '';
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

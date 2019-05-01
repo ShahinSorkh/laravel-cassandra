@@ -1,0 +1,3410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project title="Laravel Cassandra driver" version="2.9.0">
+  <partials/>
+  <file path="CassandraServiceProvider.php" generated-path="CassandraServiceProvider.html" hash="a67aa90b88f071b724849611fce837ee" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="Cassandra">\Cassandra</namespace-alias>
+    <namespace-alias name="ServiceProvider">\Illuminate\Support\ServiceProvider</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa" line="8" package="Default">
+      <extends>\Illuminate\Support\ServiceProvider</extends>
+      <name>CassandraServiceProvider</name>
+      <full_name>\ShSo\Lacassa\CassandraServiceProvider</full_name>
+      <docblock line="8">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="8" description="Default"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="15" package="Default">
+        <name>boot</name>
+        <full_name>\ShSo\Lacassa\CassandraServiceProvider::boot()</full_name>
+        <docblock line="15">
+          <description>Bootstrap the application services.</description>
+          <long-description></long-description>
+          <tag name="return" line="15" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="25" package="Default">
+        <name>register</name>
+        <full_name>\ShSo\Lacassa\CassandraServiceProvider::register()</full_name>
+        <docblock line="25">
+          <description>Register the application services.</description>
+          <long-description></long-description>
+          <tag name="return" line="25" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="8" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\CassandraServiceProvider</error>
+    </parse_markers>
+    <source>eJytUstOwzAQvPsr9lApSdXHBxTKoyckDogcCQc/toml1LZsJyCh/DuOk9A2cMQX73pnZke7vrkzlSFE0RM6QzlCXuW6eKacOkd3hDQO4dDHStiQ9+lTXTcnqajHIm+M0dYXOdpWcnyxupUCbeDxOpDOzBkA8NOjEg5m7+SLQDjb5TLesIRHrb3zlhrwFQI1ppaceqkVuIHqNiN0Ytxb9I1V0GopxrdtvE3DAhmOjeJRgAXpNIuloW1sPWA7MjfyiqV0Plj/dx92VP7DCzwIAYJ6ymgYvLCyRbv5qS98Jd16H8ys9xadrlupyjQRLFmd1dOFYNmFaCQKtt4PK0gTPu3omsW1OspyBYv+a8wFosiAeEt6QPIOtwN0R34hx0Eo/ICDVgpji6lDtrvCdxf5FHekI99scMLp</source>
+  </file>
+  <file path="Schema/Builder.php" generated-path="Schema.Builder.html" hash="b8565a75ff53d4b9a2731bc4364d2d41" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="Closure">\Closure</namespace-alias>
+    <namespace-alias name="Connection">\ShSo\Lacassa\Connection</namespace-alias>
+    <namespace-alias name="BaseBuilder">\Illuminate\Database\Schema\Builder</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa\Schema" line="9" package="Default">
+      <extends>\Illuminate\Database\Schema\Builder</extends>
+      <name>Builder</name>
+      <full_name>\ShSo\Lacassa\Schema\Builder</full_name>
+      <docblock line="9">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="9" description="Default"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="14" package="Default">
+        <name>__construct</name>
+        <full_name>\ShSo\Lacassa\Schema\Builder::__construct()</full_name>
+        <docblock line="14">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="14" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\ShSo\Lacassa\Connection</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="23" package="Default">
+        <name>createBlueprint</name>
+        <full_name>\ShSo\Lacassa\Schema\Builder::createBlueprint()</full_name>
+        <docblock line="23">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="23" description="" type="\ShSo\Lacassa\Schema\Builder">
+            <type>\ShSo\Lacassa\Schema\Builder</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$table</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$callback</name>
+          <default>null</default>
+          <type>\Closure</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="9" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Schema\Builder</error>
+      <error line="14" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="23" code="PPC:ERR-50008">No summary for method createBlueprint()</error>
+    </parse_markers>
+    <source>eJx1UctqwzAQvOsr9pCDY1LyAe4Lp1AKvflqCGt5W4usJaNHWyj596p+xLFp97LS7mh3ZnT70DWdEBpbch1KgqIpTPmKEp3DspANtZgJERzBgY0LlrL+soAdjNYkvTJ6aL4wh1Zp9FQ+occKHY2jyjworskCOshjebzGDZLjKJja9OVJ1wuM+BYQY5+mfYYUHi35YDV8GFWPtX2fu1CxkvAWdE8KjkdptPM2SJ/MXGEjL+dt/27Y8Bsb3yh3cz8D4O4anq2B7xbbFu0SFcvkB93PQz/ZDi/P4j8t5R/+T6YtNVrj4xqqZ5nSUrQ850CdVdonm2g90276uEgNmSuUp0hTB+a16JGCpk+4HrJyYgfD3IuUs/gBr1m54g==</source>
+  </file>
+  <file path="Schema/Grammar.php" generated-path="Schema.Grammar.html" hash="abccd368b6e36fde0e8b8b749ea316af" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="Connection">\ShSo\Lacassa\Connection</namespace-alias>
+    <namespace-alias name="Fluent">\Illuminate\Support\Fluent</namespace-alias>
+    <namespace-alias name="Blueprint">\ShSo\Lacassa\Schema\Blueprint</namespace-alias>
+    <namespace-alias name="BaseBlueprint">\Illuminate\Database\Schema\Blueprint</namespace-alias>
+    <namespace-alias name="BaseGrammar">\Illuminate\Database\Schema\Grammars\Grammar</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa\Schema" line="11" package="Default">
+      <extends>\Illuminate\Database\Schema\Grammars\Grammar</extends>
+      <name>Grammar</name>
+      <full_name>\ShSo\Lacassa\Schema\Grammar</full_name>
+      <docblock line="11">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="11" description="Default"/>
+      </docblock>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="18" package="Default">
+        <name>$modifiers</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifiers</full_name>
+        <default>array('VirtualAs', 'StoredAs', 'Unsigned', 'Charset', 'Collate', 'Nullable', 'Default', 'Increment', 'Comment', 'After', 'First')</default>
+        <docblock line="18">
+          <description>The possible column modifiers.</description>
+          <long-description></long-description>
+          <tag name="var" line="18" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="28" package="Default">
+        <name>$serials</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::serials</full_name>
+        <default>array('bigInteger', 'integer', 'mediumInteger', 'smallInteger', 'tinyInteger')</default>
+        <docblock line="28">
+          <description>The possible column serials.</description>
+          <long-description></long-description>
+          <tag name="var" line="28" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="35" package="Default">
+        <name>compileTableExists</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileTableExists()</full_name>
+        <docblock line="35">
+          <description>Compile the query to determine the list of tables.</description>
+          <long-description></long-description>
+          <tag name="return" line="35" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="45" package="Default">
+        <name>compileColumnListing</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileColumnListing()</full_name>
+        <docblock line="45">
+          <description>Compile the query to determine the list of columns.</description>
+          <long-description></long-description>
+          <tag name="return" line="45" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="59" package="Default">
+        <name>compileCreate</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileCreate()</full_name>
+        <docblock line="59">
+          <description>Compile a create table command.</description>
+          <long-description></long-description>
+          <tag name="param" line="59" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="59" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="param" line="59" description="" type="\Illuminate\Database\Connection" variable="$connection">
+            <type>\Illuminate\Database\Connection</type>
+          </tag>
+          <tag name="return" line="59" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\Illuminate\Database\Connection</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="82" package="Default">
+        <name>compileCreateTable</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileCreateTable()</full_name>
+        <docblock line="82">
+          <description>Create the main create table clause.</description>
+          <long-description></long-description>
+          <tag name="param" line="82" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="82" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="param" line="82" description="" type="\Illuminate\Database\Connection" variable="$connection">
+            <type>\Illuminate\Database\Connection</type>
+          </tag>
+          <tag name="return" line="82" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\Illuminate\Database\Connection</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="101" package="Default">
+        <name>compileCreateEncoding</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileCreateEncoding()</full_name>
+        <docblock line="101">
+          <description>Append the character set specifications to a command.</description>
+          <long-description></long-description>
+          <tag name="param" line="101" description="" type="string" variable="$sql">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="101" description="" type="\Illuminate\Database\Connection" variable="$connection">
+            <type>\Illuminate\Database\Connection</type>
+          </tag>
+          <tag name="param" line="101" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="return" line="101" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$sql</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\Illuminate\Database\Connection</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="133" package="Default">
+        <name>compileCreateEngine</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileCreateEngine()</full_name>
+        <docblock line="133">
+          <description>Append the engine specifications to a command.</description>
+          <long-description></long-description>
+          <tag name="param" line="133" description="" type="string" variable="$sql">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="133" description="" type="\Illuminate\Database\Connection" variable="$connection">
+            <type>\Illuminate\Database\Connection</type>
+          </tag>
+          <tag name="param" line="133" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="return" line="133" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$sql</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\Illuminate\Database\Connection</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="152" package="Default">
+        <name>compileAdd</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileAdd()</full_name>
+        <docblock line="152">
+          <description>Compile an add column command.</description>
+          <long-description></long-description>
+          <tag name="param" line="152" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="152" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="152" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="167" package="Default">
+        <name>compilePrimary</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compilePrimary()</full_name>
+        <docblock line="167">
+          <description>Compile a primary key command.</description>
+          <long-description></long-description>
+          <tag name="param" line="167" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="167" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="167" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="182" package="Default">
+        <name>compileUnique</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileUnique()</full_name>
+        <docblock line="182">
+          <description>Compile a unique key command.</description>
+          <long-description></long-description>
+          <tag name="param" line="182" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="182" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="182" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="195" package="Default">
+        <name>compileIndex</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileIndex()</full_name>
+        <docblock line="195">
+          <description>Compile a plain index key command.</description>
+          <long-description></long-description>
+          <tag name="param" line="195" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="195" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="195" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="209" package="Default">
+        <name>compileKey</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileKey()</full_name>
+        <docblock line="209">
+          <description>Compile an index creation command.</description>
+          <long-description></long-description>
+          <tag name="param" line="209" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="209" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="param" line="209" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="209" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="228" package="Default">
+        <name>compileDrop</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDrop()</full_name>
+        <docblock line="228">
+          <description>Compile a drop table command.</description>
+          <long-description></long-description>
+          <tag name="param" line="228" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="228" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="228" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="241" package="Default">
+        <name>compileDropIfExists</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDropIfExists()</full_name>
+        <docblock line="241">
+          <description>Compile a drop table (if exists) command.</description>
+          <long-description></long-description>
+          <tag name="param" line="241" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="241" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="241" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="254" package="Default">
+        <name>compileDropColumn</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDropColumn()</full_name>
+        <docblock line="254">
+          <description>Compile a drop column command.</description>
+          <long-description></long-description>
+          <tag name="param" line="254" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="254" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="254" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="269" package="Default">
+        <name>compileDropPrimary</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDropPrimary()</full_name>
+        <docblock line="269">
+          <description>Compile a drop primary key command.</description>
+          <long-description></long-description>
+          <tag name="param" line="269" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="269" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="269" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="282" package="Default">
+        <name>compileDropUnique</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDropUnique()</full_name>
+        <docblock line="282">
+          <description>Compile a drop unique key command.</description>
+          <long-description></long-description>
+          <tag name="param" line="282" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="282" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="282" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="297" package="Default">
+        <name>compileDropIndex</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDropIndex()</full_name>
+        <docblock line="297">
+          <description>Compile a drop index command.</description>
+          <long-description></long-description>
+          <tag name="param" line="297" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="297" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="297" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="312" package="Default">
+        <name>compileDropForeign</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDropForeign()</full_name>
+        <docblock line="312">
+          <description>Compile a drop foreign key command.</description>
+          <long-description></long-description>
+          <tag name="param" line="312" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="312" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="312" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="327" package="Default">
+        <name>compileRename</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileRename()</full_name>
+        <docblock line="327">
+          <description>Compile a rename table command.</description>
+          <long-description></long-description>
+          <tag name="param" line="327" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="327" description="" type="\Illuminate\Support\Fluent" variable="$command">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="327" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$command</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="339" package="Default">
+        <name>compileEnableForeignKeyConstraints</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileEnableForeignKeyConstraints()</full_name>
+        <docblock line="339">
+          <description>Compile the command to enable foreign key constraints.</description>
+          <long-description></long-description>
+          <tag name="return" line="339" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="349" package="Default">
+        <name>compileDisableForeignKeyConstraints</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::compileDisableForeignKeyConstraints()</full_name>
+        <docblock line="349">
+          <description>Compile the command to disable foreign key constraints.</description>
+          <long-description></long-description>
+          <tag name="return" line="349" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="361" package="Default">
+        <name>typeChar</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeChar()</full_name>
+        <docblock line="361">
+          <description>Create the column definition for a char type.</description>
+          <long-description></long-description>
+          <tag name="param" line="361" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="361" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="373" package="Default">
+        <name>typeString</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeString()</full_name>
+        <docblock line="373">
+          <description>Create the column definition for a string type.</description>
+          <long-description></long-description>
+          <tag name="param" line="373" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="373" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="385" package="Default">
+        <name>typeText</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeText()</full_name>
+        <docblock line="385">
+          <description>Create the column definition for a text type.</description>
+          <long-description></long-description>
+          <tag name="param" line="385" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="385" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="397" package="Default">
+        <name>typeBigint</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeBigint()</full_name>
+        <docblock line="397">
+          <description>Create the column definition for a text type.</description>
+          <long-description></long-description>
+          <tag name="param" line="397" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="397" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="409" package="Default">
+        <name>typeBlob</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeBlob()</full_name>
+        <docblock line="409">
+          <description>Create the column definition for a blob type.</description>
+          <long-description></long-description>
+          <tag name="param" line="409" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="409" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="421" package="Default">
+        <name>typeCounter</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeCounter()</full_name>
+        <docblock line="421">
+          <description>Create the column definition for a counter type.</description>
+          <long-description></long-description>
+          <tag name="param" line="421" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="421" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="433" package="Default">
+        <name>typeFrozen</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeFrozen()</full_name>
+        <docblock line="433">
+          <description>Create the column definition for a frozen type.</description>
+          <long-description></long-description>
+          <tag name="param" line="433" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="433" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="445" package="Default">
+        <name>typeInet</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeInet()</full_name>
+        <docblock line="445">
+          <description>Create the column definition for a inet type.</description>
+          <long-description></long-description>
+          <tag name="param" line="445" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="445" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="457" package="Default">
+        <name>typeInt</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeInt()</full_name>
+        <docblock line="457">
+          <description>Create the column definition for a int type.</description>
+          <long-description></long-description>
+          <tag name="param" line="457" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="457" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="469" package="Default">
+        <name>typeList</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeList()</full_name>
+        <docblock line="469">
+          <description>Create the column definition for a list type.</description>
+          <long-description></long-description>
+          <tag name="param" line="469" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="469" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="481" package="Default">
+        <name>typeMap</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeMap()</full_name>
+        <docblock line="481">
+          <description>Create the column definition for a map type.</description>
+          <long-description></long-description>
+          <tag name="param" line="481" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="481" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="493" package="Default">
+        <name>typeSet</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeSet()</full_name>
+        <docblock line="493">
+          <description>Create the column definition for a set type.</description>
+          <long-description></long-description>
+          <tag name="param" line="493" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="493" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="505" package="Default">
+        <name>typeTimeuuid</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTimeuuid()</full_name>
+        <docblock line="505">
+          <description>Create the column definition for a timeuuid type.</description>
+          <long-description></long-description>
+          <tag name="param" line="505" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="505" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="517" package="Default">
+        <name>typeTuple</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTuple()</full_name>
+        <docblock line="517">
+          <description>Create the column definition for a tuple type.</description>
+          <long-description></long-description>
+          <tag name="param" line="517" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="517" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="529" package="Default">
+        <name>typeVarchar</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeVarchar()</full_name>
+        <docblock line="529">
+          <description>Create the column definition for a varchar type.</description>
+          <long-description></long-description>
+          <tag name="param" line="529" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="529" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="541" package="Default">
+        <name>typeVarint</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeVarint()</full_name>
+        <docblock line="541">
+          <description>Create the column definition for a varint type.</description>
+          <long-description></long-description>
+          <tag name="param" line="541" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="541" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="553" package="Default">
+        <name>typeMediumText</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeMediumText()</full_name>
+        <docblock line="553">
+          <description>Create the column definition for a medium text type.</description>
+          <long-description></long-description>
+          <tag name="param" line="553" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="553" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="565" package="Default">
+        <name>typeLongText</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeLongText()</full_name>
+        <docblock line="565">
+          <description>Create the column definition for a long text type.</description>
+          <long-description></long-description>
+          <tag name="param" line="565" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="565" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="577" package="Default">
+        <name>typeBigInteger</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeBigInteger()</full_name>
+        <docblock line="577">
+          <description>Create the column definition for a big integer type.</description>
+          <long-description></long-description>
+          <tag name="param" line="577" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="577" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="589" package="Default">
+        <name>typeInteger</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeInteger()</full_name>
+        <docblock line="589">
+          <description>Create the column definition for an integer type.</description>
+          <long-description></long-description>
+          <tag name="param" line="589" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="589" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="601" package="Default">
+        <name>typeMediumInteger</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeMediumInteger()</full_name>
+        <docblock line="601">
+          <description>Create the column definition for a medium integer type.</description>
+          <long-description></long-description>
+          <tag name="param" line="601" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="601" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="613" package="Default">
+        <name>typeTinyInteger</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTinyInteger()</full_name>
+        <docblock line="613">
+          <description>Create the column definition for a tiny integer type.</description>
+          <long-description></long-description>
+          <tag name="param" line="613" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="613" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="625" package="Default">
+        <name>typeSmallInteger</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeSmallInteger()</full_name>
+        <docblock line="625">
+          <description>Create the column definition for a small integer type.</description>
+          <long-description></long-description>
+          <tag name="param" line="625" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="625" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="637" package="Default">
+        <name>typeFloat</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeFloat()</full_name>
+        <docblock line="637">
+          <description>Create the column definition for a float type.</description>
+          <long-description></long-description>
+          <tag name="param" line="637" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="637" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="649" package="Default">
+        <name>typeDouble</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeDouble()</full_name>
+        <docblock line="649">
+          <description>Create the column definition for a double type.</description>
+          <long-description></long-description>
+          <tag name="param" line="649" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="649" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="661" package="Default">
+        <name>typeDecimal</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeDecimal()</full_name>
+        <docblock line="661">
+          <description>Create the column definition for a decimal type.</description>
+          <long-description></long-description>
+          <tag name="param" line="661" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="661" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="673" package="Default">
+        <name>typeBoolean</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeBoolean()</full_name>
+        <docblock line="673">
+          <description>Create the column definition for a boolean type.</description>
+          <long-description></long-description>
+          <tag name="param" line="673" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="673" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="685" package="Default">
+        <name>typeAscii</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeAscii()</full_name>
+        <docblock line="685">
+          <description>Create the column definition for a boolean type.</description>
+          <long-description></long-description>
+          <tag name="param" line="685" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="685" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="697" package="Default">
+        <name>typeEnum</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeEnum()</full_name>
+        <docblock line="697">
+          <description>Create the column definition for an enum type.</description>
+          <long-description></long-description>
+          <tag name="param" line="697" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="697" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="709" package="Default">
+        <name>typeJson</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeJson()</full_name>
+        <docblock line="709">
+          <description>Create the column definition for a json type.</description>
+          <long-description></long-description>
+          <tag name="param" line="709" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="709" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="721" package="Default">
+        <name>typeJsonb</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeJsonb()</full_name>
+        <docblock line="721">
+          <description>Create the column definition for a jsonb type.</description>
+          <long-description></long-description>
+          <tag name="param" line="721" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="721" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="733" package="Default">
+        <name>typeDate</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeDate()</full_name>
+        <docblock line="733">
+          <description>Create the column definition for a date type.</description>
+          <long-description></long-description>
+          <tag name="param" line="733" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="733" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="745" package="Default">
+        <name>typeDateTime</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeDateTime()</full_name>
+        <docblock line="745">
+          <description>Create the column definition for a date-time type.</description>
+          <long-description></long-description>
+          <tag name="param" line="745" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="745" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="757" package="Default">
+        <name>typeDateTimeTz</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeDateTimeTz()</full_name>
+        <docblock line="757">
+          <description>Create the column definition for a date-time type.</description>
+          <long-description></long-description>
+          <tag name="param" line="757" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="757" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="769" package="Default">
+        <name>typeTime</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTime()</full_name>
+        <docblock line="769">
+          <description>Create the column definition for a time type.</description>
+          <long-description></long-description>
+          <tag name="param" line="769" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="769" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="781" package="Default">
+        <name>typeTimeTz</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTimeTz()</full_name>
+        <docblock line="781">
+          <description>Create the column definition for a time type.</description>
+          <long-description></long-description>
+          <tag name="param" line="781" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="781" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="793" package="Default">
+        <name>typeTimestamp</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTimestamp()</full_name>
+        <docblock line="793">
+          <description>Create the column definition for a timestamp type.</description>
+          <long-description></long-description>
+          <tag name="param" line="793" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="793" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="809" package="Default">
+        <name>typeTimestampTz</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeTimestampTz()</full_name>
+        <docblock line="809">
+          <description>Create the column definition for a timestamp type.</description>
+          <long-description></long-description>
+          <tag name="param" line="809" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="809" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="825" package="Default">
+        <name>typeBinary</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeBinary()</full_name>
+        <docblock line="825">
+          <description>Create the column definition for a binary type.</description>
+          <long-description></long-description>
+          <tag name="param" line="825" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="825" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="837" package="Default">
+        <name>typeUuid</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeUuid()</full_name>
+        <docblock line="837">
+          <description>Create the column definition for a uuid type.</description>
+          <long-description></long-description>
+          <tag name="param" line="837" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="837" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="849" package="Default">
+        <name>typeIpAddress</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeIpAddress()</full_name>
+        <docblock line="849">
+          <description>Create the column definition for an IP address type.</description>
+          <long-description></long-description>
+          <tag name="param" line="849" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="849" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="861" package="Default">
+        <name>typeMacAddress</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::typeMacAddress()</full_name>
+        <docblock line="861">
+          <description>Create the column definition for a MAC address type.</description>
+          <long-description></long-description>
+          <tag name="param" line="861" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="861" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="874" package="Default">
+        <name>modifyVirtualAs</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyVirtualAs()</full_name>
+        <docblock line="874">
+          <description>Get the SQL for a generated virtual column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="874" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="874" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="874" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="889" package="Default">
+        <name>modifyStoredAs</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyStoredAs()</full_name>
+        <docblock line="889">
+          <description>Get the SQL for a generated stored column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="889" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="889" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="889" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="904" package="Default">
+        <name>modifyUnsigned</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyUnsigned()</full_name>
+        <docblock line="904">
+          <description>Get the SQL for an unsigned column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="904" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="904" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="904" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="919" package="Default">
+        <name>modifyCharset</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyCharset()</full_name>
+        <docblock line="919">
+          <description>Get the SQL for a character set column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="919" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="919" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="919" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="934" package="Default">
+        <name>modifyCollate</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyCollate()</full_name>
+        <docblock line="934">
+          <description>Get the SQL for a collation column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="934" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="934" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="934" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="949" package="Default">
+        <name>modifyNullable</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyNullable()</full_name>
+        <docblock line="949">
+          <description>Get the SQL for a nullable column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="949" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="949" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="949" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="964" package="Default">
+        <name>modifyDefault</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyDefault()</full_name>
+        <docblock line="964">
+          <description>Get the SQL for a default column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="964" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="964" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="964" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="979" package="Default">
+        <name>modifyIncrement</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyIncrement()</full_name>
+        <docblock line="979">
+          <description>Get the SQL for an auto-increment column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="979" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="979" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="979" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="994" package="Default">
+        <name>modifyFirst</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyFirst()</full_name>
+        <docblock line="994">
+          <description>Get the SQL for a "first" column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="994" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="994" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="994" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="1009" package="Default">
+        <name>modifyAfter</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyAfter()</full_name>
+        <docblock line="1009">
+          <description>Get the SQL for an "after" column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="1009" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="1009" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="1009" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="1024" package="Default">
+        <name>modifyComment</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::modifyComment()</full_name>
+        <docblock line="1024">
+          <description>Get the SQL for a "comment" column modifier.</description>
+          <long-description></long-description>
+          <tag name="param" line="1024" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="param" line="1024" description="" type="\Illuminate\Support\Fluent" variable="$column">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+          <tag name="return" line="1024" description="" type="string|null">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>\Illuminate\Support\Fluent</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="1038" package="Default">
+        <name>wrapValue</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::wrapValue()</full_name>
+        <docblock line="1038">
+          <description>Wrap a single string in keyword identifiers.</description>
+          <long-description></long-description>
+          <tag name="param" line="1038" description="" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="1038" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="1054" package="Default">
+        <name>getColumns</name>
+        <full_name>\ShSo\Lacassa\Schema\Grammar::getColumns()</full_name>
+        <docblock line="1054">
+          <description>Compile the blueprint's column definitions.</description>
+          <long-description></long-description>
+          <tag name="param" line="1054" description="" type="\Illuminate\Database\Schema\Blueprint" variable="$blueprint">
+            <type>\Illuminate\Database\Schema\Blueprint</type>
+          </tag>
+          <tag name="return" line="1054" description="" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$blueprint</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Blueprint</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="11" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Schema\Grammar</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="Schema/Blueprint.php" generated-path="Schema.Blueprint.html" hash="560ac08addad46243e8c3bc7ab1b31c2" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="Connection">\Illuminate\Database\Connection</namespace-alias>
+    <namespace-alias name="BaseBluprint">\Illuminate\Database\Schema\Blueprint</namespace-alias>
+    <namespace-alias name="BaseGrammar">\Illuminate\Database\Schema\Grammars\Grammar</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa\Schema" line="9" package="Default">
+      <extends>\Illuminate\Database\Schema\Blueprint</extends>
+      <name>Blueprint</name>
+      <full_name>\ShSo\Lacassa\Schema\Blueprint</full_name>
+      <docblock line="9">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="9" description="Default"/>
+      </docblock>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="16" package="Default">
+        <name>$connection</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::connection</full_name>
+        <default></default>
+        <docblock line="16">
+          <description>The Cassandra object for this blueprint.</description>
+          <long-description></long-description>
+          <tag name="var" line="16" description="" type="\ShSo\Lacassa\Schema\MongoConnection" variable="">
+            <type>\ShSo\Lacassa\Schema\MongoConnection</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa\Schema" line="18" package="Default">
+        <name>$primary</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::primary</full_name>
+        <default></default>
+        <docblock line="18">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="23" package="Default">
+        <name>__construct</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::__construct()</full_name>
+        <docblock line="23">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="23" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\Illuminate\Database\Connection</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$table</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="34" package="Default">
+        <name>getAddedColumns</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::getAddedColumns()</full_name>
+        <docblock line="34">
+          <description>Get the columns on the blueprint that should be added.</description>
+          <long-description></long-description>
+          <tag name="return" line="34" description="" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="51" package="Default">
+        <name>toSql</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::toSql()</full_name>
+        <docblock line="51">
+          <description>Get the raw SQL statements for the blueprint.</description>
+          <long-description></long-description>
+          <tag name="param" line="51" description="" type="\Illuminate\Database\Connection" variable="$connection">
+            <type>\Illuminate\Database\Connection</type>
+          </tag>
+          <tag name="param" line="51" description="" type="\Illuminate\Database\Schema\Grammars\Grammar" variable="$grammar">
+            <type>\Illuminate\Database\Schema\Grammars\Grammar</type>
+          </tag>
+          <tag name="return" line="51" description="" type="array">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\Illuminate\Database\Connection</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$grammar</name>
+          <default></default>
+          <type>\Illuminate\Database\Schema\Grammars\Grammar</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="81" package="Default">
+        <name>primary</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::primary()</full_name>
+        <docblock line="81">
+          <description>Specify the primary key(s) for the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="81" description="" type="string|array" variable="$columns">
+            <type>string</type>
+            <type>array</type>
+          </tag>
+          <tag name="param" line="81" description="" type="string" variable="$name">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="81" description="" type="string|null" variable="$algorithm">
+            <type>string</type>
+            <type>null</type>
+          </tag>
+          <tag name="return" line="81" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default></default>
+          <type>string|array</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$name</name>
+          <default>null</default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$algorithm</name>
+          <default>null</default>
+          <type>string|null</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="93" package="Default">
+        <name>compilePrimary</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::compilePrimary()</full_name>
+        <docblock line="93">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="93" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="110" package="Default">
+        <name>ascii</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::ascii()</full_name>
+        <docblock line="110">
+          <description>Create a new ascii column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="110" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="110" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="122" package="Default">
+        <name>bigint</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::bigint()</full_name>
+        <docblock line="122">
+          <description>Create a new bigint column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="122" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="122" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="134" package="Default">
+        <name>blob</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::blob()</full_name>
+        <docblock line="134">
+          <description>Create a new blob column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="134" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="134" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="146" package="Default">
+        <name>boolean</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::boolean()</full_name>
+        <docblock line="146">
+          <description>Create a new boolean column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="146" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="146" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="158" package="Default">
+        <name>counter</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::counter()</full_name>
+        <docblock line="158">
+          <description>Create a new counter column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="158" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="158" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="170" package="Default">
+        <name>frozen</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::frozen()</full_name>
+        <docblock line="170">
+          <description>Create a new frozen column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="170" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="170" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="182" package="Default">
+        <name>inet</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::inet()</full_name>
+        <docblock line="182">
+          <description>Create a new inet column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="182" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="182" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="194" package="Default">
+        <name>int</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::int()</full_name>
+        <docblock line="194">
+          <description>Create a new int column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="194" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="194" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="207" package="Default">
+        <name>listCollection</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::listCollection()</full_name>
+        <docblock line="207">
+          <description>Create a new list column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="207" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="207" description="" type="string" variable="$collectionType">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="207" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$collectionType</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="221" package="Default">
+        <name>mapCollection</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::mapCollection()</full_name>
+        <docblock line="221">
+          <description>Create a new map column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="221" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="221" description="" type="string" variable="$collectionType1">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="221" description="" type="string" variable="$collectionType2">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="221" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$collectionType1</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$collectionType2</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="234" package="Default">
+        <name>setCollection</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::setCollection()</full_name>
+        <docblock line="234">
+          <description>Create a new set column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="234" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="234" description="" type="string" variable="$collectionType">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="234" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$collectionType</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="246" package="Default">
+        <name>timestamp</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::timestamp()</full_name>
+        <docblock line="246">
+          <description>Create a new timestamp column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="246" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="246" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="258" package="Default">
+        <name>timeuuid</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::timeuuid()</full_name>
+        <docblock line="258">
+          <description>Create a new timeuuid column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="258" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="258" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="273" package="Default">
+        <name>tuple</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::tuple()</full_name>
+        <docblock line="273">
+          <description>Create a new tuple column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="273" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="273" description="" type="string" variable="$tuple1type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="273" description="" type="string" variable="$tuple2type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="273" description="" type="string" variable="$tuple3type">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="273" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$tuple1type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$tuple2type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$tuple3type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="285" package="Default">
+        <name>uuid</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::uuid()</full_name>
+        <docblock line="285">
+          <description>Create a new uuid column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="285" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="285" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="297" package="Default">
+        <name>varchar</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::varchar()</full_name>
+        <docblock line="297">
+          <description>Create a new varchar column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="297" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="297" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Schema" line="309" package="Default">
+        <name>varint</name>
+        <full_name>\ShSo\Lacassa\Schema\Blueprint::varint()</full_name>
+        <docblock line="309">
+          <description>Create a new varint column on the table.</description>
+          <long-description></long-description>
+          <tag name="param" line="309" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="309" description="" type="\Illuminate\Support\Fluent">
+            <type>\Illuminate\Support\Fluent</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="9" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Schema\Blueprint</error>
+      <error line="23" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="93" code="PPC:ERR-50008">No summary for method compilePrimary()</error>
+      <error line="18" code="PPC:ERR-50007">No summary for property $primary</error>
+    </parse_markers>
+    <source>eJzNV01v4zYQvftXzAIuLAVKgqS3psluN20XQbdFC++tLgJaoi1uKVFLUknc1v+9Q4qS6A8lluMW9sWWOPM4b+bNkP72bZEWg0FOMqoKElMYp2Mx+UhiohSZjOOUZuRqMCgVhTvOy4zlRNPJ90STKVF0civynMaaifyq06YCmbznJS0kyzUQBe9xAV/Y5xc9P0iSZUSq+kcN4B4xvJhjuNDuQJ80zZPVbQZ/DwA/5ycn9htO4FNK4dbwzBNJQEw/IxOYCQk6ZQqmNdqZs6/d3j1gCD+LfC5a9m7t3H4XUmh8TRMYxl5+1tcQHKNfuAUvrneS6lLm8CBYsgpcTjmLYVbmFhLu7xFfaVnGOmhj8XeNYIi55DS0/lUGzGdoKJ7etIZwvRrsmqEFMTb2R7W83Aj8A9WYOwqxwFrmChDWPDaZxCeiQaWi5AlMKZAkoclGeh17IiVZPEt/TvV3BuG22i5YJ+kD3c8Y11QGzeJKFqx/1CIHw+pd6KGtob5xJuieknxOr1YMl81T+FKyJHmE8W8fQWnUfkZzrZwG6TMSLAhqHybPt6Rf0V08u9ptOK9+7F0oLcZfeKdCvVZuturQKwrmLis4MzVHM2zxIHT9Y628HF7D73+0NTk/hx9InIJeFBTEDBVq3SHFUULwSUocfyJPWD43awXjVLbxOx0rmx8f00ULjylDcBwaOMkSpAvTkqHEjRPSpDhi5GK9yLWVj7faLZRb0wiUgEc64hw+l0pDTPCX7aQ6UtWEetagoYaoYRw0Iq8SZobn0D2sy3uYUZ2KBHM3ctCjszKeMal0UPuc3pizws+6+bAZBJXzPX1iSqugrmRUo4bbmsn4vWHqPi85D4bqCzczxnme3jjPikLUhB35+gm34m6qoZoCGZVzGngrEQR2JQSze3i1gbTs6OvlYH3OeKhdPT8uaMxmC1tnN/7hT7oIVNj0vB2wHf2Oox4F+o8NGNz8UVttYGiqtN3d5BqGhM+FZDrNOrranxDjsiiE1JMfUZp4kFaW21vdsaoHqKmaiQQLYLaNvH3dq41Orw+P67Yy7pXfzkOWJ/TJqKX68fabZpqj7jW9M29/wZ1RPNjzUQMSbpxtdSGuG4HZg84Dc8MmGDnTUWRbj+CxO3Kw+GrUUBuFfn/U8nDgXdrY+dR3rfmry/RGAl2QP9FFy6O5a9RWpvE8y/UeMssNW7i+9lHdBOg+GpUdX7MGwEgcgq9Q5JglhvNbJDQwCYtWYesKhV1n6bIjdbe2SjjIc/qI8y1mzF1B6sn9clPV+jhsN9hYmsvE9utJe7RV95hgZL1GjWQ7bxArtKdsbs6M4+BdBdObeOXWmzkX02PhjaH0Z41OvTkLwSnJj4V2FU1/5pVfX/KxKHO8yx8JeRdNb/LOry/5mRR/0WMpfBVMb+qVW1/mLKfHMt9MKL1ZG6f+nI+H8j6MexPmTL2a8ZZFXv1Z+IRXwcOmxcR72+DXGYrWN905ZQavzdnqPdPDG4W7pTMjxX+bzYudrC4Pm3RktUPOLzbeXO5cBtxhhypcmEvs2ha7Vka9fpj9nzrHcA8pc0UPqXLNMop/vrNXa/1AyWri6T0xG8++c9M4liVLjigDJpy9EmAce/MvC04P3VAW9EK3zbTV4PIlg6/1wdvR4npt2EYa+VFFfgS718C4bG3Pdhsz+dp9mie70a5te0R63Uur++j0gcg4Jcfy38VF05u589uD/PFcaKtg9qG+/Vq7HPwL3KCx1A==</source>
+  </file>
+  <file path="Connection.php" generated-path="Connection.html" hash="d9b91a8f191a01b4636010b68bf343b3" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="Cassandra">\Cassandra</namespace-alias>
+    <namespace-alias name="QueryBuilder">\ShSo\Lacassa\Query\Builder</namespace-alias>
+    <namespace-alias name="QueryGrammar">\ShSo\Lacassa\Query\Grammar</namespace-alias>
+    <namespace-alias name="SchemaBuilder">\ShSo\Lacassa\Schema\Builder</namespace-alias>
+    <namespace-alias name="SchemaGrammar">\ShSo\Lacassa\Schema\Grammar</namespace-alias>
+    <namespace-alias name="QueryProcessor">\ShSo\Lacassa\Query\Processor</namespace-alias>
+    <namespace-alias name="BaseConnection">\Illuminate\Database\Connection</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa" line="13" package="Default">
+      <extends>\Illuminate\Database\Connection</extends>
+      <name>Connection</name>
+      <full_name>\ShSo\Lacassa\Connection</full_name>
+      <docblock line="13">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="13" description="Default"/>
+      </docblock>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa" line="20" package="Default">
+        <name>$connection</name>
+        <full_name>\ShSo\Lacassa\Connection::connection</full_name>
+        <default></default>
+        <docblock line="20">
+          <description>The Cassandra connection handler.</description>
+          <long-description></long-description>
+          <tag name="var" line="20" description="" type="\Cassandra\DefaultSession" variable="">
+            <type>\Cassandra\DefaultSession</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="27" package="Default">
+        <name>__construct</name>
+        <full_name>\ShSo\Lacassa\Connection::__construct()</full_name>
+        <docblock line="27">
+          <description>Create a new database connection instance.</description>
+          <long-description></long-description>
+          <tag name="param" line="27" description="" type="array" variable="$config">
+            <type>array</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$config</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="45" package="Default">
+        <name>table</name>
+        <full_name>\ShSo\Lacassa\Connection::table()</full_name>
+        <docblock line="45">
+          <description>Begin a fluent query against a database table.</description>
+          <long-description></long-description>
+          <tag name="param" line="45" description="" type="string" variable="$table">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="45" description="" type="\ShSo\Lacassa\Query\Builder">
+            <type>\ShSo\Lacassa\Query\Builder</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$table</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="53" package="Default">
+        <name>getSchemaBuilder</name>
+        <full_name>\ShSo\Lacassa\Connection::getSchemaBuilder()</full_name>
+        <docblock line="53">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="53" description="" type="\ShSo\Lacassa\Schema\Builder">
+            <type>\ShSo\Lacassa\Schema\Builder</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="63" package="Default">
+        <name>getSchemaGrammar</name>
+        <full_name>\ShSo\Lacassa\Connection::getSchemaGrammar()</full_name>
+        <docblock line="63">
+          <description>Returns the connection grammer.</description>
+          <long-description></long-description>
+          <tag name="return" line="63" description="" type="\ShSo\Lacassa\Schema\Grammar">
+            <type>\ShSo\Lacassa\Schema\Grammar</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="73" package="Default">
+        <name>getConnection</name>
+        <full_name>\ShSo\Lacassa\Connection::getConnection()</full_name>
+        <docblock line="73">
+          <description>return Cassandra object.</description>
+          <long-description></long-description>
+          <tag name="return" line="73" description="" type="\Cassandra\Session">
+            <type>\Cassandra\Session</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa" line="85" package="Default">
+        <name>createConnection</name>
+        <full_name>\ShSo\Lacassa\Connection::createConnection()</full_name>
+        <docblock line="85">
+          <description>Create a new Cassandra connection.</description>
+          <long-description></long-description>
+          <tag name="param" line="85" description="" type="array" variable="$config">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="85" description="" type="\Cassandra\Session">
+            <type>\Cassandra\Session</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$config</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="119" package="Default">
+        <name>disconnect</name>
+        <full_name>\ShSo\Lacassa\Connection::disconnect()</full_name>
+        <docblock line="119">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="119" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="128" package="Default">
+        <name>getDriverName</name>
+        <full_name>\ShSo\Lacassa\Connection::getDriverName()</full_name>
+        <docblock line="128">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="128" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa" line="136" package="Default">
+        <name>getDefaultPostProcessor</name>
+        <full_name>\ShSo\Lacassa\Connection::getDefaultPostProcessor()</full_name>
+        <docblock line="136">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="136" description="" type="\ShSo\Lacassa\Query\Processor">
+            <type>\ShSo\Lacassa\Query\Processor</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa" line="144" package="Default">
+        <name>getDefaultQueryBuilder</name>
+        <full_name>\ShSo\Lacassa\Connection::getDefaultQueryBuilder()</full_name>
+        <docblock line="144">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="144" description="" type="\ShSo\Lacassa\Query\Builder">
+            <type>\ShSo\Lacassa\Query\Builder</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa" line="152" package="Default">
+        <name>getDefaultQueryGrammar</name>
+        <full_name>\ShSo\Lacassa\Connection::getDefaultQueryGrammar()</full_name>
+        <docblock line="152">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="152" description="" type="\ShSo\Lacassa\Query\Grammar">
+            <type>\ShSo\Lacassa\Query\Grammar</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa" line="160" package="Default">
+        <name>getDefaultSchemaGrammar</name>
+        <full_name>\ShSo\Lacassa\Connection::getDefaultSchemaGrammar()</full_name>
+        <docblock line="160">
+          <description></description>
+          <long-description></long-description>
+          <tag name="return" line="160" description="" type="\ShSo\Lacassa\Schema\Grammar">
+            <type>\ShSo\Lacassa\Schema\Grammar</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="165" package="Default">
+        <name>affectingStatement</name>
+        <full_name>\ShSo\Lacassa\Connection::affectingStatement()</full_name>
+        <docblock line="165">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$bindings</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="170" package="Default">
+        <name>statement</name>
+        <full_name>\ShSo\Lacassa\Connection::statement()</full_name>
+        <docblock line="170">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$bindings</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa" line="189" package="Default">
+        <name>reconnectIfMissingConnection</name>
+        <full_name>\ShSo\Lacassa\Connection::reconnectIfMissingConnection()</full_name>
+        <docblock line="189">
+          <description>Reconnect to the database if a PDO connection is missing.</description>
+          <long-description></long-description>
+          <tag name="return" line="189" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa" line="204" package="Default">
+        <name>__call</name>
+        <full_name>\ShSo\Lacassa\Connection::__call()</full_name>
+        <docblock line="204">
+          <description>Dynamically pass methods to the connection.</description>
+          <long-description></long-description>
+          <tag name="param" line="204" description="" type="string" variable="$method">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="204" description="" type="array" variable="$parameters">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="204" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$method</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$parameters</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="13" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Connection</error>
+      <error line="53" code="PPC:ERR-50008">No summary for method getSchemaBuilder()</error>
+      <error line="119" code="PPC:ERR-50008">No summary for method disconnect()</error>
+      <error line="128" code="PPC:ERR-50008">No summary for method getDriverName()</error>
+      <error line="136" code="PPC:ERR-50008">No summary for method getDefaultPostProcessor()</error>
+      <error line="144" code="PPC:ERR-50008">No summary for method getDefaultQueryBuilder()</error>
+      <error line="152" code="PPC:ERR-50008">No summary for method getDefaultQueryGrammar()</error>
+      <error line="160" code="PPC:ERR-50008">No summary for method getDefaultSchemaGrammar()</error>
+      <error line="165" code="PPC:ERR-50008">No summary for method affectingStatement()</error>
+      <error line="170" code="PPC:ERR-50008">No summary for method statement()</error>
+    </parse_markers>
+    <source>eJytWG1P4zgQ/t5f4ZPQJkVllz3ptNLuAQcFHUhAgYJOK1pFbuK2vkucrO0AvRP//caJkzjv7enSD0nceXlmPJ6X/HoSraPBgOGAiAi7BE3X03B2jV0sBP42GMSCoLF6Zh6Hd/VqUszuY8I3s7OY+h7hCAuULOj3VvrfOQ4CXNDr9wb6qbsmATYVpCvtGjSHoSJdadeRYrrjoUuECAtU+UrKc+X7cUAZlmR2jiVeYEFm45Ax4koaMsV1BkvFCnjP9UEBMojImyTMq1IO/hkguD7t7yd3tI8e14bbkVsIWMOKT/hHTZjR//YCps5yjtk5WeLYl1OAr+SnVJ+Se8RDCcKIh/ZcE2sFwZgTsBRhxMgr8rS9JhLKhMTMJTUoEQZPI8w53iQqlnRVBhAvfOqiZcxSQY4DRELy2JV2iWuYkKe+UdeeXFNxcJz+iY4ysm9VAm9R/Pls/UU2SWRb8xqhYc1RvpbYXeyNnYHRLjLYISi0n+9CIfNosYc1RQVlKRY7Kc2DkRG+17bpjKwoxB5a+jFhEv1QTAivsNodWM43Dm5+21aB7ylbAQJFUyXhRMacoVn7qe/c3ESmnYqu7qcWrS1fEWlaroXbw4PjJQ+DTESbH5pxlrNHJ1BQX8osdgtadRzKhAn+VmAPCZtAcl06PSu1sQ3nuMsMHQzbmZFHTp8ZvSGmOYp0FC7+BCtaoRdZqDH91AEbh607RAz/nZwgFvt+G+ZS9mpKpDtkrV0NzPNrbmMtp3SnuYUudkcF8q9fXT8WMg/L7Do4fqVyDZIldiELUSaFnWe+NWQla65cZX3++cvHQ/h9tpr470IubeB9wX7BHcGi5v5yeHhoDY1kRZcotcGB7OqQNypArxXhFXEE/ZtYo9w29OED+okEkdwYknO6+XBoGG4anwLL0iswTIG+jrGQlAD9pQr0vQeyqjzwRJi7qYCmzEnIbciOMoyjSJ30TK/JNh+O0HPJBnVZp7ffQaI1ub1Qt8c/Jsnt8uEieb+fPD083ain0+trdZtePFydwlNd0PVkfHrt3D9NNMPF6fjSKfjTvzP27D1RW5LV4GrDCoi1pAhjJm1rZoTdeHI7vZo+XtyOvzvWx35fGL5v3c5xwWGbIHbYN0kDEsayJ9Ayqi3D7DElr0WZIWanyFKn3dkOaZW6D7HOJRnipR/iMuYGgdtj5wT6CLEt9ip1H/aHlL4de4PA7bFDA8XVNFMB3ZSthHgNuWcQ9vicEw96LIp9I8fm6uYjZKQlLXpeAl6rarn45EG1Onrb7Ibutbf1eQmp11lqPSoy+e2ttS5R8OyHgpgdaswEkXaNshdX2l72NQHnnL4QfguubGsCLDdLS9ZuXWBlvuur1kUjWmnr2zup8rjY3krt3E13oSu3yT3gSs3qyOi5Kzb+J+iNjWkv9C061O1moN2b5i5s/0v7XA1wvFyq08JWUwmdYABpxN5LZjXYigVlHvwjoAY/z7sbYNHO3a2/g3ELtTxmdb5RIb0BTSWTqlythUUgmyRUdi3hGqolj0m5lzASqLr2cpuM4d3IX6AHenqisVX7Em0YcSFNi0v8Qs4IYTehR5eUeLY57NfdYWohb8SNJWjJ0UA3aGG+itWzsNDRceGVUjnomBi1AiTDZGzMh3jwIkZ355PSZxiBAgpTCFu1DWT1ulAPf57pvFrepNI6hjK1mVQ4av5qKAe1IrrLtxbzC0+t6Ndddb6B2ktd7PsbpIouCohch57IPNc772WfPlK+5mEweYGY5aLFwQF9I92V13EURlurGZkyW06eondUc+EoIXoUea75cpRBn5eFZrH1PvgXF5aZtA==</source>
+  </file>
+  <file path="Query/Processor.php" generated-path="Query.Processor.html" hash="79413c8fe08da63e857fcd6af4a55dfe" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="BaseProcessor">\Illuminate\Database\Query\Processors\Processor</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa\Query" line="7" package="Default">
+      <extends>\Illuminate\Database\Query\Processors\Processor</extends>
+      <name>Processor</name>
+      <full_name>\ShSo\Lacassa\Query\Processor</full_name>
+      <docblock line="7">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="7" description="Default"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="7" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Query\Processor</error>
+    </parse_markers>
+    <source>eJxdjEEKwjAURPf/FP8eCkJxU3ChdJvNGAcqpEnIT6Ai3t2A0IK74c3jHU95ziIRCy3DU6d5Su4CDzO4W2N5HUSaUccQ2vKMqHRnVNxh/P3uWpKnWSq2T4Xp0JUN9IoPPaq7wrUyPv48ectHvjLbNyY=</source>
+  </file>
+  <file path="Query/Builder.php" generated-path="Query.Builder.html" hash="7e80f0895b65137d7f4923d2efda65e5" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="Cassandra">\Cassandra</namespace-alias>
+    <namespace-alias name="Arr">\Illuminate\Support\Arr</namespace-alias>
+    <namespace-alias name="Connection">\ShSo\Lacassa\Connection</namespace-alias>
+    <namespace-alias name="InvalidArgumentException">\InvalidArgumentException</namespace-alias>
+    <namespace-alias name="BaseBuilder">\Illuminate\Database\Query\Builder</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa\Query" line="11" package="Default">
+      <extends>\Illuminate\Database\Query\Builder</extends>
+      <name>Builder</name>
+      <full_name>\ShSo\Lacassa\Query\Builder</full_name>
+      <docblock line="11">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="11" description="Default"/>
+      </docblock>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="18" package="Default">
+        <name>$bindings</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::bindings</full_name>
+        <default>array('select' =&gt; array(), 'where' =&gt; array(), 'updateCollection' =&gt; array(), 'insertCollection' =&gt; array())</default>
+        <docblock line="18">
+          <description>The current query value bindings.</description>
+          <long-description></long-description>
+          <tag name="var" line="18" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="25" package="Default">
+        <name>$allowFiltering</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::allowFiltering</full_name>
+        <default>false</default>
+        <docblock line="25">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="27" package="Default">
+        <name>$distinct</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::distinct</full_name>
+        <default>false</default>
+        <docblock line="27">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="34" package="Default">
+        <name>$updateCollections</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::updateCollections</full_name>
+        <default></default>
+        <docblock line="34">
+          <description>The where constraints for the query.</description>
+          <long-description></long-description>
+          <tag name="var" line="34" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="41" package="Default">
+        <name>$insertCollections</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::insertCollections</full_name>
+        <default></default>
+        <docblock line="41">
+          <description>The where constraints for the query.</description>
+          <long-description></long-description>
+          <tag name="var" line="41" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="48" package="Default">
+        <name>$operators</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::operators</full_name>
+        <default>array('=', '&lt;', '&gt;', '&lt;=', '&gt;=', 'like', 'contains', 'contains key')</default>
+        <docblock line="48">
+          <description>All of the available clause operators.</description>
+          <long-description></long-description>
+          <tag name="var" line="48" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa\Query" line="64" package="Default">
+        <name>$conversion</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::conversion</full_name>
+        <default>array('=' =&gt; '$eq', '!=' =&gt; '$ne', '&lt;&gt;' =&gt; '$ne', '&lt;' =&gt; '$lt', '&lt;=' =&gt; '$lte', '&gt;' =&gt; '$gt', '&gt;=' =&gt; '$gte')</default>
+        <docblock line="64">
+          <description>Operator conversion.</description>
+          <long-description></long-description>
+          <tag name="var" line="64" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="77" package="Default">
+        <name>$collectionTypes</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::collectionTypes</full_name>
+        <default>array('set', 'list', 'map')</default>
+        <docblock line="77">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="77" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="82" package="Default">
+        <name>__construct</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::__construct()</full_name>
+        <docblock line="82">
+          <description></description>
+          <long-description></long-description>
+          <tag name="param" line="82" description="" type="\ShSo\Lacassa\Connection" variable="$connection">
+            <type>\ShSo\Lacassa\Connection</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$connection</name>
+          <default></default>
+          <type>\ShSo\Lacassa\Connection</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="88" package="Default">
+        <name>distinct</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::distinct()</full_name>
+        <docblock line="88">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="95" package="Default">
+        <name>allowFiltering</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::allowFiltering()</full_name>
+        <docblock line="95">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="109" package="Default">
+        <name>get</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::get()</full_name>
+        <docblock line="109">
+          <description>Execute the query as a "select" statement.</description>
+          <long-description></long-description>
+          <tag name="param" line="109" description="" type="array" variable="$columns">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="109" description="" type="\Cassandra\Rows">
+            <type>\Cassandra\Rows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default>array('*')</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="126" package="Default">
+        <name>getAsync</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::getAsync()</full_name>
+        <docblock line="126">
+          <description>Execute the query as a "select" statement.</description>
+          <long-description></long-description>
+          <tag name="param" line="126" description="" type="array" variable="$columns">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="126" description="" type="\Cassandra\FutureRows">
+            <type>\Cassandra\FutureRows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default>array('*')</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="ShSo\Lacassa\Query" line="143" package="Default">
+        <name>execute</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::execute()</full_name>
+        <docblock line="143">
+          <description>Execute the CQL query.</description>
+          <long-description></long-description>
+          <tag name="param" line="143" description="" type="string" variable="$cql">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="143" description="" type="\Cassandra\Rows">
+            <type>\Cassandra\Rows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$cql</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="ShSo\Lacassa\Query" line="155" package="Default">
+        <name>executeAsync</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::executeAsync()</full_name>
+        <docblock line="155">
+          <description>Execute the CQL query asyncronously.</description>
+          <long-description></long-description>
+          <tag name="param" line="155" description="" type="string" variable="$cql">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="155" description="" type="\Cassandra\FutureRows">
+            <type>\Cassandra\FutureRows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$cql</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="165" package="Default">
+        <name>deleteRow</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::deleteRow()</full_name>
+        <docblock line="165">
+          <description>Delete a record from the database.</description>
+          <long-description></long-description>
+          <tag name="return" line="165" description="" type="\Cassandra\Rows">
+            <type>\Cassandra\Rows</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="179" package="Default">
+        <name>deleteColumn</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::deleteColumn()</full_name>
+        <docblock line="179">
+          <description>Delete a column from the database.</description>
+          <long-description></long-description>
+          <tag name="param" line="179" description="" type="array" variable="$columns">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="179" description="" type="\Cassandra\Rows">
+            <type>\Cassandra\Rows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="194" package="Default">
+        <name>count</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::count()</full_name>
+        <docblock line="194">
+          <description>Retrieve the "count" result of the query.</description>
+          <long-description></long-description>
+          <tag name="param" line="194" description="" type="string" variable="$columns">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="194" description="" type="\Cassandra\Rows">
+            <type>\Cassandra\Rows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default>'*'</default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="219" package="Default">
+        <name>updateCollection</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::updateCollection()</full_name>
+        <docblock line="219">
+          <description>Used to update the colletions like set, list and map.</description>
+          <long-description></long-description>
+          <tag name="param" line="219" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="219" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="219" description="" type="string" variable="$operation">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="219" description="" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="219" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$operation</name>
+          <default>null</default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default>null</default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="251" package="Default">
+        <name>addCollectionBinding</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::addCollectionBinding()</full_name>
+        <docblock line="251">
+          <description>Add a binding to the query.</description>
+          <long-description></long-description>
+          <tag name="param" line="251" description="" type="array" variable="$value">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="251" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="251" description="" type="\ShSo\Lacassa\Query\Builder">
+            <type>\ShSo\Lacassa\Query\Builder</type>
+          </tag>
+          <tag name="throws" line="251" description="" type="\InvalidArgumentException">
+            <type>\InvalidArgumentException</type>
+          </tag>
+          <tag name="fluent" description="This method is part of a fluent interface and will return the same instance"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default>'updateCollection'</default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="268" package="Default">
+        <name>update</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::update()</full_name>
+        <docblock line="268">
+          <description>Update a record in the database.</description>
+          <long-description></long-description>
+          <tag name="param" line="268" description="" type="array" variable="$values">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="268" description="" type="integer">
+            <type>integer</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$values</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="284" package="Default">
+        <name>insert</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::insert()</full_name>
+        <docblock line="284">
+          <description>Insert a new record into the database.</description>
+          <long-description></long-description>
+          <tag name="param" line="284" description="" type="array" variable="$values">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="284" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$values</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="324" package="Default">
+        <name>insertCollection</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::insertCollection()</full_name>
+        <docblock line="324">
+          <description>Insert a colletion type in cassandra.</description>
+          <long-description></long-description>
+          <tag name="param" line="324" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="324" description="" type="string" variable="$column">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="324" description="" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="324" description="" type="\ShSo\Lacassa\Query\Builder">
+            <type>\ShSo\Lacassa\Query\Builder</type>
+          </tag>
+          <tag name="fluent" description="This method is part of a fluent interface and will return the same instance"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$column</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="338" package="Default">
+        <name>index</name>
+        <full_name>\ShSo\Lacassa\Query\Builder::index()</full_name>
+        <docblock line="338">
+          <description></description>
+          <long-description></long-description>
+          <tag name="param" line="338" description="" type="array" variable="$columns">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="338" description="" type="\Cassandra\Rows">
+            <type>\Cassandra\Rows</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="11" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Query\Builder</error>
+      <error line="82" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="88" code="PPC:ERR-50008">No summary for method distinct()</error>
+      <error line="95" code="PPC:ERR-50008">No summary for method allowFiltering()</error>
+      <error line="338" code="PPC:ERR-50008">No summary for method index()</error>
+      <error line="25" code="PPC:ERR-50007">No summary for property $allowFiltering</error>
+      <error line="27" code="PPC:ERR-50007">No summary for property $distinct</error>
+      <error line="77" code="PPC:ERR-50007">No summary for property $collectionTypes</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="Query/Grammar.php" generated-path="Query.Grammar.html" hash="b444de2f0a942a8a1b18c6298a1b2c82" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <namespace-alias name="BaseBuilder">\Illuminate\Database\Query\Builder</namespace-alias>
+    <namespace-alias name="BaseGrammar">\Illuminate\Database\Query\Grammars\Grammar</namespace-alias>
+    <class final="false" abstract="false" namespace="ShSo\Lacassa\Query" line="8" package="Default">
+      <extends>\Illuminate\Database\Query\Grammars\Grammar</extends>
+      <name>Grammar</name>
+      <full_name>\ShSo\Lacassa\Query\Grammar</full_name>
+      <docblock line="8">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="8" description="Default"/>
+      </docblock>
+      <property static="false" visibility="protected" namespace="ShSo\Lacassa\Query" line="10" package="Default">
+        <name>$selectComponents</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::selectComponents</full_name>
+        <default>array('columns', 'from', 'wheres', 'limit', 'allowFiltering')</default>
+        <docblock line="10">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="26" package="Default">
+        <name>compileInsert</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileInsert()</full_name>
+        <docblock line="26">
+          <description>Compile an insert statement into CQL.</description>
+          <long-description></long-description>
+          <tag name="param" line="26" description="" type="\ShSo\Lacassa\Query" variable="$query">
+            <type>\ShSo\Lacassa\Query</type>
+          </tag>
+          <tag name="param" line="26" description="" type="array" variable="$values">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="26" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type>\ShSo\Lacassa\Query</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$values</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="50" package="Default">
+        <name>buildInsertCollectionParam</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::buildInsertCollectionParam()</full_name>
+        <docblock line="50">
+          <description></description>
+          <long-description></long-description>
+          <tag name="param" line="50" description="" type="\Illuminate\Support\Collection" variable="$collection">
+            <type>\Illuminate\Support\Collection</type>
+          </tag>
+          <tag name="return" line="50" description="" type="\Illuminate\Support\Collection">
+            <type>\Illuminate\Support\Collection</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$collection</name>
+          <default></default>
+          <type>\Illuminate\Support\Collection</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="ShSo\Lacassa\Query" line="64" package="Default">
+        <name>wrapValue</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::wrapValue()</full_name>
+        <docblock line="64">
+          <description>Wrap a single string in keyword identifiers.</description>
+          <long-description></long-description>
+          <tag name="param" line="64" description="" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="64" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="80" package="Default">
+        <name>compileDelete</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileDelete()</full_name>
+        <docblock line="80">
+          <description>Compile a delete statement into CQL.</description>
+          <long-description></long-description>
+          <tag name="param" line="80" description="" type="\ShSo\Lacassa\Query" variable="$query">
+            <type>\ShSo\Lacassa\Query</type>
+          </tag>
+          <tag name="return" line="80" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type>\ShSo\Lacassa\Query</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="100" package="Default">
+        <name>compileUpdate</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileUpdate()</full_name>
+        <docblock line="100">
+          <description>Compile an update statement into SQL.</description>
+          <long-description></long-description>
+          <tag name="param" line="100" description="" type="\Illuminate\Database\Query\Builder" variable="$query">
+            <type>\Illuminate\Database\Query\Builder</type>
+          </tag>
+          <tag name="param" line="100" description="" type="array" variable="$values">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="100" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type>\Illuminate\Database\Query\Builder</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$values</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="131" package="Default">
+        <name>compileUpdateCollections</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileUpdateCollections()</full_name>
+        <docblock line="131">
+          <description>Compiles the udpate collection methods.</description>
+          <long-description></long-description>
+          <tag name="param" line="131" description="" type="\Illuminate\Database\Query\Builder" variable="$query">
+            <type>\Illuminate\Database\Query\Builder</type>
+          </tag>
+          <tag name="return" line="131" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type>\Illuminate\Database\Query\Builder</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="154" package="Default">
+        <name>compileCollectionValues</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileCollectionValues()</full_name>
+        <docblock line="154">
+          <description>Compiles the values assigned to collections.</description>
+          <long-description></long-description>
+          <tag name="param" line="154" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="154" description="" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="154" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="177" package="Default">
+        <name>buildCollectionString</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::buildCollectionString()</full_name>
+        <docblock line="177">
+          <description>Builds the insert string.</description>
+          <long-description></long-description>
+          <tag name="param" line="177" description="" type="string" variable="$type">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="177" description="" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="177" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$type</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="212" package="Default">
+        <name>compileIndex</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileIndex()</full_name>
+        <docblock line="212">
+          <description></description>
+          <long-description></long-description>
+          <tag name="param" line="212" description="" type="\ShSo\Lacassa\Query\Builder" variable="$query">
+            <type>\ShSo\Lacassa\Query\Builder</type>
+          </tag>
+          <tag name="param" line="212" description="" type="string" variable="$columns">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="212" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type>\ShSo\Lacassa\Query\Builder</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$columns</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="ShSo\Lacassa\Query" line="220" package="Default">
+        <name>compileAllowFiltering</name>
+        <full_name>\ShSo\Lacassa\Query\Grammar::compileAllowFiltering()</full_name>
+        <docblock line="220">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$query</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$allow_filtering</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="8" code="PPC:ERR-50005">No summary for class \ShSo\Lacassa\Query\Grammar</error>
+      <error line="50" code="PPC:ERR-50008">No summary for method buildInsertCollectionParam()</error>
+      <error line="212" code="PPC:ERR-50008">No summary for method compileIndex()</error>
+      <error line="220" code="PPC:ERR-50008">No summary for method compileAllowFiltering()</error>
+      <error line="10" code="PPC:ERR-50007">No summary for property $selectComponents</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="global" full_name="global"/>
+  <namespace name="ShSo" full_name="ShSo">
+    <namespace name="Lacassa" full_name="ShSo\Lacassa">
+      <namespace name="Query" full_name="ShSo\Lacassa\Query"/>
+      <namespace name="Schema" full_name="ShSo\Lacassa\Schema"/>
+    </namespace>
+  </namespace>
+  <deprecated count="0"/>
+</project>
