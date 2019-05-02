@@ -22,6 +22,8 @@ before_install:
 
 install:
   - composer install --prefer-dist -o
+
+before_script:
   - php prepare_db.php
 
 script:
