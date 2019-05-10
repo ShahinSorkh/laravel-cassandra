@@ -3,12 +3,10 @@
 namespace ShSo\Lacassa\Query;
 
 use Cassandra;
-use InvalidArgumentException;
-
-use ShSo\Lacassa\Connection;
-
-use Illuminate\Database\Query\Builder as BaseBuilder;
 use Illuminate\Support\Arr;
+use ShSo\Lacassa\Connection;
+use InvalidArgumentException;
+use Illuminate\Database\Query\Builder as BaseBuilder;
 
 class Builder extends BaseBuilder
 {
