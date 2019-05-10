@@ -39,26 +39,16 @@ if [ -z "$NO_CHECK" ]; then
         exit $?
     fi
 
-    if ! ( docker run $DOCKER_NETWORK cassandra:3 cqlsh -k testing -e 'exit' ); then
-        echo '-=-=-=-! Keyspace testing not found!' >&2
-        echo '-=-=-=- Creating one..'
-        docker run $DOCKER_NETWORK \
-            cassandra:3 cqlsh -e "CREATE KEYSPACE IF NOT EXISTS testing WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;"
-
-        if [ "$?" = "0" ]; then
-            echo '-=-=-=- Keyspace created'
-            echo '-=-=-=- Filling database with fake data..'
-            docker run $DOCKER_NETWORK \
-                --interactive --tty \
-                --user $DOCKER_USER \
-                --volume "$(pwd):/app:z" \
-                $DOCKER_LACASSA_IMAGE php prepare_db.php && \
-                echo '-=-=-=- Done.'
-        fi
-        exit $?
-    fi
+    echo '-=-=-=- Filling database with fake data..'
+    docker run $DOCKER_NETWORK \
+        --interactive --tty \
+        --user $DOCKER_USER \
+        --volume "$(pwd):/app:z" \
+        $DOCKER_LACASSA_IMAGE php prepare_db.php && \
+        echo '-=-=-=- Done.'
 fi
 
+echo '-=-=-=- Running command..'
 docker run $DOCKER_NETWORK \
     --interactive --tty \
     --user $DOCKER_USER \

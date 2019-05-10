@@ -15,6 +15,10 @@ echo 'creating table posts...'.PHP_EOL;
 $session->execute('CREATE TABLE IF NOT EXISTS testing.posts ( user uuid, id uuid, title text, body text, published_at timestamp, published_month text, primary key (user, id) )');
 $session->executeAsync('CREATE MATERIALIZED VIEW IF NOT EXISTS testing.posts_by_month AS SELECT * FROM testing.posts WHERE user IS NOT NULL AND id IS NOT NULL AND published_month IS NOT NULL PRIMARY KEY (published_month, user, id)');
 
+echo 'truncating possible existing data...'.PHP_EOL;
+$session->execute('TRUNCATE testing.users');
+$session->execute('TRUNCATE testing.posts');
+
 $faker = Faker\Factory::create();
 
 echo 'inserting users...'.PHP_EOL;
@@ -37,8 +41,7 @@ foreach (range(0, 10) as $i) {
 
 echo 'dumping users...'.PHP_EOL;
 $users_file = 'tests/data/users.json';
-$old_users = file_exists($users_file) ? json_decode(file_get_contents($users_file), true) : [];
-file_put_contents($users_file, json_encode(array_merge($old_users, $users_passwords)));
+file_put_contents($users_file, json_encode($users_passwords));
 
 echo 'inserting posts...'.PHP_EOL;
 $p = $session->prepare('insert into testing.posts (user, id, title, body, published_at, published_month) values (?,?,?,?,?,?)');
@@ -58,11 +61,10 @@ foreach (range(0, 200) as $i) {
 
 echo 'dumping stats...'.PHP_EOL;
 $data_file = 'tests/data/data.json';
-$old_data = file_exists($data_file) ? json_decode(file_get_contents($data_file), true) : ['users' => 0, 'posts' => 0];
 $data = [
-    'users' => $old_data['users'] + $count_users,
-    'posts' => $old_data['posts'] + $count_posts,
+    'users' => $count_users,
+    'posts' => $count_posts,
 ];
-file_put_contents($data_file, json_encode(array_merge($old_data, $data)));
+file_put_contents($data_file, json_encode($data));
 
 echo 'all users ids and their respective passwords are saved to tests/data/users.json'.PHP_EOL;
