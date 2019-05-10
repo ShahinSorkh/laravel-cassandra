@@ -1,7 +1,7 @@
 Lacassa
 =======
 [![Build Status](https://travis-ci.org/ShahinSorkh/laravel-cassandra.svg?branch=master)](https://travis-ci.org/ShahinSorkh/laravel-cassandra)
-[![Coverage Status](https://coveralls.io/repos/github/ShahinSorkh/laravel-cassandra/badge.svg?branch=master)](https://coveralls.io/github/ShahinSorkh/laravel-cassandra?branch=master)
+[![codecov](https://codecov.io/gh/ShahinSorkh/laravel-cassandra/branch/master/graph/badge.svg)](https://codecov.io/gh/ShahinSorkh/laravel-cassandra)
 
 ## WORKING ON A NEW VERSION WAIT FOR DOCUMENTATION UPDATES
 
