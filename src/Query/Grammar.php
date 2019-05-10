@@ -181,11 +181,11 @@ class Grammar extends BaseGrammar
             foreach ($value as $item) {
                 list($key, $value, $qoutk, $qoutv) = [$item[0], $item[1], $item['key'] ?? null, $item['value'] ?? null];
 
-                if (!is_bool($qoutk)) {
+                if (! is_bool($qoutk)) {
                     $qoutk = 'string' == strtolower(gettype($key));
                 }
 
-                if (!is_bool($qoutv)) {
+                if (! is_bool($qoutv)) {
                     $qoutv = 'string' == strtolower(gettype($value));
                 }
 

@@ -11,8 +11,8 @@ class TestCase extends Orchestra
     {
         parent::setUp();
         if (
-            !file_exists(__DIR__.'/data/data.json') ||
-            !file_exists(__DIR__.'/data/users.json')
+            ! file_exists(__DIR__.'/data/data.json') ||
+            ! file_exists(__DIR__.'/data/users.json')
         ) {
             die('first run [php prepare_db.php]');
         }

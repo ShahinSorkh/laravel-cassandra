@@ -35,7 +35,7 @@ class Blueprint extends BaseBluprint
     {
         return array_filter(
             $this->columns, function ($column) {
-                return !$column->change;
+                return ! $column->change;
             }
         );
     }
@@ -60,7 +60,7 @@ class Blueprint extends BaseBluprint
             $method = 'compile'.ucfirst($command->name);
 
             if (method_exists($grammar, $method)) {
-                if (!is_null($sql = $grammar->$method($this, $command, $connection))) {
+                if (! is_null($sql = $grammar->$method($this, $command, $connection))) {
                     $statements = array_merge($statements, (array) $sql);
                 }
             }
