@@ -87,7 +87,7 @@ class Connection extends BaseConnection
         $builder = Cassandra::cluster()
             ->withContactPoints($config['host'] ?? '127.0.0.1')
             ->withPort(intval($config['port'] ?? '7000'));
-        if (array_key_exists('page_size', $config) && !empty($config['page_size'])) {
+        if (array_key_exists('page_size', $config) && ! empty($config['page_size'])) {
             $builder->withDefaultPageSize(intval($config['page_size'] ?? '5000'));
         }
         if (array_key_exists('consistency', $config) && in_array(strtoupper($config['consistency']), [
@@ -97,13 +97,13 @@ class Connection extends BaseConnection
             $consistency = constant('\Cassandra::CONSISTENCY_'.strtoupper($config['consistency']));
             $builder->withDefaultConsistency($consistency);
         }
-        if (array_key_exists('timeout', $config) && !empty($config['timeout'])) {
+        if (array_key_exists('timeout', $config) && ! empty($config['timeout'])) {
             $builder->withDefaultTimeout(intval($config['timeout']));
         }
-        if (array_key_exists('connect_timeout', $config) && !empty($config['connect_timeout'])) {
+        if (array_key_exists('connect_timeout', $config) && ! empty($config['connect_timeout'])) {
             $builder->withConnectTimeout(floatval($config['connect_timeout']));
         }
-        if (array_key_exists('request_timeout', $config) && !empty($config['request_timeout'])) {
+        if (array_key_exists('request_timeout', $config) && ! empty($config['request_timeout'])) {
             $builder->withRequestTimeout(floatval($config['request_timeout']));
         }
         if (array_key_exists('username', $config) && array_key_exists('password', $config)) {
