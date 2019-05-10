@@ -11,7 +11,7 @@ elif [ ! -z "$USER" ]; then
 else
     U="$(whoami)"
 fi
-DOCKER_USER=$(awk -F':' "/^$U/ {print \$3\":\"\$4}" /etc/passwd)
+DOCKER_USER="$(awk -F':' "/^$U/ {print \$3\":\"\$4}" /etc/passwd)"
 
 if [ -z "$NO_CHECK" ]; then
     if ! ( docker ps >/dev/null 2>/dev/null ); then
@@ -25,6 +25,8 @@ if [ -z "$NO_CHECK" ]; then
             --interactive --tty \
             --user $DOCKER_USER \
             --volume "$(pwd):/app:z" \
+            --volume "/etc/passwd:/etc/passwd:Z,ro" \
+            --volume "/etc/group:/etc/group:Z,ro" \
             $DOCKER_LACASSA_IMAGE composer install --prefer-dist -o
     fi
 
@@ -53,5 +55,7 @@ docker run $DOCKER_NETWORK \
     --interactive --tty \
     --user $DOCKER_USER \
     --volume "$(pwd):/app:z" \
+    --volume "/etc/passwd:/etc/passwd:Z,ro" \
+    --volume "/etc/group:/etc/group:Z,ro" \
     $DOCKER_LACASSA_IMAGE $@
 
