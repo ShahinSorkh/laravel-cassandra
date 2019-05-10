@@ -3,6 +3,7 @@
 namespace ShSo\Lacassa;
 
 use Cassandra;
+use Cassandra\Exception\RuntimeException as CassandraRuntimeException;
 
 use ShSo\Lacassa\Query\Builder as QueryBuilder;
 use ShSo\Lacassa\Query\Grammar as QueryGrammar;
@@ -164,11 +165,33 @@ class Connection extends BaseConnection
         return new SchemaGrammar();
     }
 
+    /**
+     * Since it's not possible to find out the number
+     * of affected rows through datastax driver,
+     * it will check exceptions.
+     *
+     * @param $query string|\Cassandra\Statement
+     * @param $bindings array
+     *
+     * @return int 1 on success and 0 on failure
+     */
     public function affectingStatement($query, $bindings = [])
     {
-        return $this->statement($query, $bindings);
+        try {
+            $this->statement($query, $bindings);
+            return 1;
+        } catch (CassandraRuntimeException $e) {
+            return 0;
+        }
     }
 
+    /**
+     * @param $query string|\Cassandra\Statement
+     * @param $bindings array
+     *
+     * @return \Cassandra\Rows
+     * @throws \Cassandra\Exception\RuntimeException
+     */
     public function statement($query, $bindings = [])
     {
         return $this->run($query, $bindings, function ($query, $bindings) {
