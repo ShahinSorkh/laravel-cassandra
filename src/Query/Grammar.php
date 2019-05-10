@@ -179,7 +179,7 @@ class Grammar extends BaseGrammar
         $items = [];
         if ($type === 'map') {
             foreach ($value as $item) {
-                list($key, $value, $qoutk, $qoutv) = [$item[0], $item[1], $item['key'] ?? null, $item['value'] ?? null];
+                [$key, $value, $qoutk, $qoutv] = [$item[0], $item[1], $item['key'] ?? null, $item['value'] ?? null];
 
                 if (!is_bool($qoutk)) {
                     $qoutk = 'string' == strtolower(gettype($key));
