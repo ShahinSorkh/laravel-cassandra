@@ -28,4 +28,4 @@ before_script:
   - php prepare_db.php
 
 script:
-  - phpunit tests
+  - ./vendor/bin/phpunit tests
