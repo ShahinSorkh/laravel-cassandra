@@ -3,11 +3,13 @@
 namespace ShSo\Lacassa;
 
 use Cassandra;
+
 use ShSo\Lacassa\Query\Builder as QueryBuilder;
 use ShSo\Lacassa\Query\Grammar as QueryGrammar;
+use ShSo\Lacassa\Query\Processor as QueryProcessor;
 use ShSo\Lacassa\Schema\Builder as SchemaBuilder;
 use ShSo\Lacassa\Schema\Grammar as SchemaGrammar;
-use ShSo\Lacassa\Query\Processor as QueryProcessor;
+
 use Illuminate\Database\Connection as BaseConnection;
 
 class Connection extends BaseConnection

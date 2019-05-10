@@ -3,7 +3,9 @@
 namespace ShSo\Lacassa\Schema;
 
 use Closure;
+
 use ShSo\Lacassa\Connection;
+
 use Illuminate\Database\Schema\Builder as BaseBuilder;
 
 class Builder extends BaseBuilder
