@@ -10,6 +10,8 @@ use Cassandra\Rows;
 
 use ShSo\Lacassa\Connection;
 use ShSo\Lacassa\Query\Builder;
+use ShSo\Lacassa\Schema\Builder as SchemaBuilder;
+use ShSo\Lacassa\Schema\Grammar as SchemaGrammar;
 use ShSo\Lacassa\TestCase;
 
 class ConnectionTest extends TestCase
@@ -34,6 +36,8 @@ class ConnectionTest extends TestCase
     {
         $connection = DB::connection('cassandra');
         $this->assertInstanceOf(Builder::class, $connection->table('foo'));
+        $this->assertInstanceOf(SchemaGrammar::class, $connection->getSchemaGrammar());
+        $this->assertInstanceOf(SchemaBuilder::class, $connection->getSchemaBuilder());
     }
 
     public function testDisconnectAndReconnect()
