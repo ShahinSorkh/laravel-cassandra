@@ -49,4 +49,12 @@ class ConnectionTest extends TestCase
         $connection->statement('select * from users limit 1');
         $this->assertInstanceOf(CassandraSession::class, $connection->getConnection());
     }
+
+    public function testStatements()
+    {
+        $connection = DB::connection('cassandra');
+        $rows = $connection->statement('select * from users limit 5');
+        $this->assertInstanceOf(Rows::class, $rows);
+        $this->assertEquals(5, $rows->count());
+    }
 }
