@@ -188,7 +188,7 @@ class Connection extends BaseConnection
      */
     protected function reconnectIfMissingConnection()
     {
-        if (is_null($this->connection)) {
+        if (! isset($this->connection) || is_null($this->connection)) {
             $this->connection = $this->createConnection($this->config);
         }
     }

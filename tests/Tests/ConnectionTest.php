@@ -34,11 +34,13 @@ class ConnectionTest extends TestCase
         $this->assertInstanceOf(Builder::class, $connection->table('foo'));
     }
 
-    public function testDisconnect()
+    public function testDisconnectAndReconnect()
     {
         $connection = DB::connection('cassandra');
         $this->assertNotNull($connection->getConnection());
         $connection->disconnect();
         $this->assertNull($connection->getConnection());
+        $connection->statement('select * from users limit 1');
+        $this->assertInstanceOf(CassandraSession::class, $connection->getConnection());
     }
 }
