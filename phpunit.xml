@@ -2,6 +2,9 @@
     <listeners>
         <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener" />
     </listeners>
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
     <php>
         <env name="DB_CONNECTION" value="cassandra" />
         <env name="DB_HOST" value="127.0.0.1" />
@@ -13,4 +16,9 @@
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
 </phpunit>

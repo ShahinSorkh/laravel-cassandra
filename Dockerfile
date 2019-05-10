@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 RUN apt update \
     && apt install -y -m --autoremove --no-install-recommends \
-        vim git curl php php-dom php-curl php-mbstring php-zip zip unzip \
+        vim git curl php php-xdebug php-dom php-curl php-mbstring php-zip zip unzip \
         openssl ca-certificates php-dev php-pear libgmp3-dev make \
     && git clone git://git.launchpad.net/~sorkh.shahin/cassandra-php-driver /tmp/driver \
     && cd /tmp/driver && dpkg -i *.deb && cd - && rm -rf /tmp/driver \

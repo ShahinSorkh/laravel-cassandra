@@ -243,7 +243,7 @@ class Blueprint extends BaseBluprint
      *
      * @return \Illuminate\Support\Fluent
      */
-    public function timestamp($column)
+    public function timestamp($column, $precision = 0)
     {
         return $this->addColumn('timestamp', $column);
     }
