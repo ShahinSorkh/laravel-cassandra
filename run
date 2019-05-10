@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_CASSANDRA="cassandra"
-DOCKER_LACASSA_IMAGE="shahinsorkh/lacassa:v0.1.1"
+DOCKER_LACASSA_IMAGE="shahinsorkh/lacassa:v0.1.2"
 DOCKER_NETWORK="--network=container:$DOCKER_CASSANDRA"
 
 if [ ! -z "$SUDO_USER" ]; then
@@ -24,8 +24,7 @@ if [ -z "$NO_CHECK" ]; then
         docker run \
             --interactive --tty \
             --user $DOCKER_USER \
-            --workdir /lacassa \
-            --volume "$(pwd):/lacassa:z" \
+            --volume "$(pwd):/app:z" \
             $DOCKER_LACASSA_IMAGE composer install --prefer-dist -o
     fi
 
@@ -52,8 +51,7 @@ if [ -z "$NO_CHECK" ]; then
             docker run $DOCKER_NETWORK \
                 --interactive --tty \
                 --user $DOCKER_USER \
-                --workdir /lacassa \
-                --volume "$(pwd):/lacassa:z" \
+                --volume "$(pwd):/app:z" \
                 $DOCKER_LACASSA_IMAGE php prepare_db.php && \
                 echo '-=-=-=- Done.'
         fi
@@ -64,7 +62,6 @@ fi
 docker run $DOCKER_NETWORK \
     --interactive --tty \
     --user $DOCKER_USER \
-    --workdir /lacassa \
-    --volume "$(pwd):/lacassa:z" \
+    --volume "$(pwd):/app:z" \
     $DOCKER_LACASSA_IMAGE $@
 
