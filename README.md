@@ -1,5 +1,6 @@
 Lacassa
 =======
+[![Build Status](https://travis-ci.org/ShahinSorkh/laravel-cassandra.svg?branch=master)](https://travis-ci.org/ShahinSorkh/laravel-cassandra)
 
 ## WORKING ON A NEW VERSION WAIT FOR DOCUMENTATION UPDATES
 
