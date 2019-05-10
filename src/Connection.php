@@ -3,15 +3,13 @@
 namespace ShSo\Lacassa;
 
 use Cassandra;
-use Cassandra\Exception\RuntimeException as CassandraRuntimeException;
-
 use ShSo\Lacassa\Query\Builder as QueryBuilder;
 use ShSo\Lacassa\Query\Grammar as QueryGrammar;
-use ShSo\Lacassa\Query\Processor as QueryProcessor;
 use ShSo\Lacassa\Schema\Builder as SchemaBuilder;
 use ShSo\Lacassa\Schema\Grammar as SchemaGrammar;
-
+use ShSo\Lacassa\Query\Processor as QueryProcessor;
 use Illuminate\Database\Connection as BaseConnection;
+use Cassandra\Exception\RuntimeException as CassandraRuntimeException;
 
 class Connection extends BaseConnection
 {
@@ -179,6 +177,7 @@ class Connection extends BaseConnection
     {
         try {
             $this->statement($query, $bindings);
+
             return 1;
         } catch (CassandraRuntimeException $e) {
             return 0;

@@ -3,16 +3,14 @@
 namespace ShSo\Lacassa\Tests;
 
 use DB;
-
-use Cassandra\DefaultSession as CassandraSession;
-use Cassandra\FutureRows;
 use Cassandra\Rows;
-
+use Cassandra\FutureRows;
+use ShSo\Lacassa\TestCase;
 use ShSo\Lacassa\Connection;
 use ShSo\Lacassa\Query\Builder;
+use Cassandra\DefaultSession as CassandraSession;
 use ShSo\Lacassa\Schema\Builder as SchemaBuilder;
 use ShSo\Lacassa\Schema\Grammar as SchemaGrammar;
-use ShSo\Lacassa\TestCase;
 
 class ConnectionTest extends TestCase
 {
