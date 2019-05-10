@@ -1,0 +1,12 @@
+.DS_Store
+phpunit.phar
+.git/
+vendor/
+docs/
+tests/data/*
+composer.phar
+.idea
+*.swp
+*.swo
+cassandra.log
+phpdoc-cache-*
