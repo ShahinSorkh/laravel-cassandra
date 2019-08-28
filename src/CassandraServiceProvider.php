@@ -2,7 +2,6 @@
 
 namespace ShSo\Lacassa;
 
-use Cassandra;
 use Illuminate\Support\ServiceProvider;
 
 class CassandraServiceProvider extends ServiceProvider
