@@ -102,11 +102,11 @@ class Builder extends BaseBuilder
     /**
      * Set the table which the query is targeting.
      *
-     * @param string $table
-     *
+     * @param $collection
+     * @param null $as
      * @return $this
      */
-    public function from($collection)
+    public function from($collection, $as = null)
     {
         return parent::from($collection);
     }

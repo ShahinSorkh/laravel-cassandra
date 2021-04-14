@@ -40,10 +40,10 @@ class Connection extends BaseConnection
      * Begin a fluent query against a database table.
      *
      * @param string $table
-     *
+     * @param null $as
      * @return \ShSo\Lacassa\Query\Builder
      */
-    public function table($table)
+    public function table($table, $as = null)
     {
         return $this->getDefaultQueryBuilder()->from($table);
     }
